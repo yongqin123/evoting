@@ -28,32 +28,32 @@ Members:
 4. Tan Zhi Zhong
 5. Toh Yong Qin
 
-Installation steps for ubuntu:
+# Installation steps for ubuntu:
 # Install dependencies
-sudo apt-get update
-sudo apt-get install -y python3-pip
-sudo -H pip3 install --upgrade pip
-sudo apt install cmake libboost-all-dev libprotobuf-dev protobuf-compiler
+sudo apt-get update<br />
+sudo apt-get install -y python3-pip<br />
+sudo -H pip3 install --upgrade pip<br />
+sudo apt install cmake libboost-all-dev libprotobuf-dev protobuf-compiler<br />
 # Install CLang
-sudo apt install clang
-sudo update-alternatives --install /usr/bin/cc cc /usr/bin/clang 100
-sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++ 100
+sudo apt install clang<br />
+sudo update-alternatives --install /usr/bin/cc cc /usr/bin/clang 100<br />
+sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++ 100<br />
 # Install Microsoft SEAL version 3.6.6
-git clone -b v3.6.6 https://github.com/microsoft/SEAL.git
-cd SEAL
-cmake -DSEAL_THROW_ON_TRANSPARENT_CIPHERTEXT=OFF .
-make -j
-sudo make install
+git clone -b v3.6.6 https://github.com/microsoft/SEAL.git<br />
+cd SEAL<br />
+cmake -DSEAL_THROW_ON_TRANSPARENT_CIPHERTEXT=OFF .<br />
+make -j<br />
+sudo make install<br />
 cd ..
 # Install EVA
-git clone https://github.com/microsoft/EVA
-cd EVA
-git submodule update --init
-cmake .
-make -j
+git clone https://github.com/microsoft/EVA<br />
+cd EVA<br />
+git submodule update --init<br />
+cmake .<br />
+make -j<br />
 # Install Python packages
-python3 -m pip install -e python/
-pip3 install numpy
+python3 -m pip install -e python/<br />
+pip3 install numpy<br />
 
 Assessment 1
 ------------
