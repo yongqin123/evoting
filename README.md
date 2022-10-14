@@ -28,6 +28,33 @@ Members:
 4. Tan Zhi Zhong
 5. Toh Yong Qin
 
+Installation steps for ubuntu:
+# Install dependencies
+sudo apt-get update
+sudo apt-get install -y python3-pip
+sudo -H pip3 install --upgrade pip
+sudo apt install cmake libboost-all-dev libprotobuf-dev protobuf-compiler
+# Install CLang
+sudo apt install clang
+sudo update-alternatives --install /usr/bin/cc cc /usr/bin/clang 100
+sudo update-alternatives --install /usr/bin/c++ c++ /usr/bin/clang++ 100
+# Install Microsoft SEAL version 3.6.6
+git clone -b v3.6.6 https://github.com/microsoft/SEAL.git
+cd SEAL
+cmake -DSEAL_THROW_ON_TRANSPARENT_CIPHERTEXT=OFF .
+make -j
+sudo make install
+cd ..
+# Install EVA
+git clone https://github.com/microsoft/EVA
+cd EVA
+git submodule update --init
+cmake .
+make -j
+# Install Python packages
+python3 -m pip install -e python/
+pip3 install numpy
+
 Assessment 1
 ------------
 Project requirements documentation
