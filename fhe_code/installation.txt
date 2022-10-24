@@ -1,0 +1,5 @@
+using visual studios hold ctrl + shift + p, enter command: >git: Clone
+copy and paste https://github.com/sarojaerabelli/py-fhe.git to the url
+choose directory you want to clone to
+using terminal of visual studio, navigate to the root folder of the py-fhe cloned repo directory
+and enter the following command: pip install -e .
