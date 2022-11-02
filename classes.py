@@ -8,13 +8,19 @@ from flask import Flask, redirect ,url_for, render_template, request, session, f
 import psycopg2, psycopg2.extras, datetime, re
 from datetime import timedelta, date, datetime
 
-
+'''
 ### POSTGRESQL CONFIG ###
 db_host = 'satao.db.elephantsql.com'
 db_name = 'jwwfjrox'
 db_user = 'jwwfjrox'
 db_pw = 'jQiFAyGF07Tghwk44c4GButvW2uKzsLi'
+'''
 
+### POSTGRESQL CONFIG ###
+db_host = 'ec2-34-234-240-121.compute-1.amazonaws.com'
+db_name = 'dcgsvhb0enfgfd'
+db_user = 'ampoosmqdvdzte'
+db_pw = '1494a152d2acffe248186b855286562322f43ab69a4ae0cd1b061bef24f36bf3'
 
 ### Use Case 1 (LOGIN) ###
 class LoginPage:
@@ -28,7 +34,7 @@ class LoginPage:
         return render_template("login.html", profiles=profiles)
 
     def redirectPage(account_type):
-        default_profiles = ["candidate"]
+        default_profiles = ["candidate", "super_admin", "voter"]
         if account_type not in default_profiles:
             return redirect(url_for("otherProfiles", type=account_type))
         else:
@@ -40,6 +46,7 @@ class LoginPageController:
         self.entity = UserAccount()
 
     def getCredentials(self, request_form) -> bool:
+        
         self.entity.username = request_form["username"]
         self.entity.password = request_form["password"]
         self.entity.account_type = request_form["type"]
@@ -58,7 +65,7 @@ class UserAccount():
     def getAllProfiles(self) -> list:
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute(f"SELECT profile_name FROM profile")
+                cursor.execute(f'SELECT profile_name FROM public."Profile"')
                 profiles = cursor.fetchall()
         return profiles
 
@@ -66,10 +73,13 @@ class UserAccount():
         # connect to db
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute(f"SELECT * FROM login WHERE username = %s AND password = %s AND profile = %s", (self.username, self.password, self.account_type))
+                cursor.execute(f'SELECT * FROM public."Login" WHERE username = %s AND password = %s AND profile = %s', (self.username, self.password, self.account_type))
                 result = cursor.fetchone()
                 db.commit()
-
+                print(result)
+                print(self.username)
+                print(self.password)
+                print(self.account_type)
                 if result != None: return True
                 else: return False
 
@@ -81,7 +91,7 @@ class CandidatePage:
     def candidateTemplate(self, username):
         return render_template("candidateHome.html", username=username)
 
-
+    
 class CandidatePageController:
     def __init__(self) -> None:
         self.entity = CandidateDetails()
@@ -95,10 +105,80 @@ class CandidateDetails:
     def candidateName(self):
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute(f"SELECT name FROM login WHERE profile = 'candidate'; ")
+                cursor.execute(f'SELECT name FROM public."Login" WHERE profile = "candidate"; ')
                 result = cursor.fetchall()
                 db.commit()
                 return result
+
+
+### voter Use case ###
+class VoterPage:
+    def __init__(self) -> None:
+        self.controller = VoterPageController()
+        
+    def buttonClicked(self, request_form):
+        self.button_id = request_form["button_type"]
+        if self.button_id == "b1":
+            print("test")
+            return redirect(url_for("voterUpdateAddress"))
+        elif self.button_id =='return':
+            return redirect(url_for("index"))
+
+    def voterTemplate(self, username):
+        return render_template("voterHome.html", username=username)
+
+    def voterTemplateUpdateAddress(self, username, address_postalCode):
+        return render_template("voterUpdateAddress.html", username=username, address_postalCode=address_postalCode)
+class VoterPageController:
+    def __init__(self) -> None:
+        self.entity = VoterDetails()
+
+    def getName(self):
+        return self.entity.voterGetName()
+
+    def getPhoneNumber(self):
+        return self.entity.phone_number()
+
+    def getAddress(self):
+        return self.entity.voterGetAddress()
+
+    def setAddress(self, request):
+        streetName = str(request["streetName"]).split(" ")
+        #streetName.remove("Singapore")
+        streetName = streetName[:-2]
+        self.entity.address = " ".join(streetName) + " " + str(request["unitNumber"])
+        self.entity.postalCode = str(request["postalCode"])
+        return self.entity.voterNewAddress()
+
+class VoterDetails:
+
+    def voterGetName(self) -> str:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute(f'SELECT name FROM public."Voter" WHERE nric = %s; ', (session["username"],))
+                result = cursor.fetchall()
+                db.commit()
+                return result[0][0]
+    
+    def voterGetAddress(self) -> list:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute(f'SELECT address, postal_code FROM public."Voter" WHERE nric = %s; ', (session["username"],))
+                result = cursor.fetchall()
+                db.commit()
+
+                return result[0]
+
+    def voterNewAddress(self) -> None:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                print(self.address)
+                print(self.postalCode)
+                cursor.execute(f'UPDATE public."Voter" SET address = %s , postal_code = %s WHERE nric = %s; ', (self.address, self.postalCode, session["username"],))
+                #result = cursor.fetchall()
+                db.commit()
+                print("testing")
+                #return result[0][0]
 
 """
 class UserAccount:
