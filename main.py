@@ -41,7 +41,7 @@ def index():
             session["username"] = request.form["username"]
             session["account_type"] = request.form["type"]
 
-            # redirect page to candidate, super_admin, voter
+            # redirect page to candidate, admin, voter
             return LoginPage.redirectPage(session["account_type"]) # C-B
 
         else:

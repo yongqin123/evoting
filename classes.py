@@ -53,7 +53,7 @@ class LoginPageController:
         return self.entity.doesUserExist()
 
     def redirectPage(account_type):
-        default_profiles = ["candidate", "super_admin", "voter"]
+        default_profiles = ["candidate", "admin", "voter"]
         if account_type not in default_profiles:
             return redirect(url_for("otherProfiles", type=account_type))
         else:
@@ -179,6 +179,39 @@ class VoterDetails:
                 db.commit()
                 print("testing")
                 #return result[0][0]
+
+
+### superadmin Use case ###
+class superadminPage:
+    def __init__(self) -> None:
+        self.controller = superadminControllerPage()
+
+    def superadminTemplate(self, data):
+        return render_template("superadminHome.html", data=data)
+
+    
+class superadminControllerPage:
+    def __init__(self) -> None:
+        self.entity = superadminDetails()
+
+    #def getName(self):
+    #    return self.entity.candidateName()
+    def createAdmin(self):
+        return self.entity.createAdmin()
+
+    def get_admin(self)->list:
+        return self.entity.retrieveAdmin()
+
+
+class superadminDetails:
+
+    def retrieveAdmin(self):
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute(f'SELECT username,password,name FROM public."Login" where profile=%s;',('admin',))
+                result = cursor.fetchall()
+                db.commit()
+                return result
 
 """
 class UserAccount:
