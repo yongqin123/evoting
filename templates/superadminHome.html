@@ -104,6 +104,9 @@ Welcome, super admin {{username}}
         }
     </style>
     <form>
+       <button type="button" id="button_create" name ="create_admin" data-toggle="modal" data-target="#createModal">
+        Create Admin
+       </button>
         <h4>Below are the admins</h4>
         <table>
             <tr>
@@ -113,16 +116,77 @@ Welcome, super admin {{username}}
             </tr>
             {% for n in data %}
             <a href="#">
-            <tr id="{{n[0]}}" >
+            <tr>
         
             <td>{{n[0]}}</td>
             <td>{{n[1]}}</td>
             <td>{{n[2]}}</td>
-        
+            <td>
+              <button type="button" id="{{n[0]}}" name ="deleteButton" onclick="getSelectedUsername(this.id)" data-toggle="modal" data-target="#deleteModal">
+                Delete Order
+              </button>
+            </td>
             </tr>
         </a>
             {% endfor %}
         </table>
+
+       <!-- Modal for delete-->
+  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete admin</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+        <br>
+        <text> Confirm to delete Admin?:</text>
+        <input style="border:0;width:100px" id="username_delete" name="username" readonly></input>
+        <!-- <input style="border:0;width:100px" id="order_id_delete" name="order_id" readonly></input> -->
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button id="button_delete" name = "button_type" value = "button_delete">Delete Admin</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+   <!-- Modal for Create admin-->
+   <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete admin</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        </div>
+        <div class="modal-body">
+        <br>
+        <text> Confirm to delete Admin?:</text>
+        <input style="border:0;width:100px" id="username_delete" name="username" readonly></input>
+        <!-- <input style="border:0;width:100px" id="order_id_delete" name="order_id" readonly></input> -->
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button id="button_delete" name = "button_type" value = "button_delete">Delete Admin</button>
+        </div>
+      </div>
+    </div>
+  </div>
     </form>
 </body>
+<script>
+  function getSelectedUsername(clicked_id)
+    {
+      var selected_id = clicked_id
+      document.getElementById("username_delete").value = selected_id
+    }
+
+</script>
 </html>

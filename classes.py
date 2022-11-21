@@ -202,6 +202,9 @@ class superadminControllerPage:
     def get_admin(self)->list:
         return self.entity.retrieveAdmin()
 
+    def delete_admin(self)->list:
+        return self.entity.deleteAdmin()
+
 
 class superadminDetails:
 
@@ -213,6 +216,14 @@ class superadminDetails:
                 db.commit()
                 return result
 
+    def deleteAdmin(self,username):
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                #'DELETE from public."Login" where profile = %s AND username = %s;',('admin',username,)
+                cursor.execute(f'SELECT username,password,name FROM public."Login" where profile=%s;',('admin',))
+                result = cursor.fetchall()
+                db.commit()
+                return result
 """
 class UserAccount:
     def getAllProfiles(self) -> list:

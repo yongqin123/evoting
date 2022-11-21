@@ -30,6 +30,10 @@ def index():
 
     elif request.method == "POST":
         print("12345")
+        if request.form["button_type"] == "button_delete":
+            username = request.form["username"]
+            data = boundary.controller.delete_admin(username)
+            return redirect(url_for('/', data=data))
 
         
 
