@@ -33,7 +33,8 @@ def index():
         if request.form["button_type"] == "button_delete":
             username = request.form["username"]
             data = boundary.controller.delete_admin(username)
-            return redirect(url_for('/', data=data))
+            print("In post")
+            return redirect(url_for('index', data=data))
 
         
 
