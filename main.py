@@ -67,7 +67,9 @@ def voter():
     #name = VoterPage().controller.getName()
     if request.method == "GET":
         if "username" in session:
-            return boundary.voterTemplate(session["username"])
+            details = VoterPage().controller.getDetails()
+            constituency = VoterPage().controller.getDistrictName()
+            return boundary.voterTemplate(session["username"], details, constituency)
         else:
             flash("login first!")
             return redirect(url_for("index"))
@@ -80,13 +82,47 @@ def voter():
 @app.route("/voterUpdateAddress", methods=["GET", "POST"])
 def voterUpdateAddress():
     boundary = VoterPage()
-    address_postalCode = VoterPage().controller.getAddress()
     if request.method == "GET":
-        return boundary.voterTemplateUpdateAddress(session["username"], address_postalCode)
+        return boundary.voterTemplateUpdateAddress(session["username"])
 
     elif request.method == "POST":
-        test = boundary.controller.setAddress(request.form)
+        boundary.controller.setAddress(request.form)
         return redirect(url_for("voter"))
+
+### VOTER UPDATE ADDRESS PAGE ###
+@app.route("/voterUpdatePhoneNumber", methods=["GET", "POST"])
+def voterUpdatePhoneNumber():
+    boundary = VoterPage()
+    if request.method == "GET":
+        return boundary.voterTemplateUpdatePhoneNumber(session["username"])
+
+    elif request.method == "POST":
+        boundary.controller.setPhoneNumber(request.form)
+        return redirect(url_for("voter"))
+
+@app.route("/voterViewParties", methods=["GET", "POST"])
+def voterViewParties():
+    boundary = VoterPage()
+    parties = VoterPage().controller.getParties()
+    if request.method == "GET":
+        return boundary.voterTemplateViewParties(session["username"], parties)
+    
+    elif request.method == "POST":
+        session["candidates"] = VoterPage().controller.getCandidatesByDistrict(request.form)
+        print(session["candidates"])
+        return redirect(url_for("voterViewCandidates"))
+
+@app.route("/voterViewCandidates", methods=["GET", "POST"])
+def voterViewCandidates():
+    boundary = VoterPage()
+    parties = VoterPage().controller.getParties()
+    
+    if request.method == "GET":
+        return boundary.voterTemplateViewCandidates(session["username"], parties, session["candidates"])
+    
+    elif request.method == "POST":
+        session["candidates"] = VoterPage().controller.getCandidatesByDistrict(request.form)
+        return redirect(url_for("voterViewCandidates"))
 
 '''
 ### LOGOUT (TO APPLY BCE) ###
