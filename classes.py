@@ -36,7 +36,7 @@ class LoginPage:
         return render_template("login.html", profiles=profiles)
 
     def redirectPage(account_type):
-        default_profiles = ["candidate", "super_admin", "voter"]
+        default_profiles = ["party", "super_admin", "voter"]
         if account_type not in default_profiles:
             return redirect(url_for("otherProfiles", type=account_type))
         else:
@@ -55,7 +55,7 @@ class LoginPageController:
         return self.entity.doesUserExist()
 
     def redirectPage(account_type):
-        default_profiles = ["candidate", "admin", "voter"]
+        default_profiles = ["party", "admin", "voter"]
         if account_type not in default_profiles:
             return redirect(url_for("otherProfiles", type=account_type))
         else:
