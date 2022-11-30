@@ -7,6 +7,8 @@ from random import vonmisesvariate
 from flask import Flask, redirect ,url_for, render_template, request, session, flash
 import psycopg2, psycopg2.extras, datetime, re
 from datetime import timedelta, date, datetime
+from bs4 import BeautifulSoup
+import requests
 
 '''
 ### POSTGRESQL CONFIG ###
