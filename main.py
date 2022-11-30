@@ -49,16 +49,65 @@ def index():
             return boundary.loginTemplate() # redirect to login page
 
 
-### CANDIDATE PAGE ###
-@app.route("/candidate", methods=["GET", "POST"])
-def candidate():
-    boundary = CandidatePage()
+### PARTY PAGE ###
+@app.route("/party", methods=["GET", "POST"])
+def party():
+    boundary = PartyPage()
     if request.method == "GET":
         if "username" in session:
-            return boundary.candidateTemplate(session["username"])
+            return boundary.partyTemplate(session["username"])
         else:
             flash("login first!")
             return redirect(url_for("index"))
+    elif request.method == "POST":
+        return boundary.buttonClicked(request.form)
+
+@app.route("/Party/CreateProfile", methods=["GET", "POST"])
+def CreateProfile():
+    boundary = PartyPage()
+    partyName = session["username"]
+    if request.method == "GET":
+        return boundary.partyTemplateCreate()
+
+    elif request.method == "POST":
+
+        error, result =  boundary.controller.createProfile(request.form, request.form.getlist)
+
+        if result:
+            flash("Profile successfully created!")
+            return boundary.partyTemplate(session["username"])
+
+        else:
+            print(f"In main result : {error}")
+            flash(error)
+            return boundary.partyTemplateCreate() 
+
+    
+@app.route("/Party/UpdateProfile", methods=["GET", "POST"])
+def UpdateProfile():
+    boundary = PartyPage()
+    partyName = session["username"]
+    if request.method == "GET":
+        if "username" in session:
+            return boundary.partyGetDistrict()
+            
+
+        elif request.method == "POST":
+            boundary.controller.updateProfile(request.form, partyName)
+            #return boundary.partyTemplateUpdate(partyName)
+
+    """  elif request.method == "POST":
+
+        error, result =  boundary.controller.createProfile(request.form, request.form.getlist)
+
+        if result:
+            flash("Profile successfully created!")
+            return redirect(url_for("party"))
+
+        else:
+            print(f"In main result : {error}")
+            flash(error)
+            return redirect(url_for("CreateProfile")) """
 
 ### VOTER PAGE ###
 @app.route("/voter", methods=["GET", "POST"])

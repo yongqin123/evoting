@@ -85,32 +85,123 @@ class UserAccount():
                 if result != None: return True
                 else: return False
 
-### candidate Use case ###
-class CandidatePage:
+### party Use case ###
+class PartyPage:
     def __init__(self) -> None:
-        self.controller = CandidatePageController()
+        self.controller = PartyPageController()
 
-    def candidateTemplate(self, username):
-        return render_template("candidateHome.html", username=username)
+    def partyTemplate(self, username):
+        return render_template("partyHome.html", username=username)
 
+    def buttonClicked(self, request_form):
+        self.button_id = request_form["button_type"]
+
+        if self.button_id == "b1":
+            return redirect(url_for("CreateProfile"))
+        elif self.button_id == "b2":
+            return redirect(url_for("partyUpdate"))
     
-class CandidatePageController:
+    def partyTemplateCreate(self):
+        return render_template("partyCreate.html")
+
+    def partyGetDistrict(self):
+        return render_template("partyGetDistrict.html")
+    
+    def partyTemplateUpdate(self):
+        return render_template("partyUpdate.html")
+    
+    
+
+# Party Controller    
+class PartyPageController:
     def __init__(self) -> None:
-        self.entity = CandidateDetails()
+        self.entity = PartyDetails()
 
     def getName(self):
-        return self.entity.candidateName()
+        return self.entity.PartyName()
+    
+    def createProfile(self, request, request_list) -> list:
+        
+        self.entity.nric=request_list("NRIC[]")
+        self.entity.name=request_list("Name[]")
+        self.entity.image=request_list("img[]")
+
+        self.entity.partyName = request["PartyName"]
+        self.entity.districtName = request["DistrictName"]
+        return self.entity.createNewPartyProfile()
+    
+    def updateProfile(self, request, partyName):
+        self.entity.partyName = partyName
+        self.entity.districtName = request["DistrictName"]
+        return self.entity.updatePartyProfile()
 
 
-class CandidateDetails:
 
-    def candidateName(self):
+
+#Party Entity
+class PartyDetails:
+
+    def PartyName(self):
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute(f'SELECT name FROM public."Login" WHERE profile = "candidate"; ')
+                cursor.execute(f'SELECT name FROM public."Login" WHERE profile = "Party"; ')
                 result = cursor.fetchall()
                 db.commit()
                 return result
+
+
+    def updatePartyProfile(self):
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute('SELECT * FROM public."Candidate" WHERE "Party_name" = %s and "DistrictName" = %s ;',(self.party_name,self.districtName,))
+                candidate_results = cursor.fetchall()
+                print(candidate_results)
+
+                return candidate_results  
+
+
+    def createNewPartyProfile(self):
+        #print("here")
+        #print(self.nric)
+        #print(self.name)
+        #print(self.image)
+
+        existing_candidate = []
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                #check if candidate is already registered
+                for i in range(len(self.nric)):
+                    nric = self.nric[i]
+                    #print(f"nric: {nric}")
+                    #print((type(self.candidate_list)[i]))
+                    cursor.execute('SELECT * FROM public."Candidate" WHERE "NRIC" = %s ;',(nric,))
+                    #cursor.execute('SELECT * FROM "Candidate" limit 0')
+                    #colnames = [desc[0] for desc in cursor.description]
+                    #print(colnames)
+                    candidate = cursor.fetchone()
+                    #print(f"in class: {candidate}")
+                    
+                    if candidate == None:
+                        continue
+                
+                    else:
+                        existing_candidate.append(candidate)
+
+        #insert candidates to db
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                if len(existing_candidate) == 0:
+                    for i in range(len(self.nric)):
+                        nric = self.nric[i]
+                        name = self.name[i]
+                        image = self.image[i]
+                        cursor.execute('INSERT INTO public."Candidate" ("NRIC", "Name", "Image", "Party_name", "DistrictName") VALUES (%s, %s, %s, %s, %s)', (nric, name, image, self.partyName, self.districtName, ))
+                        db.commit()
+
+                else:
+                    return existing_candidate, False
+            
+        return existing_candidate, True
 
 
 ### voter Use case ###

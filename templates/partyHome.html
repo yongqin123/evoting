@@ -1,0 +1,32 @@
+<html>
+<head>
+</head>
+
+<body>
+    <div class="bottomright">
+      {% with messages = get_flashed_messages() %} 
+          {% if messages %}
+              {% for msg in messages %}
+                  <h1>{{msg}}</h1>
+              {% endfor %}
+          {% endif %}
+      {% endwith %}
+  </div>
+  <form class="form-inline" action = "" method="POST">
+    <button class="button-84" id="b1" name = "button_type" value = "b1" style="width:250px; height:100px;">Create Profile </button>
+    <button class="button-84" id="b2" name = "button_type" value = "b2" style="width:250px; height:100px;" >Update Profile </button>
+    <br /><br />
+  </form>
+  <div>
+    
+    Hello
+  </div>
+
+
+
+
+
+
+
+</body>
+</html>
