@@ -150,7 +150,89 @@ class VoterPageController:
         self.entity.postalCode = str(request["postalCode"])
         return self.entity.voterNewAddress()
 
+class VoterPage:
+    def __init__(self) -> None:
+        self.controller = VoterPageController()
+        
+    def buttonClicked(self, request_form):
+        self.button_id = request_form["button_type"]
+        if self.button_id == "b1":
+            return redirect(url_for("voterUpdateAddress"))
+        if self.button_id == "b2":
+            return redirect(url_for("voterUpdatePhoneNumber"))
+        if self.button_id == "b3":
+            return redirect(url_for("voterViewParties"))
+        if self.button_id == "b4":
+            return redirect(url_for("voterUpdatePhoneNumber"))
+        elif self.button_id =='return':
+            return redirect(url_for("index"))
+
+
+    def voterTemplate(self, username, details, constituency):
+        return render_template("voterHome.html", username=username, details=details, constituency=constituency)
+
+    def voterTemplateUpdateAddress(self, username):
+        return render_template("voterUpdateAddress.html", username=username)
+
+    def voterTemplateUpdatePhoneNumber(self, username):
+        return render_template("voterUpdatePhoneNumber.html", username=username)
+
+    def voterTemplateViewParties(self, username, parties):
+        return render_template("voterViewParties.html", username=username, parties=parties)
+    
+    def voterTemplateViewCandidates(self, username, parties, candidates):
+        return render_template("voterViewCandidates.html", username=username, parties=parties, candidates=candidates)
+
+    
+class VoterPageController:
+    def __init__(self) -> None:
+        self.entity = VoterDetails()
+
+    def getName(self):
+        return self.entity.voterGetName()
+
+    def getPhoneNumber(self):
+        return self.entity.voterGetPhoneNumber()
+
+    def getAddress(self):
+        return self.entity.voterGetAddress()
+
+    def getDetails(self):
+        return self.entity.voterDetails()
+
+    def setAddress(self, request):
+        streetName = str(request["streetName"]).split(" ")
+        postal_code = streetName[-1]
+        streetName = streetName[:-2]
+        print(streetName)
+        self.entity.address = " ".join(streetName) + " " + str(request["unitNumber"])
+        self.entity.postal_code = postal_code
+        return self.entity.voterNewAddress()
+
+    def setPhoneNumber(self, request):
+        self.entity.phone_number = request["phone_number"]
+        return self.entity.voterNewPhoneNumber()
+
+    def getDistrictName(self):
+        return self.entity.voterDistrictName()
+
+    def getCandidatesByDistrict(self, request):
+        self.entity.districtName = self.getDistrictName()
+        self.entity.chosen_party = request["parties"]
+        session["chosen_party"] = self.entity.chosen_party
+        return self.entity.voterGetCandidatesByDistrict()
+
+    def getParties(self):
+        return self.entity.voterGetParties()
+
 class VoterDetails:
+    def voterDetails(self):
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute(f'SELECT name, address, postal_code, phone_number FROM public."Voter" WHERE nric = %s; ', (session["username"],))
+                result = cursor.fetchall()
+                db.commit()
+                return result[0]
 
     def voterGetName(self) -> str:
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
@@ -166,20 +248,55 @@ class VoterDetails:
                 cursor.execute(f'SELECT address, postal_code FROM public."Voter" WHERE nric = %s; ', (session["username"],))
                 result = cursor.fetchall()
                 db.commit()
+                return result[0]
 
+    def voterGetPhoneNumber(self):
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute(f'SELECT phone_number FROM public."Voter" WHERE nric = %s; ', (session["username"],))
+                result = cursor.fetchone()
+                db.commit()
                 return result[0]
 
     def voterNewAddress(self) -> None:
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                print(self.address)
-                print(self.postalCode)
-                cursor.execute(f'UPDATE public."Voter" SET address = %s , postal_code = %s WHERE nric = %s; ', (self.address, self.postalCode, session["username"],))
-                #result = cursor.fetchall()
+                print("testing")
+                url = f"https://www.parliament.gov.sg/mps/find-mps-in-my-constituency?SearchKeyword={self.postal_code}"
+                fp = requests.get(url).text
+                soup = BeautifulSoup(fp, 'html.parser')
+                contestingZone = soup.find("div" , {"class" : "row result-grc result-pd"}).find("h4").find("a").text
+                cursor.execute(f'UPDATE public."Voter" SET address = %s , postal_code = %s, "contestingZone" = %s WHERE nric = %s; ', (self.address, self.postal_code, contestingZone , session["username"],))
+                db.commit()
+    
+    def voterNewPhoneNumber(self) -> None:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute(f'UPDATE public."Voter" SET phone_number = %s WHERE nric = %s; ', (self.phone_number, session["username"],))
                 db.commit()
                 print("testing")
-                #return result[0][0]
 
+    def voterDistrictName(self):
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute(f'SELECT "contestingZone" FROM public."Voter" WHERE nric = %s;', (session["username"],))
+                result = cursor.fetchone()
+                return result[0]
+
+    def voterGetCandidatesByDistrict(self):
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute(f'SELECT "Name", "Image", "Party_name" FROM public."Candidate" WHERE "DistrictName" = %s AND "Party_name" = %s;', (self.districtName,self.chosen_party))
+                result = cursor.fetchall()
+                print(result)
+                return result
+
+    def voterGetParties(self):
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute(f'SELECT "Party_name", "Manifesto" FROM public."Party";')
+                result = cursor.fetchall()
+                return result
 
 ### superadmin Use case ###
 class superadminPage:
