@@ -1,0 +1,62 @@
+<html>
+    <head>
+        <style>
+            
+            table,td,th {  border-collapse: collapse; border:1px solid black}
+        </style>
+    </head>
+
+    <body>
+            <table id="form_table">
+                <tr><th colspan="2">Update Address</th></tr>
+
+                
+                <tr><td class="form_td"><label>Postal Code: </label><input required name="postalCode" id="postalCode" type="number"></td></tr>
+                <tr><td colspan="2"><button id="fad" onclick="findAddress()">Find Address</button></td></tr>
+            </table>
+            
+        <form action="#" method="POST">       
+            <table>
+                <tr>
+                    <td class="form_td"><label>Block/Street Number: </label><input onchange="this.style.width = ((this.value.length + 1) * 9) + 'px';" required name="streetName" id="streetName" type="text"></td>
+                </tr>
+                <tr>
+                    <td class="form_td"><label>Unit Number: </label><input required name="unitNumber" id="unitNumber" type="text"></td>
+                </tr>
+                <tr><td><button type="submit">submit</button></td></tr>
+            </table>
+        </form>      
+        
+    <script>
+        $(document).ready(function() {
+            $("#fad").click(function(event) {
+                event.preventDefault();
+                
+            });
+        });
+
+
+        function findAddress() {
+            var postalCode = document.getElementById("postalCode").value
+            var streetName = document.getElementById("streetName")
+            fetch(
+                'https://developers.onemap.sg/commonapi/search?searchVal=' +
+                postalCode +
+                '&returnGeom=Y&getAddrDetails=Y'
+            )
+            .then((response) => response.json())
+            .then((json) => 
+                streetName.value = json.results[0].ADDRESS
+            );
+        }
+        function onlyNumberKey( evt ) {
+            // Only ASCII character in that range allowed
+            var ASCIICode = ( evt.which ) ? evt.which : evt.keyCode
+            if ( ASCIICode > 31 && ( ASCIICode < 48 || ASCIICode > 57 ) )
+                return false;
+            return true;
+        }
+
+    </script>
+    </body>
+</html>

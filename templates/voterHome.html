@@ -1,0 +1,45 @@
+<html>
+    <head>
+        <title>Welcome!</title>
+        <style>
+            
+            table,td,th {  border-collapse: collapse; border:1px solid black}
+        </style>
+    </head>
+
+    <body>
+        <form action= # method="POST">
+            
+            <table id="form_table">
+                <tr><th colspan="3">Personal Information</th></tr>
+                <tr>
+                    <td><label>Name: </label></td>
+                    <td>{{ details[0] }}</td>
+                </tr>
+                <tr>
+                    <td><label>NRIC: </label></td>
+                    <td>{{ username }}</td>
+                </tr>
+                <tr>
+                    <td><label>Address: </label></td>
+                    <td>{{ details[1] + " " + details[2]|string}}</td>
+                    <td class="form_td"><button type="submit" name="button_type" id="b1" value="b1">Update</button></td>
+                </tr>
+                <tr>
+                    <td><label>Phone Number</label></td>
+                    <td>{{ details[3] }}</td>
+                    <td class="form_td"><button type="submit" name="button_type" id="b2" value="b2">Update</button></td>
+                </tr> 
+                <tr>
+                    <td><label>Constituency: </label></td>
+                    <td>{{ constituency }}</td>
+                    <td class="form_td"><button type="submit" name="button_type" id="b3" value="b3">View Candidates</button></td>
+                <tr>
+                    
+                    <td colspan="3" class="form_td"><button style="display: block; margin: auto;" type="submit" name="button_type" id="b4" value="b4">Vote</button></td>
+                </tr>
+            </table>
+        </form>
+        
+    </body>
+</html>
