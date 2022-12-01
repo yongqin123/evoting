@@ -33,7 +33,8 @@ class LoginPage:
     def loginTemplate(self):
         # get all profiles
         profiles = self.controller.getProfiles()
-        return render_template("login.html", profiles=profiles)
+        parties = self.controller.getParties()
+        return render_template("login.html", profiles=profiles, parties=parties)
 
     def redirectPage(account_type):
         default_profiles = ["party", "super_admin", "voter"]
@@ -63,6 +64,9 @@ class LoginPageController:
     def getProfiles(self) -> list:
         return self.entity.getAllProfiles()
 
+    def getParties(self):
+        return self.entity.getAllParties()
+
 class UserAccount():
     def getAllProfiles(self) -> list:
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
@@ -84,6 +88,14 @@ class UserAccount():
                 print(self.account_type)
                 if result != None: return True
                 else: return False
+
+    def getAllParties(self):
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute(f'SELECT "Party_name" FROM public."Party"')
+                parties = cursor.fetchall()
+                print(parties)
+        return parties
 
 ### party Use case ###
 class PartyPage:
