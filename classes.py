@@ -418,8 +418,8 @@ class superadminControllerPage:
 
     #def getName(self):
     #    return self.entity.candidateName()
-    def createAdmin(self):
-        return self.entity.createAdmin()
+    def createAdmin(self,admin_username,admin_password,admin_name):
+        return self.entity.createAdmin(admin_username,admin_password,admin_name)
 
     def get_admin(self)->list:
         return self.entity.retrieveAdmin()
@@ -445,6 +445,16 @@ class superadminDetails:
                 db.commit()
                 cursor.execute(f'SELECT username,password,name FROM public."Login" where profile=%s;',('admin',))
                 
+                db.commit()
+                result = cursor.fetchall()
+                return result
+
+    def createAdmin(self,admin_username,admin_password,admin_name):
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute(f'INSERT INTO public."Login"(username,password,name,profile) VALUES(%s,%s,%s,%s);',(admin_username,admin_password,admin_name,'admin',))
+                db.commit()
+                cursor.execute(f'SELECT username,password,name FROM public."Login" where profile=%s;',('admin',))
                 db.commit()
                 result = cursor.fetchall()
                 return result
