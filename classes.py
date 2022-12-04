@@ -53,6 +53,11 @@ class LoginPageController:
         self.entity.username = request_form["username"]
         self.entity.password = request_form["password"]
         self.entity.account_type = request_form["type"]
+
+        if request_form["type"] == "party":
+            #print("here " + request_form["party"])
+            self.entity.party = request_form["party"]
+
         return self.entity.doesUserExist()
 
     def redirectPage(account_type):
@@ -79,13 +84,22 @@ class UserAccount():
         # connect to db
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute(f'SELECT * FROM public."Login" WHERE username = %s AND password = %s AND profile = %s', (self.username, self.password, self.account_type))
-                result = cursor.fetchone()
-                db.commit()
-                print(result)
-                print(self.username)
-                print(self.password)
-                print(self.account_type)
+                if self.account_type == "party":
+                    #check if party's name is correct
+                    print("party name:" + self.party)
+                    cursor.execute(f'SELECT * FROM public."Login" WHERE username = %s AND password = %s AND name = %s AND profile = %s', (self.username, self.password, self.party, self.account_type))
+                    result = cursor.fetchone()
+                    db.commit()
+                
+                else:
+                    cursor.execute(f'SELECT * FROM public."Login" WHERE username = %s AND password = %s AND profile = %s', (self.username, self.password, self.account_type))
+                    result = cursor.fetchone()
+                    db.commit()
+                    print(result)
+                    print(self.username)
+                    print(self.password)
+                    print(self.account_type)
+
                 if result != None: return True
                 else: return False
 

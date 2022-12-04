@@ -40,6 +40,9 @@ def index():
             # login success - add username & account_type in session
             session["username"] = request.form["username"]
             session["account_type"] = request.form["type"]
+            
+            if request.form["type"] == "party":
+                session["party"] = request.form["party"]
 
             # redirect page to candidate, admin, voter
             return LoginPage.redirectPage(session["account_type"]) # C-B
