@@ -1,0 +1,119 @@
+<html>
+<head>
+    <style>
+        
+    </style>
+    
+</head>
+
+<body>
+    <div class="existing"  role = "alert ">
+        {% with messages = get_flashed_messages() %} 
+            
+            {% for msg in messages[0] %}
+                <h1>{{msg[0]}} is already created!</h1>
+            {% endfor %}
+        {% endwith %}
+    </div>
+
+
+  
+    <form class="form-inline" action = "" method="POST">
+    <div class = "Party">
+        <h1>Create profile</h1>
+        <p>Please fill in the form to create the party's profile for the district</p>
+
+        <label><b>Party Name</b></label>
+        <select name = "PartyName">
+            <option>{{party}}}</option>
+        </select>
+
+        <label><b>Contesting Zone</b></label>
+        <select name = "DistrictName">
+            <option>Aljunied GRC</option>
+            <option>Ang Mo Kio GRC</option>
+            <option>Bishan-Toa Payoh GRC</option>
+            <option>Bukit Batok SMC</option>
+            <option>Bukit Panjang SMC</option>
+            <option>Chua Chu Kang GRC</option>
+            <option>East Coast GRC</option>
+            <option>Holland-Bukit Timah GRC</option>
+            <option>Hong Kah North SMC</option>
+            <option>Hougang SMC</option>
+            <option>Jalan Besar GRC</option>
+            <option>Jurong GRC</option>
+            <option>Kebun Baru SMC</option>
+            <option>MacPherson SMC</option>
+            <option>Marine Parade GRC</option>
+            <option>Marsiling-Yew Tee GRC</option>
+            <option>Marymount SMC</option>
+            <option>Mountbatten SMC</option>
+            <option>Nee Soon GRC</option>
+            <option>Pasir Ris-Punggol GRC</option>
+            <option>Pioneer SMC</option>
+            <option>Potong Pasir SMC</option>
+            <option>Punggol West SMC</option>
+            <option>Radin Mas SMC</option>
+            <option>Sembawang GRC</option>
+            <option>Sengkang GRC</option>
+            <option>Tampines GRC</option>
+            <option>Tanjong Pagar GRC</option>
+            <option>West Coast GRC</option>
+            <option>Yio Chu Kang SMC</option>
+            <option>Yuhua SMC</option>
+        </select>
+        <br><br>
+
+    </div>
+    
+    <div class = "Candidate">
+        <h3>Candidate 1</h3>
+        <label><b>Name</b></label>
+        <input type ="text" placeholder ="Candidate 1" name = "Name[]" value="A">
+        <label><b>NRIC</b></label>
+        <input type ="text" placeholder ="S1234567Z" name = "NRIC[]" value = "S1234567A"><br><br>
+        <label><b>Upload Image</b></label>
+        <input class="form-control form-control-lg" id="formFileLg" type="file" name = "img[]" value = "test1.jfif" /><span>Upload your jpeg/jpg image. Max size 50 MB</span>
+        <br><br>
+
+        <h3>Candidate 2</h3>
+        <label><b>Name</b></label>
+        <input type ="text" placeholder ="Candidate 1" name = "Name[]" value="B">
+        <label><b>NRIC</b></label>
+        <input type ="text" placeholder ="S1234567Z" name = "NRIC[]" value = "S1234567B"><br><br>
+        <label><b>Upload Image</b></label>
+        <input class="form-control form-control-lg" id="formFileLg" type="file" name = "img[]" value = "test1.jfif" /><span>Upload your jpeg/jpg image. Max size 50 MB</span>
+        <br><br>
+
+        <h3>Candidate 3</h3>
+        <label><b>Name</b></label>
+        <input type ="text" placeholder ="Candidate 1" name = "Name[]" value="C">
+        <label><b>NRIC</b></label>
+        <input type ="text" placeholder ="S1234567Z" name = "NRIC[]" value = "S1234567C"><br><br>
+        <label><b>Upload Image</b></label>
+        <input class="form-control form-control-lg" id="formFileLg" type="file" name = "img[]" value = "test1.jfif" /><span>Upload your jpeg/jpg image. Max size 50 MB</span>
+        <br><br>
+
+        <h3>Candidate 4</h3>
+        <label><b>Name</b></label>
+        <input type ="text" placeholder ="Candidate 1" name = "Name[]" value="D">
+        <label><b>NRIC</b></label>
+        <input type ="text" placeholder ="S1234567Z" name = "NRIC[]" value = "S1234567D"><br><br>
+        <label><b>Upload Image</b></label>
+        <input class="form-control form-control-lg" id="formFileLg" type="file" name = "img[]" value = "test1.jfif" /><span>Upload your jpeg/jpg image. Max size 50 MB</span>
+        <br><br>
+
+        <h3>Candidate 5</h3>
+        <label><b>Name</b></label>
+        <input type ="text" placeholder ="Candidate 1" name = "Name[]" value="E">
+        <label><b>NRIC</b></label>
+        <input type ="text" placeholder ="S1234567Z" name = "NRIC[]" value = "S1234567E"><br><br>
+        <label><b>Upload Image</b></label>
+        <input class="form-control form-control-lg" id="formFileLg" type="file" name = "img[]" value = "test1.jfif" /><span>Upload your jpeg/jpg image. Max size 50 MB</span>
+        <br><br>
+    </div>
+    <button type="submit" value="submit"> Submit </button>
+  </form>
+
+</body>
+</html>

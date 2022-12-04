@@ -1,0 +1,38 @@
+<html>
+<head>
+</head>
+
+<body>
+    
+  <form>
+    <div class = "Party">
+        <h1>Update profile</h1>
+        <p>Please fill in the form to create a profile for your party</p>
+
+        <label><b>Party Name</b></label>
+        <select name = "PartyName">
+            <option>{{party}}</option>
+        </select>
+        <br><br>
+
+        <label><b>Menifesto</b></label>
+        <textarea placeholder ="Manifesto for frontpage" name = "PartyManifesto" ></textarea>
+        <br><br>
+
+        <label><b>Upload Party Logo</b></label>
+        <input class="form-control form-control-lg" id="formFileLg" type="file" name = "logo"  /><span>Upload your jpeg/jpg image. Max size 50 MB</span>
+
+       
+    </div>
+    <button type="submit" value="submit"> Submit </button>  
+  </form>
+ 
+
+
+
+
+
+
+
+</body>
+</html>

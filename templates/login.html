@@ -98,14 +98,19 @@ E-voting
 	<input type="password" id = "pw" placeholder = "Password"  name="password">
 	<select class="topright" name="type" onchange="isParty()" id="type">
 		{% for profile in profiles %}
-		<option value={{profile[0]}}>{{profile[0]}}</option>
+		<option value={{profile[0]}} id = "profileName" >{{profile[0]}}</option>
 		{% endfor %}
 	</select>
 
 	<select name="party" id="party">
-		{% for party in parties %}
-		<option value={{party[0]}}>{{party[0]}}</option>
-		{% endfor %}
+		<option>Thunder Party</option>
+		<option>Mallet Party</option>
+		<option>Sun Party</option>
+		<option>Palm Tree Party</option>
+		<option>Campass Party</option>
+		<option>Audi Party</option>
+		<option>Nokia Party</option>
+		<option>Olympics Torch Party</option>
 	</select>
 	<br>
 	<button type="submit" value="submit"> LOGIN </button>
@@ -114,6 +119,7 @@ E-voting
 </div>
 </div>
 <br><br>
+
 <script>
 	//Set Party Selector list as non visible as default
 	document.getElementById("party").style.display = 'none';
@@ -132,5 +138,6 @@ E-voting
 		}
 	}
 </script>
+
 </body>
 </html>
