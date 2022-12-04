@@ -35,7 +35,12 @@ def index():
             data = boundary.controller.delete_admin(username)
             print("In post")
             return redirect(url_for('index', data=data))
-
+        if request.form["button_type"] == "button_create":
+            a_username = request.form["admin_username"]
+            a_password = request.form["admin_password"]
+            a_name = request.form["admin_name"]
+            data = boundary.controller.createAdmin(a_username,a_password,a_name)
+            return redirect(url_for('index',data=data))
         
 
 ### INITIALIZATION ###

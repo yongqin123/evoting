@@ -115,9 +115,9 @@ Welcome, super admin {{username}}
         <h4>Below are the admins</h4>
         <table>
             <tr>
-            <th>admin username</th>
-            <th>admin password</th>
-            <th>admin name</th>
+            <th>username</th>
+            <th>password</th>
+            <th>name</th>
             </tr>
             {% for n in data %}
             <a href="#">
@@ -174,11 +174,17 @@ Welcome, super admin {{username}}
             <div class="modal-body">
             <br>
            
-            <!-- <input style="border:0;width:100px" id="order_id_delete" name="order_id" readonly></input> -->
+            Admin's username: <input style="width:200px;text-align: center;" id="admin_username" name="admin_username"></input>
+            <br>
+            <br>
+            Admin's password:<input style="width:200px;text-align: center;" id="admin_password" name="admin_password"></input>
+            <br>
+            <br>
+            Admin's name: <input style="width:200px;text-align: center;" id="admin_name" name="admin_name"></input>
             </div>
             <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button id="button_delete" name = "button_type" value = "button_delete">Delete Admin</button>
+            <button id="button_create" name = "button_type" value = "button_create">Create Admin</button>
             </div>
           </div>
         </div>
