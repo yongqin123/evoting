@@ -8,6 +8,7 @@ from flask import Flask, redirect ,url_for, render_template, request, session, f
 import psycopg2, psycopg2.extras, datetime, re
 from datetime import timedelta, date, datetime
 from bs4 import BeautifulSoup
+from werkzeug.utils import secure_filename
 import requests
 
 '''
@@ -163,6 +164,11 @@ class PartyPageController:
         self.entity.party = party
         return self.entity.CheckPartyExist()
 
+    def DistrictExists(self, request, party) -> bool:
+        self.entity.district = request["districtName"]
+        self.entity.party = party
+        return self.entity.CheckDistrictExist()
+
     def createPartyProfile(self,request):
 
         self.entity.party = request["PartyName"]
@@ -171,36 +177,38 @@ class PartyPageController:
 
         return self.entity.createNewPartyProfile()
 
-    def updatePartyProfile(self, request):
+    def updatePartyProfile(self, request ,party):
         self.entity.manifesto = request["PartyManifesto"]
         self.entity.logo = request["logo"]
+        self.entity.party = party
 
-        return self.entity.updatePartyProfile()
+        return self.entity.updateProfileParty()
     
     def createDistrictProfile(self, request, request_list) -> list:
         
         self.entity.nric=request_list("NRIC[]")
         self.entity.name=request_list("Name[]")
-        self.entity.image=request_list("img[]")
+        #self.entity.image=request_list("img[]")
+        self.entity.image = request.files["img[]"]
 
         self.entity.partyName = request["PartyName"]
-        self.entity.districtName = request["DistrictName"]
+        self.entity.districtName = request["districtName"]
         return self.entity.creatNewDistrictProfile()
     
 
     def getCandidatesByDistrict(self, request, party):
-        self.entity.districtName = request["DistrictName"]
+        self.entity.districtName = request["districtName"]
         self.entity.party = party
         return self.entity.getCandidates()
 
-    def updateDistrict(self, request_list):
+    def updateDistrict(self, request, request_list):
         self.entity.Oldnric=request_list("oldNRIC[]")
         self.entity.Oldname=request_list("oldName[]")
-        self.entity.Oldimage=request_list("oldimg[]")
 
         self.entity.nric=request_list("newNRIC[]")
         self.entity.name=request_list("newName[]")
-        self.entity.image=request_list("newimg[]")
+    
+        self.entity.image = request("img[]")
 
         return self.entity.updateNewDistrictProfile()
 
@@ -219,17 +227,29 @@ class PartyDetails:
                 return result
 
     def CheckPartyExist(self):
-        print("=")
-        print(self.party)
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute('SELECT * FROM public."Party" WHERE "Party_name" = %s ;', (self.party,))
-                result = cursor.fetchall()
+                result = cursor.fetchone()
                 print(result)
                 db.commit()
 
-                print(len(result))
-                if len(result) == 0: 
+                
+                if result != None: 
+                    return True #there is a result, hence party already exists
+                else: 
+                    return False
+
+    def CheckDistrictExist(self):
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute('SELECT COUNT("DistrictName") FROM public."Candidate" WHERE "DistrictName" = %s AND "Party_name" = %s group by "Party_name";', (self.district, self.party,))
+                result = cursor.fetchone()
+                print(result)
+                db.commit()
+
+                #print(len(result))
+                if result != None: 
                     return True #there is a result, hence party already exists
                 else: 
                     return False
@@ -240,11 +260,23 @@ class PartyDetails:
                 cursor.execute('INSERT INTO public."Party" ("Party_name", "Manifesto", "Logo") VALUES (%s, %s, %s)', (self.party, self.manifesto, self.logo, ))
                 db.commit()
 
-    def updatePartyProfile(self):
-        """ with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
-            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor: """
+    def updateProfileParty(self):
         print(self.manifesto)
         print(self.logo)
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:     
+                if self.manifesto and self.logo != "":
+                    return
+                elif self.manifesto == "" and self.logo != "": 
+                    cursor.execute('UPDATE public."Party" set "Logo" = %s WHERE "Party_name" = %s', (self.logo, self.party, ))
+                    db.commit()
+                elif self.logo == "" and self.manifesto !="": 
+                    cursor.execute('UPDATE public."Party" set "Manifesto" = %s WHERE "Party_name" = %s', (self.logo, self.party, ))
+                    db.commit()
+                else:
+                    cursor.execute('UPDATE public."Party" set "Manifesto" = %s , "Logo" = %s WHERE "Party_name" = %s', (self.manifesto, self.logo, self.party, ))
+                    db.commit()
+     
 
     def creatNewDistrictProfile(self):
         #print("here")
@@ -301,11 +333,24 @@ class PartyDetails:
     def updateNewDistrictProfile(self):
         print(self.Oldnric)
         print(self.Oldname)
-        print(self.Oldimage)
 
         print(self.nric)
         print(self.name)
         print(self.image)
+
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                for i in range(5):
+                    if self.image[i].filename != "":
+                        cursor.execute('UPDATE public."Candidate" SET "Image" = %s WHERE "NRIC" = %s AND "Name" = %s',(self.image[i].filename, self.Oldnric[i], self.Oldname[i],))
+
+                    if self.name[i] != "":
+                        cursor.execute('UPDATE public."Candidate" SET "Name" = %s WHERE "Name" = %s AND "NRIC" = %s',(self.name[i], self.Oldname[i], self.Oldnric[i],))
+
+                    if self.nric[i] != "":
+                        cursor.execute('UPDATE public."Candidate" SET "NRIC" = %s WHERE "NRIC" = %s',(self.nric[i], self.Oldnric[i],))
+                db.commit() 
+
 
 
 ### voter Use case ###
@@ -326,7 +371,7 @@ class VoterPage:
 
     def voterTemplateUpdateAddress(self, username, address_postalCode):
         return render_template("voterUpdateAddress.html", username=username, address_postalCode=address_postalCode)
-class VoterPageController:
+""" class VoterPageController:
     def __init__(self) -> None:
         self.entity = VoterDetails()
 
@@ -346,7 +391,7 @@ class VoterPageController:
         self.entity.address = " ".join(streetName) + " " + str(request["unitNumber"])
         self.entity.postalCode = str(request["postalCode"])
         return self.entity.voterNewAddress()
-
+ """
 class VoterPage:
     def __init__(self) -> None:
         self.controller = VoterPageController()

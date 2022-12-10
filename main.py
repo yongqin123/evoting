@@ -3,6 +3,7 @@ from tkinter import Menu
 from flask import Flask, redirect ,url_for, render_template, request, session, flash
 import psycopg2, psycopg2.extras, datetime, re
 from datetime import timedelta, date, datetime, time
+from werkzeug.utils import secure_filename
 from classes import * # import all classes from classes.py
 
 '''
@@ -73,7 +74,7 @@ def CreatePartyProfile():
     if request.method == "GET":
         
         if boundary.controller.ProfileExists(session["party"]) == True:
-            print("access denied")
+            #print("access denied")
             flash("Party's profile already exists!")
             return redirect(url_for("party"))
 
@@ -92,7 +93,7 @@ def CreatePartyProfile():
 def UpdatePartyProfile():
     boundary = PartyPage()
     if request.method == "GET":
-        print(boundary.controller.ProfileExists(session["party"]))
+        #print(boundary.controller.ProfileExists(session["party"]))
         #print(session["party"])
         if boundary.controller.ProfileExists(session["party"]):
             return boundary.updatePartyTemplate(session["party"])
@@ -102,8 +103,9 @@ def UpdatePartyProfile():
             return redirect(url_for("party"))
     
     elif request.method == "POST":
-        boundary.controller.updatePartyProfile(request.form)
-        return
+        boundary.controller.updatePartyProfile(request.form, session["party"])
+        flash("Party's profile successfully updated!")
+        return redirect(url_for("party"))
 
 
 @app.route("/Party/DistrictCreateProfile", methods=["GET", "POST"])
@@ -111,20 +113,29 @@ def CreateDistrictProfile():
     boundary = PartyPage()
     
     if request.method == "GET":
-        return boundary.partyDistrictTemplateCreate(session["party"])
-
-    elif request.method == "POST":
-
-        error, result =  boundary.controller.createDistrictProfile(request.form, request.form.getlist)
-
-        if result:
-            flash("Profile successfully created!")
+        partyProfile_exists = boundary.controller.ProfileExists(session["party"])
+        if partyProfile_exists == True:
+            return boundary.partyDistrictTemplateCreate(session["party"])
+        else:
+            flash("Create a party profile first!")
             return redirect(url_for("party"))
 
+    elif request.method == "POST":
+        
+        partyDistrictProfile_exists = boundary.controller.DistrictExists(request.form, session["party"])
+        if partyDistrictProfile_exists == False:
+            error, result =  boundary.controller.createDistrictProfile(request.form, request.form.getlist)
+            if result:
+                flash("Profile successfully created!")
+                return redirect(url_for("party"))
+
+            else:
+                print(f"In main result : {error}")
+                flash(error)
+                return boundary.partyDistrictTemplateCreate(session["party"])
         else:
-            print(f"In main result : {error}")
-            flash(error)
-            return boundary.partyDistrictTemplateCreate(session["party"]) 
+            flash("Disctrict profile already exists, please select update to edit profile!")
+            return redirect(url_for("party"))
 
     
 @app.route("/Party/getDistrict", methods=["GET", "POST"])
@@ -137,11 +148,16 @@ def getDistrict():
             
 
     elif request.method == "POST":
-        print("in post")
-        data = boundary.controller.getCandidatesByDistrict(request.form, session["party"])
-        session["selectedDistrictCandidates"] = data
-        print(session["selectedDistrictCandidates"])
-        return redirect(url_for("updateDistrictProfile"))
+        if boundary.controller.DistrictExists(request.form, session["party"]):
+            #print("in post")
+            data = boundary.controller.getCandidatesByDistrict(request.form, session["party"])
+            session["selectedDistrictCandidates"] = data
+            #print(session["selectedDistrictCandidates"])
+            return redirect(url_for("updateDistrictProfile"))
+
+        else:
+            flash("No record found, please create a profile for the district!")
+            return redirect(url_for("party"))
 
 
 @app.route("/Party/getDistrict/UpdateProfile", methods=["GET", "POST"])
@@ -149,14 +165,17 @@ def updateDistrictProfile():
     boundary = PartyPage()
     
     if request.method == "GET":
-        if "username" in session:
-            return boundary.partyDistrictTemplateUpdate(session["selectedDistrictCandidates"])
+        return boundary.partyDistrictTemplateUpdate(data =session["selectedDistrictCandidates"])
             
 
     elif request.method == "POST":
-        boundary.controller.updateDistrict(request.form.getlist)
+        images = request.files.get('img')
+        print(f"here {images}")
+        boundary.controller.updateDistrict(request.files.getlist, request.form.getlist)
         flash("District profile successfully updated!")
         return redirect(url_for("party"))
+
+
 
 ### VOTER PAGE ###
 @app.route("/voter", methods=["GET", "POST"])
