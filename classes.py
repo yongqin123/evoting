@@ -10,6 +10,12 @@ from datetime import timedelta, date, datetime
 from bs4 import BeautifulSoup
 from werkzeug.utils import secure_filename
 import requests
+import dropbox
+import base64
+import json
+from PIL import Image
+import numpy as np
+import io
 
 '''
 ### POSTGRESQL CONFIG ###
@@ -24,6 +30,12 @@ db_host = 'ec2-34-234-240-121.compute-1.amazonaws.com'
 db_name = 'dcgsvhb0enfgfd'
 db_user = 'ampoosmqdvdzte'
 db_pw = '1494a152d2acffe248186b855286562322f43ab69a4ae0cd1b061bef24f36bf3'
+
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
+
+def allowed_file(filename): 
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 ### Use Case 1 (LOGIN) ###
 class LoginPage:
@@ -138,11 +150,11 @@ class PartyPage:
     def updatePartyTemplate(self, party):
         return render_template("partyUpdateProfile.html", party=party)
     
-    def partyDistrictTemplateCreate(self, party):
-        return render_template("partyDistrictCreate.html", party=party)
+    def partyDistrictTemplateCreate(self, party, zones):
+        return render_template("partyDistrictCreate.html", party=party, zones = zones)
 
-    def partyGetDistrict(self):
-        return render_template("partyGetDistrict.html")
+    def partyGetDistrict(self, zones):
+        return render_template("partyGetDistrict.html", zones = zones)
     
     def getDistrictForm(self):
         return redirect(url_for("updateDistrictProfile"))
@@ -156,6 +168,7 @@ class PartyPage:
 class PartyPageController:
     def __init__(self) -> None:
         self.entity = PartyDetails()
+        
 
     def getName(self):
         return self.entity.PartyName()
@@ -169,27 +182,27 @@ class PartyPageController:
         self.entity.party = party
         return self.entity.CheckDistrictExist()
 
-    def createPartyProfile(self,request):
+    def createPartyProfile(self,request, requestImg):
 
         self.entity.party = request["PartyName"]
         self.entity.manifesto = request["PartyManifesto"]
-        self.entity.logo = request["logo"]
+        self.entity.logo = requestImg["logo"]
 
         return self.entity.createNewPartyProfile()
 
-    def updatePartyProfile(self, request ,party):
+    def updatePartyProfile(self, request, requestImg ,party):
         self.entity.manifesto = request["PartyManifesto"]
-        self.entity.logo = request["logo"]
+        self.entity.logo = requestImg["logo"]
         self.entity.party = party
 
         return self.entity.updateProfileParty()
     
-    def createDistrictProfile(self, request, request_list) -> list:
+    def createDistrictProfile(self, request, request_list, requestImg) -> list:
         
         self.entity.nric=request_list("NRIC[]")
         self.entity.name=request_list("Name[]")
         #self.entity.image=request_list("img[]")
-        self.entity.image = request.files["img[]"]
+        self.entity.image = requestImg("img[]")
 
         self.entity.partyName = request["PartyName"]
         self.entity.districtName = request["districtName"]
@@ -212,10 +225,58 @@ class PartyPageController:
 
         return self.entity.updateNewDistrictProfile()
 
+    def getContestingZones(self):
+        return self.entity.getDbDistrictName()
+
+    def getImages(self, filepath,):
+        return self.entity.load_image(filepath)
+
+    
 
 
 #Party Entity
 class PartyDetails:
+    def uploadImagePartyLogo(self):
+        APP_KEY = 'v0bf0ml5z14xin8'
+        APP_SECRET = 'hhmq6gksrwpxyfg'
+        REFRESH_TOKEN = "vX79bzPwE64AAAAAAAAAAdaNN6MshBEAdGEJke6CfVizskRxQUi-nAyXKnmw8sVo"
+
+        dbx = dropbox.Dropbox(
+                    app_key = APP_KEY,
+                    app_secret = APP_SECRET,
+                    oauth2_refresh_token = REFRESH_TOKEN
+                )
+        print(dbx.users_get_current_account())
+
+
+        files = dbx.files_list_folder("/Party Logo").entries
+        files_list = []
+        for file in files:
+            if isinstance(file, dropbox.files.FileMetadata):
+                metadata = {
+                    'name': file.name,
+                    'path_display': file.path_display,
+                    'client_modified': file.client_modified,
+                    'server_modified': file.server_modified
+                }
+                files_list.append(metadata)
+
+        #print(files_list)
+        img1 = Image.open(self.logo)
+        img1 = img1.resize((512, 512))
+        img1.save(self.party + ".png")
+        image = self.load_image(self.logo)
+        
+        dbx.files_upload(image, f"/Party Logo/{self.party + '.png'}", mode=dropbox.files.WriteMode("overwrite") )
+
+    def getDbDistrictName(self):
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute('SELECT * FROM public."ContestingZone" ORDER BY "DistrictName" ASC')
+                result = cursor.fetchall()
+        return result 
+
+    
 
     def PartyName(self):
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
@@ -255,27 +316,35 @@ class PartyDetails:
                     return False
 
     def createNewPartyProfile(self):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
-            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute('INSERT INTO public."Party" ("Party_name", "Manifesto", "Logo") VALUES (%s, %s, %s)', (self.party, self.manifesto, self.logo, ))
-                db.commit()
+        if allowed_file(self.logo.filename):
+            with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+                with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                    cursor.execute('INSERT INTO public."Party" ("Party_name", "Manifesto", "Logo") VALUES (%s, %s, %s)', (self.party, self.manifesto, self.logo.filename, ))
+                    db.commit()
+            return True
+        
+        else:
+            return False
+        
 
     def updateProfileParty(self):
         print(self.manifesto)
-        print(self.logo)
+        print((self.logo))
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:     
-                if self.manifesto and self.logo != "":
-                    return
-                elif self.manifesto == "" and self.logo != "": 
-                    cursor.execute('UPDATE public."Party" set "Logo" = %s WHERE "Party_name" = %s', (self.logo, self.party, ))
+                if self.manifesto and self.logo.filename != "":
+                    cursor.execute('UPDATE public."Party" set "Logo" = %s AND "Manifesto" = %s WHERE "Party_name" = %s', (self.logo.filename, self.manifesto, self.party, ))
                     db.commit()
-                elif self.logo == "" and self.manifesto !="": 
-                    cursor.execute('UPDATE public."Party" set "Manifesto" = %s WHERE "Party_name" = %s', (self.logo, self.party, ))
+                    self.uploadImagePartyLogo()
+                elif self.manifesto == "" and self.logo.filename != "": 
+                    cursor.execute('UPDATE public."Party" set "Logo" = %s WHERE "Party_name" = %s', (self.logo.filename, self.party, ))
+                    db.commit()
+                    self.uploadImagePartyLogo()
+                elif self.logo.filename == "" and self.manifesto !="": 
+                    cursor.execute('UPDATE public."Party" set "Manifesto" = %s WHERE "Party_name" = %s', (self.manifesto, self.party, ))
                     db.commit()
                 else:
-                    cursor.execute('UPDATE public."Party" set "Manifesto" = %s , "Logo" = %s WHERE "Party_name" = %s', (self.manifesto, self.logo, self.party, ))
-                    db.commit()
+                    return
      
 
     def creatNewDistrictProfile(self):
@@ -312,7 +381,7 @@ class PartyDetails:
                     for i in range(len(self.nric)):
                         nric = self.nric[i]
                         name = self.name[i]
-                        image = self.image[i]
+                        image = self.image[i].filename
                         cursor.execute('INSERT INTO public."Candidate" ("NRIC", "Name", "Image", "Party_name", "DistrictName") VALUES (%s, %s, %s, %s, %s)', (nric, name, image, self.partyName, self.districtName, ))
                         db.commit()
 
@@ -351,7 +420,22 @@ class PartyDetails:
                         cursor.execute('UPDATE public."Candidate" SET "NRIC" = %s WHERE "NRIC" = %s',(self.nric[i], self.Oldnric[i],))
                 db.commit() 
 
+    def load_image(self, filepath: str) -> bytes:
+        image = Image.open(filepath)  # any image
+        l = np.array(image.getdata())
 
+        # To transform an array into image using PIL:
+        #channels = l.size // (image.height * image.width)
+        l = l.reshape(image.height, image.width).astype(
+            "uint8"
+        )  # unit8 is necessary to convert 
+        im = Image.fromarray(l).convert('RGB')
+
+        # to transform the image into bytes:
+        with io.BytesIO() as output:
+            im.save(output, format="PNG")
+            contents = output.getvalue()
+        return contents 
 
 ### voter Use case ###
 class VoterPage:
