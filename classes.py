@@ -489,7 +489,15 @@ class VoterPage:
         if self.button_id == "b3":
             return redirect(url_for("voterViewParties"))
         if self.button_id == "b4":
-            return redirect(url_for("voterUpdatePhoneNumber"))
+            print("In after click button")
+            print(self.controller.hasVoterVoted()[0])
+            if(self.controller.hasVoterVoted()[0]==True):
+                print("Voter voted")
+                flash("You have already voted")
+                return redirect(url_for("voter"))
+            else:
+                print("Hevent vote")
+                return redirect(url_for("voterVote"))
         elif self.button_id =='return':
             return redirect(url_for("index"))
 
@@ -508,6 +516,9 @@ class VoterPage:
     
     def voterTemplateViewCandidates(self, username, parties, candidates):
         return render_template("voterViewCandidates.html", username=username, parties=parties, candidates=candidates)
+
+    def voterTemplateVoteParty(self,username,parties):
+        return render_template("voterVote.html",username=username,parties=parties )
 
     
 class VoterPageController:
@@ -551,6 +562,13 @@ class VoterPageController:
     def getParties(self):
         return self.entity.voterGetParties()
 
+    def voterVote(self,request):
+        #self.entity.chosen_party = request.form.get("parties")
+        #session["chosen_party"] = self.entity.chosen_party
+        return self.entity.voterVote(request)
+
+    def hasVoterVoted(self):
+        return self.entity.hasVote()
 class VoterDetails:
     def voterDetails(self):
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
@@ -623,6 +641,23 @@ class VoterDetails:
                 cursor.execute(f'SELECT "Party_name", "Manifesto" FROM public."Party";')
                 result = cursor.fetchall()
                 return result
+
+    def voterVote(self,request):
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute(f'UPDATE public."Voter" SET voted=true')
+                db.commit()
+                print("Voter voted!")
+
+    def hasVote(self):
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute(f'SELECT "voted" FROM public."Voter"')
+                result = cursor.fetchone()
+                
+                db.commit()
+                return result
+                print("Voter voted!")
 
 ### superadmin Use case ###
 class superadminPage:

@@ -5,6 +5,7 @@ import psycopg2, psycopg2.extras, datetime, re
 from datetime import timedelta, date, datetime, time
 from werkzeug.utils import secure_filename
 from classes import * # import all classes from classes.py
+import time
 
 '''
 ### POSTGRESQL CONFIG ###
@@ -259,6 +260,19 @@ def voterViewCandidates():
         session["candidates"] = VoterPage().controller.getCandidatesByDistrict(request.form)
         return redirect(url_for("voterViewCandidates"))
 
+@app.route("/voterVote", methods=["GET", "POST"])
+def voterVote():
+    boundary = VoterPage()
+    parties = VoterPage().controller.getParties()
+    
+    if request.method == "GET":
+        return boundary.voterTemplateVoteParty(session["username"], parties)
+    
+    elif request.method == "POST":
+        session["party"] = VoterPage().controller.voterVote(request.form.get("parties"))
+        print(request.form.get("parties"))
+
+        return redirect(url_for("voter"))
 '''
 ### LOGOUT (TO APPLY BCE) ###
 @app.route("/logOut")

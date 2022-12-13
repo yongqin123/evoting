@@ -10,15 +10,28 @@
     </head>
 
     <body>
+        <form action="#" method="POST">
+            <label>Select Party: </label>
+            <select name="parties" id="parties">
+              <option disabled selected value> -- select an option -- </option>
+              {% for n in parties %}
+              <option id="get_party" name="get_party" value="{{ n[0] }}">{{ n[0] }}</option>
+              {% endfor %}
+            </select>
+            <button button_type="submit" name="submit" id="submit">submit</button>
+          </form>
         
         
-            <label>input a value: </label><input name="inpt" id="inpt" type="number">
-            <h1 id="result"></h1>
-            <button id="submit" type="button">submit</button>
-        
-        
-        <script></script>
+    
     
     </body>
-    
+    <script>
+        function getSelectedParty(clicked_id)
+          {
+            var selected_id = clicked_id
+            document.getElementById("get_party").value = selected_id
+            console.log(selected_id)
+          }
+
+      </script>
 </html>

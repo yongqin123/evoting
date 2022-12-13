@@ -8,6 +8,15 @@
     </head>
 
     <body>
+        <div class="bottomright">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for msg in messages %}
+                        <h1>{{msg}}</h1>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+        </div>
         <form action= # method="POST">
             
             <table id="form_table">
