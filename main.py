@@ -5,7 +5,6 @@ import psycopg2, psycopg2.extras, datetime, re
 from datetime import timedelta, date, datetime, time
 from werkzeug.utils import secure_filename
 from classes import * # import all classes from classes.py
-import time
 
 '''
 ### POSTGRESQL CONFIG ###
@@ -58,16 +57,18 @@ def index():
 @app.route("/party", methods=["GET", "POST"])
 def party():
     boundary = PartyPage()
+    partyDetails = PartyPage().controller.getPartyDetails()
+    print(partyDetails)
     if "username" in session:
         if request.method == "GET":
  
-                return boundary.partyTemplate(session["username"], session["party"])
+            return boundary.partyTemplate(session["username"], session["party"], partyDetails)
         elif request.method == "POST":
             print("partypost")
             return boundary.buttonClicked(request.form)
     else:
-            flash("login first!")
-            return redirect(url_for("index"))
+        flash("login first!")
+        return redirect(url_for("index"))
 
 @app.route("/CreatePartyProfile", methods=["GET", "POST"])
 def CreatePartyProfile():
@@ -76,7 +77,7 @@ def CreatePartyProfile():
         if request.method == "GET":
             if boundary.controller.ProfileExists(session["party"]) == True:
                 #print("access denied")
-                flash("Party's profile already exists!")
+                flash("Party profile already exists!")
                 return redirect(url_for("party"))
 
             else:
@@ -87,7 +88,7 @@ def CreatePartyProfile():
     
         elif request.method == "POST":
             boundary.controller.createPartyProfile(request.form, request.files)
-            flash("Party's profile successfully created!")
+            flash("Party profile successfully created!")
             return redirect(url_for("party"))
     else:
         flash("login first!")
@@ -110,7 +111,7 @@ def UpdatePartyProfile():
         
         elif request.method == "POST":
             boundary.controller.updatePartyProfile(request.form, request.files, session["party"])
-            flash("Party's profile successfully updated!")
+            flash("Party profile successfully updated!")
             return redirect(url_for("party"))
     else:
         flash("login first!")
@@ -195,6 +196,29 @@ def updateDistrictProfile():
         flash("login first!")
         return redirect(url_for("index"))
 
+@app.route("/Party/viewDistrict", methods=["GET", "POST"])
+def PartyViewDistrict():
+    boundary = PartyPage()
+    districts =  PartyPage().controller.getDistricts()
+    if request.method == "GET":
+        return boundary.partyTemplateViewDistricts( districts)
+    
+    elif request.method == "POST":
+        session["show_candidates"] = PartyPage().controller.getCandidatesByDistrictToView(request.form)
+        print(session["show_candidates"])
+        return redirect(url_for("PartyViewCandidates"))
+
+@app.route("/Party/viewDistrict/viewCandidates", methods=["GET", "POST"])
+def PartyViewCandidates():
+    boundary = PartyPage()
+    districts =  PartyPage().controller.getDistricts()
+    if request.method == "GET":
+        return boundary.partyTemplateViewCandidates(districts, session["show_candidates"])
+    
+    elif request.method == "POST":
+        session["show_candidates"] = PartyPage().controller.getCandidatesByDistrictToView(request.form)
+        print(session["show_candidates"])
+        return redirect(url_for("PartyViewCandidates"))
 
 ### VOTER PAGE ###
 @app.route("/voter", methods=["GET", "POST"])
@@ -252,9 +276,10 @@ def voterViewParties():
 def voterViewCandidates():
     boundary = VoterPage()
     parties = VoterPage().controller.getParties()
-    
+    chosen_party = VoterPage().controller.getSelectedParty()
+    print(session["candidates"])
     if request.method == "GET":
-        return boundary.voterTemplateViewCandidates(session["username"], parties, session["candidates"])
+        return boundary.voterTemplateViewCandidates(session["username"], parties, session["candidates"], chosen_party=chosen_party)
     
     elif request.method == "POST":
         session["candidates"] = VoterPage().controller.getCandidatesByDistrict(request.form)
@@ -273,6 +298,7 @@ def voterVote():
         print(request.form.get("parties"))
 
         return redirect(url_for("voter"))
+
 '''
 ### LOGOUT (TO APPLY BCE) ###
 @app.route("/logOut")

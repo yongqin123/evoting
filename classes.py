@@ -16,20 +16,15 @@ import json
 from PIL import Image
 import numpy as np
 import io
+import os
 
-'''
+app = Flask(__name__)
+app.config['UPLOAD FOLDER'] = os.path.join(os.getcwd(), "static/photos")
 ### POSTGRESQL CONFIG ###
-db_host = 'satao.db.elephantsql.com'
-db_name = 'jwwfjrox'
-db_user = 'jwwfjrox'
-db_pw = 'jQiFAyGF07Tghwk44c4GButvW2uKzsLi'
-'''
-
-### POSTGRESQL CONFIG ###
-db_host = 'ec2-34-234-240-121.compute-1.amazonaws.com'
-db_name = 'dcgsvhb0enfgfd'
-db_user = 'ampoosmqdvdzte'
-db_pw = '1494a152d2acffe248186b855286562322f43ab69a4ae0cd1b061bef24f36bf3'
+db_host = 'db-postgresql-sgp1-68432-do-user-13104720-0.b.db.ondigitalocean.com'
+db_name = 'defaultdb'
+db_user = 'doadmin'
+db_pw = 'AVNS_dzEhcpyafmLeNwHBmDN'
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
@@ -87,7 +82,7 @@ class LoginPageController:
 
 class UserAccount():
     def getAllProfiles(self) -> list:
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute(f'SELECT profile_name FROM public."Profile"')
                 profiles = cursor.fetchall()
@@ -95,7 +90,7 @@ class UserAccount():
 
     def doesUserExist(self) -> bool:
         # connect to db
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 if self.account_type == "party":
                     #check if party's name is correct
@@ -117,7 +112,7 @@ class UserAccount():
                 else: return False
 
     def getAllParties(self):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute(f'SELECT "Party_name" FROM public."Party"')
                 parties = cursor.fetchall()
@@ -129,8 +124,8 @@ class PartyPage:
     def __init__(self) -> None:
         self.controller = PartyPageController()
 
-    def partyTemplate(self, username, party):
-        return render_template("partyHome.html", username=username, party=party)
+    def partyTemplate(self, username, party, partyDetails):
+        return render_template("partyHome.html", username=username, party=party, partyDetails= partyDetails)
 
     def buttonClicked(self, request_form):
         self.button_id = request_form["button_type"]
@@ -143,6 +138,8 @@ class PartyPage:
             return redirect(url_for("CreateDistrictProfile"))
         elif self.button_id == "b4":
             return redirect(url_for("getDistrict"))
+        elif self.button_id == "b5":
+            return redirect(url_for("PartyViewDistrict"))
 
     def partyTemplateProfileCreate(self, party):
         return render_template("partyProfileCreate.html", party=party)
@@ -162,16 +159,25 @@ class PartyPage:
     def partyDistrictTemplateUpdate(self, data):
         return render_template("partyDistrictUpdate.html", data=data)
     
+    def partyTemplateViewDistricts(self, districts):
+        return render_template("partyViewDistricts.html", districts=districts)
     
+    def partyTemplateViewCandidates(self, districts, candidates):
+        return render_template("partyViewCandidates.html", districts=districts, candidates=candidates)
 
 # Party Controller    
 class PartyPageController:
     def __init__(self) -> None:
         self.entity = PartyDetails()
-        
+    
+    def getPartyDetails(self):
+        return self.entity.partyDetailsAll()
 
     def getName(self):
         return self.entity.PartyName()
+
+    def getDistricts(self):
+        return self.entity.PartyDistricts()
 
     def ProfileExists(self, party) -> bool:
         self.entity.party = party
@@ -212,7 +218,13 @@ class PartyPageController:
     def getCandidatesByDistrict(self, request, party):
         self.entity.districtName = request["districtName"]
         self.entity.party = party
+        session["districtName"] = self.entity.districtName
+        session["party"] = self.entity.party
         return self.entity.getCandidates()
+
+    def getCandidatesByDistrictToView(self, request):
+        self.entity.districtToView = request["districtName"]
+        return self.entity.getCandidatesToView()
 
     def updateDistrict(self, request, request_list):
         self.entity.Oldnric=request_list("oldNRIC[]")
@@ -222,7 +234,8 @@ class PartyPageController:
         self.entity.name=request_list("newName[]")
     
         self.entity.image = request("img[]")
-
+        self.entity.party = session["districtName"]
+        self.entity.districtName = session["party"]
         return self.entity.updateNewDistrictProfile()
 
     def getContestingZones(self):
@@ -236,50 +249,56 @@ class PartyPageController:
 
 #Party Entity
 class PartyDetails:
+    def partyDetailsAll(self):
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute('SELECT * FROM public."Party" WHERE "Party_name" = %s',(session["party"],))
+                result = cursor.fetchone()
+                print(result)
+                return result
+
+    def PartyDistricts(self):
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute('SELECT DISTINCT "DistrictName" FROM public."Candidate" WHERE "Party_name" = %s',(session["party"],))
+                result = cursor.fetchall()
+                if result == [[]]:
+                    return None
+                else:
+                    result = list(map(lambda x: x[0], result))
+                    return result
     def uploadImagePartyLogo(self):
-        APP_KEY = 'v0bf0ml5z14xin8'
-        APP_SECRET = 'hhmq6gksrwpxyfg'
-        REFRESH_TOKEN = "vX79bzPwE64AAAAAAAAAAdaNN6MshBEAdGEJke6CfVizskRxQUi-nAyXKnmw8sVo"
 
-        dbx = dropbox.Dropbox(
-                    app_key = APP_KEY,
-                    app_secret = APP_SECRET,
-                    oauth2_refresh_token = REFRESH_TOKEN
-                )
-        print(dbx.users_get_current_account())
-
-
-        files = dbx.files_list_folder("/Party Logo").entries
-        files_list = []
-        for file in files:
-            if isinstance(file, dropbox.files.FileMetadata):
-                metadata = {
-                    'name': file.name,
-                    'path_display': file.path_display,
-                    'client_modified': file.client_modified,
-                    'server_modified': file.server_modified
-                }
-                files_list.append(metadata)
-
-        #print(files_list)
         img1 = Image.open(self.logo)
         img1 = img1.resize((512, 512))
-        img1.save(self.party + ".png")
-        image = self.load_image(self.logo)
         
-        dbx.files_upload(image, f"/Party Logo/{self.party + '.png'}", mode=dropbox.files.WriteMode("overwrite") )
+        filename = secure_filename(self.party + ".png")
+        
+        img1.save(os.path.join(app.config['UPLOAD FOLDER'], self.party + ".png"))
+
+    def uploadImageCandidate(self):
+        for i in range(len(self.image)):     
+            img1 = Image.open(self.image[i])
+            img1 = img1.resize((512, 512))
+            img1.save(os.path.join(app.config['UPLOAD FOLDER'], secure_filename(self.nric[i] + ".png")))
+           
+    def getCandidatesToView(self):
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute('SELECT "Name", "Image" FROM public."Candidate" WHERE "DistrictName" = %s AND "Party_name" = %s;', (self.districtToView, session["party"]))
+                result = cursor.fetchall()
+                return result
 
     def getDbDistrictName(self):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute('SELECT * FROM public."ContestingZone" ORDER BY "DistrictName" ASC')
                 result = cursor.fetchall()
         return result 
 
     
-
     def PartyName(self):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute(f'SELECT name FROM public."Login" WHERE profile = "Party"; ')
                 result = cursor.fetchall()
@@ -288,7 +307,7 @@ class PartyDetails:
                 return result
 
     def CheckPartyExist(self):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute('SELECT * FROM public."Party" WHERE "Party_name" = %s ;', (self.party,))
                 result = cursor.fetchone()
@@ -302,7 +321,7 @@ class PartyDetails:
                     return False
 
     def CheckDistrictExist(self):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute('SELECT COUNT("DistrictName") FROM public."Candidate" WHERE "DistrictName" = %s AND "Party_name" = %s group by "Party_name";', (self.district, self.party,))
                 result = cursor.fetchone()
@@ -316,28 +335,24 @@ class PartyDetails:
                     return False
 
     def createNewPartyProfile(self):
-        if allowed_file(self.logo.filename):
-            with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
-                with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                    cursor.execute('INSERT INTO public."Party" ("Party_name", "Manifesto", "Logo") VALUES (%s, %s, %s)', (self.party, self.manifesto, self.logo.filename, ))
-                    db.commit()
-            return True
-        
-        else:
-            return False
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute('INSERT INTO public."Party" ("Party_name", "Manifesto", "Logo") VALUES (%s, %s, %s)', (self.party, self.manifesto, self.party + ".png", ))
+                db.commit()
+                self.uploadImagePartyLogo()
         
 
     def updateProfileParty(self):
         print(self.manifesto)
         print((self.logo))
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:     
                 if self.manifesto and self.logo.filename != "":
-                    cursor.execute('UPDATE public."Party" set "Logo" = %s AND "Manifesto" = %s WHERE "Party_name" = %s', (self.logo.filename, self.manifesto, self.party, ))
+                    cursor.execute('UPDATE public."Party" set "Logo" = %s AND "Manifesto" = %s WHERE "Party_name" = %s', (self.party + ".png", self.manifesto, self.party, ))
                     db.commit()
                     self.uploadImagePartyLogo()
                 elif self.manifesto == "" and self.logo.filename != "": 
-                    cursor.execute('UPDATE public."Party" set "Logo" = %s WHERE "Party_name" = %s', (self.logo.filename, self.party, ))
+                    cursor.execute('UPDATE public."Party" set "Logo" = %s WHERE "Party_name" = %s', (self.party + ".png", self.party, ))
                     db.commit()
                     self.uploadImagePartyLogo()
                 elif self.logo.filename == "" and self.manifesto !="": 
@@ -354,7 +369,7 @@ class PartyDetails:
         #print(self.image)
 
         existing_candidate = []
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 #check if candidate is already registered
                 for i in range(len(self.nric)):
@@ -375,15 +390,16 @@ class PartyDetails:
                         existing_candidate.append(candidate)
 
         #insert candidates to db
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 if len(existing_candidate) == 0:
                     for i in range(len(self.nric)):
                         nric = self.nric[i]
                         name = self.name[i]
-                        image = self.image[i].filename
+                        image = self.nric[i] + ".png"
                         cursor.execute('INSERT INTO public."Candidate" ("NRIC", "Name", "Image", "Party_name", "DistrictName") VALUES (%s, %s, %s, %s, %s)', (nric, name, image, self.partyName, self.districtName, ))
                         db.commit()
+                        self.uploadImageCandidate()
 
                 else:
                     return existing_candidate, False
@@ -392,12 +408,23 @@ class PartyDetails:
 
 
     def getCandidates(self):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute('SELECT * FROM public."Candidate" WHERE "Party_name" = %s AND "DistrictName" = %s', (self.party, self.districtName, ))
+                cursor.execute('SELECT * FROM public."Candidate" WHERE "Party_name" = %s AND "DistrictName" = %s ', (self.party, self.districtName, ))
                 result = cursor.fetchall()
-                print(result)
+                #print(result)
         return result
+
+    def updateCandidateImage(self, i):
+        print(self.Oldnric[i])
+        img1 = Image.open(self.image[i])
+        img1 = img1.resize((512, 512))
+        #path = os.getcwd()
+        if self.nric[i] != "":
+            os.remove(os.path.join(app.config['UPLOAD FOLDER'], secure_filename(self.nric[i] + ".png")))
+            img1.save(os.path.join(app.config['UPLOAD FOLDER'], secure_filename(self.nric[i] + ".png")))
+        else:
+            img1.save(os.path.join(app.config['UPLOAD FOLDER'], secure_filename(self.Oldnric[i] + ".png")))
 
     def updateNewDistrictProfile(self):
         print(self.Oldnric)
@@ -407,75 +434,69 @@ class PartyDetails:
         print(self.name)
         print(self.image)
 
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 for i in range(5):
-                    if self.image[i].filename != "":
-                        cursor.execute('UPDATE public."Candidate" SET "Image" = %s WHERE "NRIC" = %s AND "Name" = %s',(self.image[i].filename, self.Oldnric[i], self.Oldname[i],))
+                    #new nric field is not blank and image is blank
+                    if self.nric[i] != "" and self.image[i].filename == "":
+                        #Open image of old file using old nric
+                        img1 = Image.open(os.path.join(app.config['UPLOAD FOLDER'], secure_filename(self.Oldnric[i] + ".png")))
 
+                        #Update candidate old nric column with new nric 
+                        cursor.execute('UPDATE public."Candidate" SET "NRIC" = %s WHERE "NRIC" = %s',(self.nric[i], self.Oldnric[i],))
+
+                        #Update candidate old image path with new iamge path
+                        cursor.execute('UPDATE public."Candidate" SET "Image" = %s WHERE "NRIC" = %s',(self.nric[i] + ".png", self.nric[i],))
+
+                        #save iamge as new image file name
+                        img1.save(os.path.join(app.config['UPLOAD FOLDER'], secure_filename(self.nric[i] + ".png")))
+
+                        #delete old image
+                        os.remove(os.path.join(app.config['UPLOAD FOLDER'], secure_filename(self.Oldnric[i] + ".png")))
+
+                    #new nric field is blank and image is not blank
+                    if self.nric[i] == "" and self.image[i].filename != "":
+                        #Open image of old file using old nric
+                        img1 = Image.open(os.path.join(app.config['UPLOAD FOLDER'], secure_filename(self.Oldnric[i] + ".png")))
+                        
+                        #Update candidate old image path with new iamge path **technically file name remains the same
+                        cursor.execute('UPDATE public."Candidate" SET "Image" = %s WHERE "NRIC" = %s',(self.Oldnric[i] + ".png", self.Oldnric[i],))
+
+                        img1 = Image.open(self.image[i])
+                        img1 = img1.resize((512, 512))
+
+                        #save img as new image file name **replace the files too since using same object instance
+                        img1.save(os.path.join(app.config['UPLOAD FOLDER'], secure_filename(self.Oldnric[i] + ".png")))
+
+                    #new nric field is not blank and image field is not blank
+                    if self.nric[i] != "" and self.image[i].filename != "":
+                        #self.updateCandidateImage(i)
+                        #Update image old image path, old nric, old name
+                        img1 = Image.open(self.image[i])
+                        img1 = img1.resize((512, 512))
+                        #cursor.execute('UPDATE public."Candidate" SET "Image" = %s WHERE "NRIC" = %s AND "Name" = %s',(self.Oldnric[i] + ".png", self.Oldnric[i], self.Oldname[i],))
+                        cursor.execute('UPDATE public."Candidate" SET "Image" = %s WHERE "NRIC" = %s',(self.nric[i] + ".png", self.Oldnric[i],))
+                    #
+                        #Update candidate old nric column with new nric 
+                        cursor.execute('UPDATE public."Candidate" SET "NRIC" = %s WHERE "NRIC" = %s',(self.nric[i], self.Oldnric[i],))
+
+                        img1.save(os.path.join(app.config['UPLOAD FOLDER'], secure_filename(self.nric[i] + ".png")))
+                        os.remove(os.path.join(app.config['UPLOAD FOLDER'], secure_filename(self.Oldnric[i] + ".png")))
+                        
+                        #else:
+                         #   img1.save(os.path.join(app.config['UPLOAD FOLDER'], secure_filename(self.Oldnric[i] + ".png")))
+
+
+                    #set name column to new name in db
                     if self.name[i] != "":
                         cursor.execute('UPDATE public."Candidate" SET "Name" = %s WHERE "Name" = %s AND "NRIC" = %s',(self.name[i], self.Oldname[i], self.Oldnric[i],))
 
-                    if self.nric[i] != "":
-                        cursor.execute('UPDATE public."Candidate" SET "NRIC" = %s WHERE "NRIC" = %s',(self.nric[i], self.Oldnric[i],))
+                    
                 db.commit() 
 
-    def load_image(self, filepath: str) -> bytes:
-        image = Image.open(filepath)  # any image
-        l = np.array(image.getdata())
-
-        # To transform an array into image using PIL:
-        #channels = l.size // (image.height * image.width)
-        l = l.reshape(image.height, image.width).astype(
-            "uint8"
-        )  # unit8 is necessary to convert 
-        im = Image.fromarray(l).convert('RGB')
-
-        # to transform the image into bytes:
-        with io.BytesIO() as output:
-            im.save(output, format="PNG")
-            contents = output.getvalue()
-        return contents 
+    
 
 ### voter Use case ###
-class VoterPage:
-    def __init__(self) -> None:
-        self.controller = VoterPageController()
-        
-    def buttonClicked(self, request_form):
-        self.button_id = request_form["button_type"]
-        if self.button_id == "b1":
-            print("test")
-            return redirect(url_for("voterUpdateAddress"))
-        elif self.button_id =='return':
-            return redirect(url_for("index"))
-
-    def voterTemplate(self, username):
-        return render_template("voterHome.html", username=username)
-
-    def voterTemplateUpdateAddress(self, username, address_postalCode):
-        return render_template("voterUpdateAddress.html", username=username, address_postalCode=address_postalCode)
-""" class VoterPageController:
-    def __init__(self) -> None:
-        self.entity = VoterDetails()
-
-    def getName(self):
-        return self.entity.voterGetName()
-
-    def getPhoneNumber(self):
-        return self.entity.phone_number()
-
-    def getAddress(self):
-        return self.entity.voterGetAddress()
-
-    def setAddress(self, request):
-        streetName = str(request["streetName"]).split(" ")
-        #streetName.remove("Singapore")
-        streetName = streetName[:-2]
-        self.entity.address = " ".join(streetName) + " " + str(request["unitNumber"])
-        self.entity.postalCode = str(request["postalCode"])
-        return self.entity.voterNewAddress()
- """
 class VoterPage:
     def __init__(self) -> None:
         self.controller = VoterPageController()
@@ -489,15 +510,9 @@ class VoterPage:
         if self.button_id == "b3":
             return redirect(url_for("voterViewParties"))
         if self.button_id == "b4":
-            print("In after click button")
-            print(self.controller.hasVoterVoted()[0])
-            if(self.controller.hasVoterVoted()[0]==True):
-                print("Voter voted")
-                flash("You have already voted")
-                return redirect(url_for("voter"))
-            else:
-                print("Hevent vote")
-                return redirect(url_for("voterVote"))
+            return redirect(url_for("voterUpdatePhoneNumber"))
+        
+        
         elif self.button_id =='return':
             return redirect(url_for("index"))
 
@@ -514,11 +529,8 @@ class VoterPage:
     def voterTemplateViewParties(self, username, parties):
         return render_template("voterViewParties.html", username=username, parties=parties)
     
-    def voterTemplateViewCandidates(self, username, parties, candidates):
-        return render_template("voterViewCandidates.html", username=username, parties=parties, candidates=candidates)
-
-    def voterTemplateVoteParty(self,username,parties):
-        return render_template("voterVote.html",username=username,parties=parties )
+    def voterTemplateViewCandidates(self, username, parties, candidates, chosen_party):
+        return render_template("voterViewCandidates.html", username=username, parties=parties, candidates=candidates, chosen_party=chosen_party)
 
     
 class VoterPageController:
@@ -562,6 +574,9 @@ class VoterPageController:
     def getParties(self):
         return self.entity.voterGetParties()
 
+    def getSelectedParty(self):
+        return self.entity.voterGetSelectedParty()
+
     def voterVote(self,request):
         #self.entity.chosen_party = request.form.get("parties")
         #session["chosen_party"] = self.entity.chosen_party
@@ -569,9 +584,10 @@ class VoterPageController:
 
     def hasVoterVoted(self):
         return self.entity.hasVote()
+
 class VoterDetails:
     def voterDetails(self):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute(f'SELECT name, address, postal_code, phone_number FROM public."Voter" WHERE nric = %s; ', (session["username"],))
                 result = cursor.fetchall()
@@ -579,7 +595,7 @@ class VoterDetails:
                 return result[0]
 
     def voterGetName(self) -> str:
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute(f'SELECT name FROM public."Voter" WHERE nric = %s; ', (session["username"],))
                 result = cursor.fetchall()
@@ -587,7 +603,7 @@ class VoterDetails:
                 return result[0][0]
     
     def voterGetAddress(self) -> list:
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute(f'SELECT address, postal_code FROM public."Voter" WHERE nric = %s; ', (session["username"],))
                 result = cursor.fetchall()
@@ -595,7 +611,7 @@ class VoterDetails:
                 return result[0]
 
     def voterGetPhoneNumber(self):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute(f'SELECT phone_number FROM public."Voter" WHERE nric = %s; ', (session["username"],))
                 result = cursor.fetchone()
@@ -603,7 +619,7 @@ class VoterDetails:
                 return result[0]
 
     def voterNewAddress(self) -> None:
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 print("testing")
                 url = f"https://www.parliament.gov.sg/mps/find-mps-in-my-constituency?SearchKeyword={self.postal_code}"
@@ -614,50 +630,53 @@ class VoterDetails:
                 db.commit()
     
     def voterNewPhoneNumber(self) -> None:
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute(f'UPDATE public."Voter" SET phone_number = %s WHERE nric = %s; ', (self.phone_number, session["username"],))
                 db.commit()
                 print("testing")
 
     def voterDistrictName(self):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute(f'SELECT "contestingZone" FROM public."Voter" WHERE nric = %s;', (session["username"],))
                 result = cursor.fetchone()
                 return result[0]
 
     def voterGetCandidatesByDistrict(self):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute(f'SELECT "Name", "Image", "Party_name" FROM public."Candidate" WHERE "DistrictName" = %s AND "Party_name" = %s;', (self.districtName,self.chosen_party))
+                cursor.execute(f'SELECT "Name", "Party_name", "Image", "DistrictName" FROM public."Candidate" WHERE "DistrictName" = %s AND "Party_name" = %s;', (self.districtName,self.chosen_party))
                 result = cursor.fetchall()
-                print(result)
+                #print(type(result[0][1]))
+                
                 return result
 
     def voterGetParties(self):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute(f'SELECT "Party_name", "Manifesto" FROM public."Party";')
                 result = cursor.fetchall()
                 return result
 
-    def voterVote(self,request):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+    def voterGetSelectedParty(self):
+         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute(f'UPDATE public."Voter" SET voted=true')
-                db.commit()
-                print("Voter voted!")
+                cursor.execute(f'SELECT "Party_name", "Manifesto", "Logo" FROM public."Party" WHERE "Party_name" = %s;', (session["chosen_party"],))
+                result = cursor.fetchone()
+                
+                return result
 
     def hasVote(self):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute(f'SELECT "voted" FROM public."Voter"')
                 result = cursor.fetchone()
                 
                 db.commit()
-                return result
                 print("Voter voted!")
+                return result
+                
 
 ### superadmin Use case ###
 class superadminPage:
@@ -687,7 +706,7 @@ class superadminControllerPage:
 class superadminDetails:
 
     def retrieveAdmin(self):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute(f'SELECT username,password,name FROM public."Login" where profile=%s;',('admin',))
                 result = cursor.fetchall()
@@ -695,7 +714,7 @@ class superadminDetails:
                 return result
 
     def deleteAdmin(self,username):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute(f'DELETE from public."Login" where profile = %s AND username = %s;',('admin',username,))
                 db.commit()
@@ -706,7 +725,7 @@ class superadminDetails:
                 return result
 
     def createAdmin(self,admin_username,admin_password,admin_name):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute(f'INSERT INTO public."Login"(username,password,name,profile) VALUES(%s,%s,%s,%s);',(admin_username,admin_password,admin_name,'admin',))
                 db.commit()
@@ -714,227 +733,3 @@ class superadminDetails:
                 db.commit()
                 result = cursor.fetchall()
                 return result
-"""
-class UserAccount:
-    def getAllProfiles(self) -> list:
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
-            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute(f"SELECT profile_name FROM profile")
-                profiles = cursor.fetchall()
-        return profiles
-
-    def getUsernameProfiles(self) -> list:
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
-            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute(f"SELECT username, profile FROM users")
-                profiles = cursor.fetchall()
-        return profiles
-
-    def doesUserExist(self) -> bool:
-        # connect to db
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
-            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute(f"SELECT * FROM users WHERE username = %s AND password = %s AND profile = %s", (self.username, self.password, self.account_type))
-                result = cursor.fetchone()
-                db.commit()
-
-                if result != None: return True
-                else: return False
-
-    def getDatabyUandT(self) -> list:
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
-                with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                    cursor.execute(f"SELECT username, password, profile FROM users WHERE username=%s AND profile=%s", (self.username, self.account_type))
-                    db.commit()
-                    return cursor.fetchall()
-
-    def getDatabyU(self) -> list:
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
-                with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                    cursor.execute(f"SELECT username, password, profile FROM users WHERE username='{self.username}'")
-                    db.commit()
-                    return cursor.fetchall()
-
-    def createAccount(self) -> bool:
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
-            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute(f"SELECT username, password, profile FROM users WHERE username=%s AND profile=%s", (self.username, self.account_type))
-                result = cursor.fetchone()
-                db.commit()
-                if result == None:
-                    with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
-                        with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                            cursor.execute(f"INSERT INTO users (profile, username, password) VALUES (%s, %s, %s)", (self.account_type, self.username, self.password))
-                            db.commit()
-                    return True
-                else:
-                    return False
-
-    def editAccount(self) -> bool:
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
-            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute(f"SELECT username, password, profile FROM users WHERE username=%s AND profile=%s", (self.username, self.account_type))
-                result = cursor.fetchone()
-                db.commit()
-                if result != None:
-                    with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
-                        with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                            cursor.execute(f"UPDATE users SET username=%s, password=%s, profile=%s WHERE username=%s AND profile=%s", (self.new_username, self.new_password, self.new_account_type, self.username, self.account_type))
-                        db.commit()
-                    return True
-                else:
-                    return False
-
-    def viewAccount(self) -> list:
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
-            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute(f"SELECT * FROM users WHERE username=%s AND profile=%s", (self.username, self.account_type))
-                db.commit()
-                return cursor.fetchall()
-
-    def searchAccount(self) -> bool:
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
-            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute(f"SELECT username, password, profile FROM users WHERE username='{self.username}'")
-                result = cursor.fetchone()
-                db.commit()
-                if result != None:
-                    return True
-                else:
-                    return False
-
-    def suspendAccount(self) -> bool:
-         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
-            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute(f"SELECT username, password, profile FROM users WHERE username=%s AND profile=%s", (self.username, self.account_type))
-                result = cursor.fetchone()
-                db.commit()
-                if result != None:
-                    with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
-                        with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                            cursor.execute(f"DELETE FROM users WHERE username=%s AND profile=%s", (self.username, self.account_type))
-                        db.commit()
-                    return True
-                else:
-                    return False
-
-### Use Case 2 (LOGOUT) ###
-class Logout:
-    def __init__(self, session) -> None:
-        self.session = session
-        self.username = session["username"]
-        self.controller = LogoutController(self.session, self.username)
-
-    def logUserOut(self):
-        self.session = self.controller.editSession(self.session, self.username)
-        flash(f"{self.username} logged out!")
-        return redirect(url_for("index"))
-
-class LogoutController:
-    def __init__(self, session, username) -> None:
-        self.session = session
-        self.username = session["username"]
-        self.entity = UserSession()
-
-    def editSession(self, session, username):
-        return self.entity.checkUserInSession(session, username)
-
-
-class UserSession:
-    def checkUserInSession(self, session, username):
-        self.session = session
-        if "username" in session and session["username"] == username:
-            return self.removeUserSession(username)
-
-    def removeUserSession(self, username):
-        self.session.pop("username")
-        return self.session
-
-##################################
-class UserProfile:
-    def getFunctions(self) -> list:
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
-            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute(f"SELECT Column_name FROM Information_schema.columns WHERE Table_name like 'profile'")
-                profile_function = cursor.fetchall()
-                del profile_function[0]
-                print(profile_function[0])
-        return profile_function
-
-    def allProfile(self) -> list:
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
-            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute(f"SELECT profile_name FROM profile")
-                profile_name = cursor.fetchall()
-        return profile_name
-
-    def getProfile(self) -> list:
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
-            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute(f"SELECT * FROM profile WHERE profile_name='{self.profile_name}'")
-                db.commit()
-                return cursor.fetchall()
-
-    def createProfile(self) -> bool:
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
-            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute(f"SELECT profile_name FROM profile WHERE profile_name='{self.profile_name}'")
-                result = cursor.fetchone()
-                db.commit()
-                if result == None: #check if profile exist
-                    with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
-                        with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                            cursor.execute(f"INSERT INTO profile (profile_name, grant_view_statistics, grant_view_edit_cart, grant_view_edit_accounts, grant_view_edit_menu, grant_view_edit_coupon) VALUES (%s, %s, %s, %s, %s, %s)", (self.profile_name, self.statistics, self.cart, self.accounts, self.menu, self.coupon))
-                            db.commit()
-                    return True
-                else:
-                    return False
-
-    def editProfile(self) -> bool:
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
-            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute(f"SELECT profile_name FROM profile WHERE profile_name='{self.profile_name}'")
-                result = cursor.fetchone()
-                db.commit()
-                if result != None: #check if profile exist
-                    with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
-                        with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                            cursor.execute(f"UPDATE profile SET profile_name=%s, grant_view_statistics=%s, grant_view_edit_cart=%s, grant_view_edit_accounts=%s, grant_view_edit_menu=%s, grant_view_edit_coupon=%s WHERE profile_name=%s", (self.new_profile_name, self.statistics, self.cart, self.accounts, self.menu, self.coupon, self.profile_name))
-                            db.commit()
-                    return True
-                else:
-                    return False
-
-    def viewProfile(self) -> list:
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
-            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute(f"SELECT * FROM profile WHERE profile_name='{self.profile_name}'")
-                db.commit()
-                return cursor.fetchall()
-
-    def searchProfile(self) -> bool:
-         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
-            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute(f"SELECT profile_name FROM profile WHERE profile_name='{self.profile_name}'")
-                result = cursor.fetchone()
-                db.commit()
-                if result != None:
-                    return True
-                else:
-                    return False
-
-    def suspendProfile(self) -> list:
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
-            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute(f"SELECT profile_name FROM profile WHERE profile_name='{self.profile_name}'")
-                result = cursor.fetchone()
-                db.commit()
-                if result != None: #check if profile exist
-                    with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host) as db:
-                        with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                            cursor.execute(f"DELETE FROM profile WHERE profile_name='{self.profile_name}'")
-                            db.commit()
-                    return True
-                else:
-                    return False
-"""
