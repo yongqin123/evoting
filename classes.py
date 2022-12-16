@@ -510,7 +510,17 @@ class VoterPage:
         if self.button_id == "b3":
             return redirect(url_for("voterViewParties"))
         if self.button_id == "b4":
-            return redirect(url_for("voterUpdatePhoneNumber"))
+            print("In after click button")
+            print(self.controller.hasVoterVoted()[0])
+            if(self.controller.hasVoterVoted()[0]==True):
+                print("Voter voted")
+                flash("You have already voted")
+                return redirect(url_for("voter"))
+            else:
+                print("Hevent vote")
+                return redirect(url_for("voterVote"))
+        elif self.button_id =='return':
+            return redirect(url_for("index"))
         
         
         elif self.button_id =='return':
@@ -531,6 +541,9 @@ class VoterPage:
     
     def voterTemplateViewCandidates(self, username, parties, candidates, chosen_party):
         return render_template("voterViewCandidates.html", username=username, parties=parties, candidates=candidates, chosen_party=chosen_party)
+    
+    def voterTemplateVoteParty(self,username,parties):
+        return render_template("voterVote.html",username=username,parties=parties )
 
     
 class VoterPageController:
@@ -666,6 +679,13 @@ class VoterDetails:
                 result = cursor.fetchone()
                 
                 return result
+
+    def voterVote(self,request):
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute(f'UPDATE public."Voter" SET voted=true')
+                db.commit()
+                print("Voter voted!")
 
     def hasVote(self):
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
