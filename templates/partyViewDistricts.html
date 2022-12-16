@@ -1,6 +1,6 @@
 <html>
-<head>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
       .cnds {
@@ -75,8 +75,8 @@
         font-weight: bold;
         font-size: 4em;
         color: green;
-        top: -30px; 
-        left: 0px; 
+        top: -30px;
+        left: 0px;
         font-family: Georgia, Times, serif;
       }
       .regular::after {
@@ -88,48 +88,23 @@
         bottom: -50px;
         right: 0px;
         font-family: Georgia, Times, serif;
-      }      
+      }
       
     </style>
-</head>
-
-<body>
-  <p id="demo"></p>
-
-  
-    <div class="bottomright">
-      {% with messages = get_flashed_messages() %} 
-          {% if messages %}
-              {% for msg in messages %}
-                <!--<h1>{{msg}}</h1>-->
-                <script> 
-                  confirm("{{msg}}")
-                </script>
-              {% endfor %}
-          {% endif %}
-      {% endwith %}
-  </div>
-  <form class="form-inline" action = "" method="POST">
-    <button class="button-84" id="b1" name = "button_type" value = "b1" style="width:250px; height:100px;">Create Party Profile </button>
-    <button class="button-84" id="b2" name = "button_type" value = "b2" style="width:250px; height:100px;" >Update Party Profile </button>
-    <button class="button-84" id="b1" name = "button_type" value = "b3" style="width:250px; height:100px;">Create District Profile </button>
-    <button class="button-84" id="b2" name = "button_type" value = "b4" style="width:250px; height:100px;" >Update District Profile </button>
-    <button class="button-84" id="b2" name = "button_type" value = "b5" style="width:250px; height:100px;" >Display Candidate Details </button>
-    <br /><br />
-  </form>
-  
-  
-  
-  <h1 class="center">{{partyDetails[0]}}</h1>
-        
-        {% if partyDetails %}
-          <img  src="{{ url_for('static', filename = 'photos/' + partyDetails[2] ) }}" alt="">
-        {% endif %}
-        <br><text>Our Mission: "{{partyDetails[1]}}"</text>
-  
-
-
-
-
-</body>
+  </head>
+  <body>
+    <form action="#" method="POST">
+      <label>Select district: </label>
+      <select name="districtName" id="districtName">
+        <option disabled selected value> -- select an option -- </option>
+        {% for n in districts %}
+        <option value="{{ n }}">{{ n }}</option>
+        {% endfor %}
+      </select>
+      <button onclick="myFunction()">Search</button>
+    </form> 
+      
+  <script>
+  </script>
+  </body>
 </html>

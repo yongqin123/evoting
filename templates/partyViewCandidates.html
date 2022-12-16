@@ -72,34 +72,24 @@
   <body>
       <form action="#" method="POST">
         <label>Select Party: </label>
-        <select name="parties" id="parties">
+        <select name="districtName" id="districtName">
           <option disabled selected value> -- select an option -- </option>
-          {% for n in parties %}
-          <option value="{{ n[0] }}">{{ n[0] }}</option>
+          {% for n in districts %}
+          <option value="{{ n }}">{{ n }}</option>
           {% endfor %}
         </select>
         <button>Search</button>
       </form>
         
 
-      <h1 class="center">{{chosen_party[0]}}</h1>
-        
-        {% if chosen_party[2] %}
-          <img style="display: block;
-          margin-left: auto;
-          margin-right: auto;" src="{{ url_for('static', filename = 'photos/' + chosen_party[2] ) }}" alt="">
-        {% endif %}
-        <br><text style="display: block;
-        margin-left: auto;
-        margin-right: auto;
-        width: 40%;">Our Mission: "{{chosen_party[1]}}"</text>
+      
       <div class="cnds" id="cmds" >
         
       
         {% for n in candidates %}
         <div class="cnd {{ n[0] }}">
-          {% if n[2] %}
-            <img  class="cnd__image" src="{{ url_for('static', filename = 'photos/' + n[2] ) }}" >
+          {% if n[1] %}
+            <img  class="cnd__image" src="{{ url_for('static', filename = 'photos/' + n[1] ) }}" >
           {% endif %}
             
           <div class="cnd__info">
