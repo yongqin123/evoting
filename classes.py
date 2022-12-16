@@ -542,8 +542,8 @@ class VoterPage:
     def voterTemplateViewCandidates(self, username, parties, candidates, chosen_party):
         return render_template("voterViewCandidates.html", username=username, parties=parties, candidates=candidates, chosen_party=chosen_party)
     
-    def voterTemplateVoteParty(self,username,parties):
-        return render_template("voterVote.html",username=username,parties=parties )
+    def voterTemplateVoteParty(self,username,parties,constituency):
+        return render_template("voterVote.html",username=username,parties=parties,constituency=constituency)
 
     
 class VoterPageController:
@@ -590,14 +590,17 @@ class VoterPageController:
     def getSelectedParty(self):
         return self.entity.voterGetSelectedParty()
 
-    def voterVote(self,request):
+    def getConstituency(self):
+        return self.entity.voterGetConstituency()
+
+    def voterVote(self,request,constituency):
         #self.entity.chosen_party = request.form.get("parties")
         #session["chosen_party"] = self.entity.chosen_party
-        return self.entity.voterVote(request)
+        return self.entity.voterVote(request,constituency)
 
     def hasVoterVoted(self):
         return self.entity.hasVote()
-
+vote_count = 0
 class VoterDetails:
     def voterDetails(self):
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
@@ -679,12 +682,18 @@ class VoterDetails:
                 result = cursor.fetchone()
                 
                 return result
-
-    def voterVote(self,request):
+    
+    def voterVote(self,selected_party,constituency):
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                voter_count = vote_count + 1
                 cursor.execute(f'UPDATE public."Voter" SET voted=true')
                 db.commit()
+                cursor.execute(f'SELECT "voted_party", "contestingZone" FROM public."Votes" ')
+                result = cursor.fetchall()
+                print(result)
+                db.commit()
+                cursor.execute(f'INSERT INTO public."Votes"(voted_party, "contestingZone", vote_count)VALUES (%s, %s, %s);',(selected_party,constituency,voter_count,))
                 print("Voter voted!")
 
     def hasVote(self):
@@ -697,6 +706,14 @@ class VoterDetails:
                 print("Voter voted!")
                 return result
                 
+    def voterGetConstituency(self):
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute(f'SELECT "contestingZone" FROM public."Voter"')
+                result = cursor.fetchone()
+                
+                db.commit()
+                return result
 
 ### superadmin Use case ###
 class superadminPage:

@@ -289,14 +289,18 @@ def voterViewCandidates():
 def voterVote():
     boundary = VoterPage()
     parties = VoterPage().controller.getParties()
+    constituency = VoterPage().controller.getConstituency()
+    print(constituency)
     
     if request.method == "GET":
-        return boundary.voterTemplateVoteParty(session["username"], parties)
+        return boundary.voterTemplateVoteParty(session["username"], parties,constituency)
     
     elif request.method == "POST":
-        session["party"] = VoterPage().controller.voterVote(request.form.get("parties"))
+        new_constituency = str(constituency)[2:-2] 
+        session["party"] = VoterPage().controller.voterVote(request.form.get("parties"),new_constituency)
+        print(constituency)
         print(request.form.get("parties"))
-
+        flash("You have successfully voted")
         return redirect(url_for("voter"))
 
 '''
