@@ -686,16 +686,40 @@ class VoterDetails:
     def voterVote(self,selected_party,constituency):
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                voter_count = vote_count + 1
+                toVoteArr=[]
+                
                 cursor.execute(f'UPDATE public."Voter" SET voted=true')
                 db.commit()
+                
+                
+                print("To insert... : " + str(selected_party) + " constituency: " + str(constituency))
+                toVoteArr.append(selected_party)
+                toVoteArr.append(constituency)
+                print(toVoteArr)
+
                 cursor.execute(f'SELECT "voted_party", "contestingZone" FROM public."Votes" ')
                 result = cursor.fetchall()
+                print("printing select")
                 print(result)
+                
+                print("End of printing select")
                 db.commit()
-                cursor.execute(f'INSERT INTO public."Votes"(voted_party, "contestingZone", vote_count)VALUES (%s, %s, %s);',(selected_party,constituency,voter_count,))
-                print("Voter voted!")
 
+                if(toVoteArr in result):
+                    print("Consituency and Party exist")
+                    cursor.execute(f'SELECT vote_count FROM public."Votes" WHERE voted_party = %s AND "contestingZone"=%s;',(selected_party,constituency,))
+                    vote_count_from_db = cursor.fetchone()
+                    print(vote_count_from_db[0])
+                    vote_from_db = int(vote_count_from_db[0])
+                    vote_count_to_insert = vote_from_db+1
+                    cursor.execute(f'UPDATE public."Votes" SET vote_count=%s WHERE voted_party = %s AND "contestingZone" = %s;',(vote_count_to_insert,selected_party,constituency,))
+                    db.commit()
+                else:
+                    print("Consituency and Party DOES NOT exist")
+                    voter_count = vote_count + 1
+                    cursor.execute(f'INSERT INTO public."Votes"(voted_party, "contestingZone", vote_count)VALUES (%s, %s, %s);',(selected_party,constituency,voter_count,))
+                    print("Voter voted!")
+                    db.commit()
     def hasVote(self):
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
