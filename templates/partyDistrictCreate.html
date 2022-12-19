@@ -19,73 +19,63 @@
 
   
     <form action="#" method="POST" enctype="multipart/form-data">
-    <div class = "Party">
-        <h1>Create profile</h1>
-        <p>Please fill in the form to create the party's profile for the district</p>
+        <div class = "Party">
+            <h1>Create profile</h1>
+            <p>Please fill in the form to create the party's profile for the district</p>
 
-        <label><b>Party Name</b></label>
-        <select name = "PartyName">
-            <option>{{party}}</option>
-        </select>
+            <label><b>Party Name</b></label>
+            <select name = "PartyName">
+                <option>{{party}}</option>
+            </select>
 
-        <label><b>Contesting Zone</b></label>
-        <select name = "districtName">
-            {% for zone in zones %}
-                <option>{{zone[0]}}</option>
-            {% endfor %}
-        </select>
-        <br><br>
+            <label><b>Contesting Zone</b></label>
+            <select name = "districtName" id = "districtName" onchange ="create()">
+                <option value="" selected disabled hidden>Choose here</option>
+                {% for zone in zones %}
+                    <option>{{zone[0]}}</option>
+                {% endfor %}
+            </select>
+            <br><br>
 
-    </div>
+            <div id='smc'></div>
+            <div id="grc"></div>
+        </div>
+        
+        <button type="submit" value="submit"> Submit </button>
+    </form>
+
     
-    <div class = "Candidate">
-        <h3>Candidate 1</h3>
-        <label><b>Name</b></label>
-        <input type ="text" placeholder ="Candidate 1" name = "Name[]" value="A" required>
-        <label><b>NRIC</b></label>
-        <input type ="text" placeholder ="S1234567Z" name = "NRIC[]" value = "S1234567A" required><br><br>
-        <label><b>Upload Image</b></label>
-        <input class="form-control form-control-lg" id="formFileLg" type="file" name = "img[]"  required/><span>Upload your jpeg/jpg image. Max size 50 MB</span>
-        <br><br>
 
-        <h3>Candidate 2</h3>
-        <label><b>Name</b></label>
-        <input type ="text" placeholder ="Candidate 1" name = "Name[]" value="B" required>
-        <label><b>NRIC</b></label>
-        <input type ="text" placeholder ="S1234567Z" name = "NRIC[]" value = "S1234567B" required><br><br>
-        <label><b>Upload Image</b></label>
-        <input class="form-control form-control-lg" id="formFileLg" type="file" name = "img[]" required/><span>Upload your jpeg/jpg image. Max size 50 MB</span>
-        <br><br>
+    <script>
+        function create()
+        {
+            selected = document.getElementById("districtName")
+            if (selected.options[selected.selectedIndex].value.includes("SMC"))
+            {
+                //reset 
+                const g = document.getElementById("grc");
+                g.innerHTML= '';
 
-        <h3>Candidate 3</h3>
-        <label><b>Name</b></label>
-        <input type ="text" placeholder ="Candidate 1" name = "Name[]" value="C" required>
-        <label><b>NRIC</b></label>
-        <input type ="text" placeholder ="S1234567Z" name = "NRIC[]" value = "S1234567C" required><br><br>
-        <label><b>Upload Image</b></label>
-        <input class="form-control form-control-lg" id="formFileLg" type="file" name = "img[]" required/><span>Upload your jpeg/jpg image. Max size 50 MB</span>
-        <br><br>
+                const e = document.getElementById("smc");
+                e.innerHTML= '<h3>Candidate 1</h3><label><b>Name</b></label><input type ="text" placeholder ="Candidate 1" name = "Name[]"  id="a1" ><label><b>NRIC</b></label><input type ="text" placeholder ="S1234567Z" name = "NRIC[]"  id="a2" ><br><br><label><b>Upload Image</b></label><input type="file" name = "img[]" id="a3" /><span>Upload your jpeg/jpg image. Max size 50 MB</span><br><br>'
+                //document.getElementById('smc').appendChild(e)
+            }
 
-        <h3>Candidate 4</h3>
-        <label><b>Name</b></label>
-        <input type ="text" placeholder ="Candidate 1" name = "Name[]" value="D" required>
-        <label><b>NRIC</b></label>
-        <input type ="text" placeholder ="S1234567Z" name = "NRIC[]" value = "S1234567D" required><br><br>
-        <label><b>Upload Image</b></label>
-        <input class="form-control form-control-lg" id="formFileLg" type="file" name = "img[]" required/><span>Upload your jpeg/jpg image. Max size 50 MB</span>
-        <br><br>
+            else if (selected.options[selected.selectedIndex].value.includes("GRC"))
+            {
+                const s = document.getElementById("smc");
+                s.innerHTML = '';
+                
+                const e = document.getElementById("grc");
+                e.innerHTML= '';
+                for (let i =0; i < 5; i++) {
+                    e.innerHTML = e.innerHTML + '<h3>Candidate ' + (i+1) +'</h3><label><b>Name</b></label><input type ="text" placeholder ="Candidate ' + (i+1) +'" name = "Name[]"  id="a' + (i+1) +'" ><label><b>NRIC</b></label><input type ="text" placeholder ="S1234567Z" name = "NRIC[]"  id="a2" ><br><br><label><b>Upload Image</b></label><input type="file" name = "img[]" id="a3" /><span>Upload your jpeg/jpg image. Max size 50 MB</span><br><br>'
+                }
+            }
 
-        <h3>Candidate 5</h3>
-        <label><b>Name</b></label>
-        <input type ="text" placeholder ="Candidate 1" name = "Name[]" value="E" required>
-        <label><b>NRIC</b></label>
-        <input type ="text" placeholder ="S1234567Z" name = "NRIC[]" value = "S1234567E" required><br><br>
-        <label><b>Upload Image</b></label>
-        <input class="form-control form-control-lg" id="formFileLg" type="file" name = "img[]" required/><span>Upload your jpeg/jpg image. Max size 50 MB</span>
-        <br><br>
-    </div>
-    <button type="submit" value="submit"> Submit </button>
-  </form>
-
+        }
+    </script>
+    
+  
 </body>
 </html>

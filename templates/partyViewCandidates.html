@@ -71,7 +71,7 @@
   </head>
   <body>
       <form action="#" method="POST">
-        <label>Select Party: </label>
+        <label>Select District: </label>
         <select name="districtName" id="districtName">
           <option disabled selected value> -- select an option -- </option>
           {% for n in districts %}
@@ -84,8 +84,6 @@
 
       
       <div class="cnds" id="cmds" >
-        
-      
         {% for n in candidates %}
         <div class="cnd {{ n[0] }}">
           {% if n[1] %}
