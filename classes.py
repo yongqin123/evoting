@@ -212,7 +212,7 @@ class PartyPageController:
 
         self.entity.partyName = request["PartyName"]
         self.entity.districtName = request["districtName"]
-        return self.entity.creatNewDistrictProfile()
+        return self.entity.createNewDistrictProfile()
     
 
     def getCandidatesByDistrict(self, request, party):
@@ -267,6 +267,7 @@ class PartyDetails:
                 else:
                     result = list(map(lambda x: x[0], result))
                     return result
+
     def uploadImagePartyLogo(self):
 
         img1 = Image.open(self.logo)
@@ -277,11 +278,11 @@ class PartyDetails:
         img1.save(os.path.join(app.config['UPLOAD FOLDER'], self.party + ".png"))
 
     def uploadImageCandidate(self):
-        for i in range(len(self.image)):     
+        for i in range(len(self.image)):
             img1 = Image.open(self.image[i])
             img1 = img1.resize((512, 512))
             img1.save(os.path.join(app.config['UPLOAD FOLDER'], secure_filename(self.nric[i] + ".png")))
-           
+        
     def getCandidatesToView(self):
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
@@ -362,11 +363,11 @@ class PartyDetails:
                     return
      
 
-    def creatNewDistrictProfile(self):
+    def createNewDistrictProfile(self):
         #print("here")
-        #print(self.nric)
-        #print(self.name)
-        #print(self.image)
+        print(self.nric)
+        print(self.name)
+        print(self.image)
 
         existing_candidate = []
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
@@ -374,15 +375,9 @@ class PartyDetails:
                 #check if candidate is already registered
                 for i in range(len(self.nric)):
                     nric = self.nric[i]
-                    #print(f"nric: {nric}")
-                    #print((type(self.candidate_list)[i]))
                     cursor.execute('SELECT * FROM public."Candidate" WHERE "NRIC" = %s ;',(nric,))
-                    #cursor.execute('SELECT * FROM "Candidate" limit 0')
-                    #colnames = [desc[0] for desc in cursor.description]
-                    #print(colnames)
                     candidate = cursor.fetchone()
-                    #print(f"in class: {candidate}")
-                    
+
                     if candidate == None:
                         continue
                 
@@ -415,17 +410,6 @@ class PartyDetails:
                 #print(result)
         return result
 
-    def updateCandidateImage(self, i):
-        print(self.Oldnric[i])
-        img1 = Image.open(self.image[i])
-        img1 = img1.resize((512, 512))
-        #path = os.getcwd()
-        if self.nric[i] != "":
-            os.remove(os.path.join(app.config['UPLOAD FOLDER'], secure_filename(self.nric[i] + ".png")))
-            img1.save(os.path.join(app.config['UPLOAD FOLDER'], secure_filename(self.nric[i] + ".png")))
-        else:
-            img1.save(os.path.join(app.config['UPLOAD FOLDER'], secure_filename(self.Oldnric[i] + ".png")))
-
     def updateNewDistrictProfile(self):
         print(self.Oldnric)
         print(self.Oldname)
@@ -436,7 +420,7 @@ class PartyDetails:
 
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                for i in range(5):
+                for i in range(len(self.Oldnric)):
                     #new nric field is not blank and image is blank
                     if self.nric[i] != "" and self.image[i].filename == "":
                         #Open image of old file using old nric
@@ -493,6 +477,7 @@ class PartyDetails:
 
                     
                 db.commit() 
+
 
     
 

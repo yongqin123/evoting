@@ -143,7 +143,8 @@ def CreateDistrictProfile():
                 else:
                     print(f"In main result : {error}")
                     flash(error)
-                    return boundary.partyDistrictTemplateCreate(session["party"])
+                    contestingZones = boundary.controller.getContestingZones()
+                    return boundary.partyDistrictTemplateCreate(session["party"],contestingZones)
             else:
                 flash("Disctrict profile already exists, please select update to edit profile!")
                 return redirect(url_for("party"))
@@ -165,6 +166,7 @@ def getDistrict():
         elif request.method == "POST":
             if boundary.controller.DistrictExists(request.form, session["party"]):
                 #print("in post")
+            
                 data = boundary.controller.getCandidatesByDistrict(request.form, session["party"])
                 session["selectedDistrictCandidates"] = data
                 #print(session["selectedDistrictCandidates"])
@@ -201,7 +203,7 @@ def PartyViewDistrict():
     boundary = PartyPage()
     districts =  PartyPage().controller.getDistricts()
     if request.method == "GET":
-        return boundary.partyTemplateViewDistricts( districts)
+        return boundary.partyTemplateViewDistricts(districts)
     
     elif request.method == "POST":
         session["show_candidates"] = PartyPage().controller.getCandidatesByDistrictToView(request.form)
