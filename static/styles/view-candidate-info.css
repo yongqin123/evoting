@@ -1,0 +1,986 @@
+.cnds {
+  margin: 0 auto;
+  max-width: 1000px;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(225px, 1fr));
+  
+  
+  gap: 10px;
+  font-family: sans-serif;
+  padding-top: 10px;
+}
+
+.cnds * {
+  box-sizing: border-box;
+}
+
+.cnd__image {
+  width: 50%;
+  height: 50%;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  border-top: 2px solid #333333;
+  border-right: 2px solid #333333;
+  border-left: 2px solid #333333;
+}
+
+.cnd__content {
+  line-height: 1.5;
+  font-size: 0.9em;
+  padding: 15px;
+  background: #fafafa;
+  
+}
+
+.cnd_content > p:first-of-type {
+  margin-top: 0;
+}
+
+.cnd__content > p:last-of-type {
+  margin-bottom: 0;
+}
+
+.cnd__info {
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #555555;
+  background: #eeeeee;
+  font-size: 0.8em;
+  
+}
+
+.cnd__info i {
+  font-size: 0.9em;
+  margin-right: 8px;
+}
+
+
+
+.regular {
+  position: relative;
+  padding: 0 40px;
+}
+.regular::before {
+  content: "\201C";
+  position: absolute;
+  font-weight: bold;
+  font-size: 4em;
+  color: green;
+  top: -30px;
+  left: 0px;
+  font-family: Georgia, Times, serif;
+}
+.regular::after {
+  content: "\201D";
+  position: absolute;
+  font-weight: bold;
+  font-size: 4em;
+  color: green;
+  bottom: -50px;
+  right: 0px;
+  font-family: Georgia, Times, serif;
+}
+.view-candidate-info-container {
+  min-height: 100vh;
+}
+.view-candidate-info-view-candidate-info {
+  width: 100%;
+  height: 1024px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  align-items: flex-start;
+  border-color: transparent;
+  background-color: rgba(240, 240, 240, 1);
+}
+.view-candidate-info-frame16desktopsiteheading {
+  top: 0px;
+  left: 0px;
+  width: 2480px;
+  height: 84px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+  background-color: rgba(255, 255, 255, 1);
+}
+.view-candidate-info-text {
+  top: 26px;
+  left: 64px;
+  color: rgba(0, 0, 0, 1);
+  height: auto;
+  position: absolute;
+  font-size: 24px;
+  align-self: auto;
+  font-style: Black;
+  text-align: left;
+  font-family: Nunito;
+  font-weight: 900;
+  line-height: 129.99999523162842%;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.view-candidate-info-pageitems {
+  top: 20px;
+  left: 671px;
+  width: 705px;
+  display: flex;
+  position: absolute;
+  align-items: center;
+  border-color: transparent;
+}
+.view-candidate-info-text02 {
+  color: rgba(0, 0, 0, 1);
+  height: auto;
+  font-size: 20px;
+  align-self: auto;
+  font-style: Bold;
+  text-align: left;
+  font-family: Nunito;
+  font-weight: 700;
+  line-height: 129.99999523162842%;
+  font-stretch: normal;
+  margin-right: 48px;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.view-candidate-info-text04 {
+  color: rgba(0, 0, 0, 1);
+  height: auto;
+  font-size: 20px;
+  align-self: auto;
+  font-style: Bold;
+  text-align: left;
+  font-family: Nunito;
+  font-weight: 700;
+  line-height: 129.99999523162842%;
+  font-stretch: normal;
+  margin-right: 48px;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.view-candidate-info-text06 {
+  color: rgba(0, 0, 0, 1);
+  height: auto;
+  font-size: 20px;
+  align-self: auto;
+  font-style: Bold;
+  text-align: left;
+  font-family: Nunito;
+  font-weight: 700;
+  line-height: 129.99999523162842%;
+  font-stretch: normal;
+  margin-right: 48px;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.view-candidate-info-text08 {
+  color: rgba(0, 0, 0, 1);
+  height: auto;
+  font-size: 20px;
+  align-self: auto;
+  font-style: Bold;
+  text-align: left;
+  font-family: Nunito;
+  font-weight: 700;
+  line-height: 129.99999523162842%;
+  font-stretch: normal;
+  margin-right: 48px;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.view-candidate-info-frame28cart-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+  margin-right: 48px;
+}
+.view-candidate-info-frame03filled-button {
+  height: 44px;
+  display: flex;
+  padding: 8px 16px;
+  position: relative;
+  align-items: center;
+  flex-shrink: 0;
+  border-color: transparent;
+  border-radius: 8px;
+  justify-content: center;
+  background-color: rgba(183, 10, 19, 1);
+}
+.view-candidate-info-text10 {
+  color: rgba(255, 255, 255, 1);
+  height: auto;
+  font-size: 17px;
+  align-self: auto;
+  font-style: Bold;
+  text-align: left;
+  font-family: Nunito;
+  font-weight: 700;
+  line-height: 129.99999523162842%;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.view-candidate-info-s-v-g25home-icon {
+  top: 29px;
+  left: 1208px;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+}
+.view-candidate-info-rectangle14 {
+  top: 186px;
+  left: 130px;
+  width: 1254px;
+  height: 823px;
+  position: absolute;
+  border-color: transparent;
+  border-radius: 15px 15px 0 0;
+}
+.view-candidate-info-login-button {
+  top: 522px;
+  left: 562px;
+  width: 362.8787841796875px;
+  height: 20.25px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  margin-right: 0;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: transparent;
+}
+.view-candidate-info-text12 {
+  color: rgba(0, 0, 0, 1);
+  width: 363px;
+  height: auto;
+  position: absolute;
+  font-size: 30px;
+  align-self: auto;
+  font-style: SemiBold;
+  text-align: center;
+  font-family: Urbanist;
+  font-weight: 600;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.view-candidate-info-login-button1 {
+  top: 106px;
+  left: 817px;
+  width: 479px;
+  height: 63px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  margin-right: 0;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: rgba(255, 255, 255, 1);
+}
+.view-candidate-info-text14 {
+  top: 21.375001907348633px;
+  left: 50.802947998046875px;
+  color: rgba(0, 0, 0, 1);
+  width: 363px;
+  height: auto;
+  position: absolute;
+  font-size: 15px;
+  align-self: auto;
+  font-style: SemiBold;
+  text-align: center;
+  font-family: Urbanist;
+  font-weight: 600;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.view-candidate-info-login-button2 {
+  top: 913px;
+  left: 517px;
+  width: 479px;
+  height: 63px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  margin-right: 0;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: rgba(208, 208, 208, 1);
+}
+.view-candidate-info-text19 {
+  top: 21.3749942779541px;
+  left: 50.80322265625px;
+  color: var(--dl-color-default-white);
+  width: 363px;
+  height: auto;
+  position: absolute;
+  font-size: 15px;
+  align-self: auto;
+  font-style: SemiBold;
+  text-align: center;
+  font-family: Urbanist;
+  font-weight: 600;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.view-candidate-info-text21 {
+  top: 969px;
+  left: 153px;
+  color: var(--dl-color-default-dark);
+  width: 301px;
+  height: auto;
+  position: absolute;
+  font-size: 10px;
+  align-self: auto;
+  font-style: SemiBold;
+  text-align: left;
+  font-family: Urbanist;
+  font-weight: 600;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.view-candidate-info-text26 {
+  top: 148px;
+  left: 73px;
+  width: 631px;
+  height: 33px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  margin-right: 0;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: transparent;
+}
+.view-candidate-info-text27 {
+  color: var(--dl-color-default-dark);
+  width: 631px;
+  height: auto;
+  position: absolute;
+  font-size: 20px;
+  align-self: auto;
+  font-style: Bold;
+  text-align: center;
+  font-family: Urbanist;
+  font-weight: 700;
+  line-height: 129.99999523162842%;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.view-candidate-info-text29 {
+  top: 148px;
+  left: 73px;
+  width: 631px;
+  height: 33px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  margin-right: 0;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: transparent;
+}
+.view-candidate-info-text30 {
+  color: var(--dl-color-default-dark);
+  width: 631px;
+  height: auto;
+  position: absolute;
+  font-size: 20px;
+  align-self: auto;
+  font-style: Bold;
+  text-align: center;
+  font-family: Urbanist;
+  font-weight: 700;
+  line-height: 129.99999523162842%;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.view-candidate-info-thunder-party-box {
+  top: 586px;
+  left: 138px;
+  width: 644.8787841796875px;
+  height: 283px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  margin-right: 0;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: transparent;
+}
+.view-candidate-info-rectangle173 {
+  top: 0px;
+  left: 81px;
+  width: 480px;
+  height: 283px;
+  position: absolute;
+  border-color: rgba(0, 0, 0, 1);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 8px;
+}
+.view-candidate-info-text32 {
+  top: 204px;
+  left: 282px;
+  color: rgba(0, 0, 0, 1);
+  width: 363px;
+  height: auto;
+  position: absolute;
+  font-size: 15px;
+  align-self: auto;
+  font-style: SemiBold;
+  text-align: center;
+  font-family: Urbanist;
+  font-weight: 600;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.view-candidate-info-text34 {
+  top: 207px;
+  color: rgba(0, 0, 0, 1);
+  width: 363px;
+  height: auto;
+  position: absolute;
+  font-size: 15px;
+  align-self: auto;
+  font-style: SemiBold;
+  text-align: center;
+  font-family: Urbanist;
+  font-weight: 600;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.view-candidate-info-text36 {
+  top: 185px;
+  left: 111px;
+  color: var(--dl-color-default-dark);
+  width: 140px;
+  height: auto;
+  position: absolute;
+  font-size: 20px;
+  align-self: auto;
+  font-style: SemiBold;
+  text-align: center;
+  font-family: Urbanist;
+  font-weight: 600;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.view-candidate-info-davidleeportrait {
+  top: 78px;
+  left: 146px;
+  width: 362.8787841796875px;
+  height: 145.25px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  border-radius: 0px 0px 0px 0px;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: transparent;
+}
+.view-candidate-info-image6 {
+  top: 0px;
+  left: 129px;
+  width: 103px;
+  height: 103px;
+  position: absolute;
+  border-color: transparent;
+}
+.view-candidate-info-text41 {
+  top: 125px;
+  color: rgba(0, 0, 0, 1);
+  width: 363px;
+  height: auto;
+  position: absolute;
+  font-size: 15px;
+  align-self: auto;
+  font-style: SemiBold;
+  text-align: center;
+  font-family: Urbanist;
+  font-weight: 600;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.view-candidate-info-text43 {
+  top: 107px;
+  left: 111px;
+  color: var(--dl-color-default-dark);
+  width: 140px;
+  height: auto;
+  position: absolute;
+  font-size: 20px;
+  align-self: auto;
+  font-style: SemiBold;
+  text-align: center;
+  font-family: Urbanist;
+  font-weight: 600;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.view-candidate-info-thunderpartyheader {
+  top: 18px;
+  left: 234px;
+  width: 174px;
+  height: 44px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  border-radius: 0px 0px 0px 0px;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: transparent;
+}
+.view-candidate-info-text48 {
+  top: 9px;
+  left: 34px;
+  color: var(--dl-color-default-dark);
+  width: 140px;
+  height: auto;
+  position: absolute;
+  font-size: 20px;
+  align-self: auto;
+  font-style: SemiBold;
+  text-align: center;
+  font-family: Urbanist;
+  font-weight: 600;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.view-candidate-info-png-item2011111 {
+  top: 0px;
+  left: 0px;
+  width: 34px;
+  height: 44px;
+  position: absolute;
+  border-color: transparent;
+}
+.view-candidate-info-text53 {
+  top: 771px;
+  left: 531px;
+  color: var(--dl-color-default-dark);
+  width: 140px;
+  height: auto;
+  position: absolute;
+  font-size: 20px;
+  align-self: auto;
+  font-style: SemiBold;
+  text-align: center;
+  font-family: Urbanist;
+  font-weight: 600;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.view-candidate-info-mallet-party-box {
+  top: 249px;
+  left: 552px;
+  width: 712px;
+  height: 620px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  margin-right: 0;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: transparent;
+}
+.view-candidate-info-rectangle1731 {
+  top: 337px;
+  left: 232px;
+  width: 480px;
+  height: 283px;
+  position: absolute;
+  border-color: rgba(0, 0, 0, 1);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 8px;
+}
+.view-candidate-info-text58 {
+  top: 125px;
+  color: rgba(0, 0, 0, 1);
+  width: 363px;
+  height: auto;
+  position: absolute;
+  font-size: 15px;
+  align-self: auto;
+  font-style: SemiBold;
+  text-align: center;
+  font-family: Urbanist;
+  font-weight: 600;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.view-candidate-info-pratheepportrait {
+  top: 415px;
+  left: 159px;
+  width: 521.8787841796875px;
+  height: 146.25px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  border-radius: 0px 0px 0px 0px;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: transparent;
+}
+.view-candidate-info-text60 {
+  top: 125px;
+  color: rgba(0, 0, 0, 1);
+  width: 363px;
+  height: auto;
+  position: absolute;
+  font-size: 15px;
+  align-self: auto;
+  font-style: SemiBold;
+  text-align: center;
+  font-family: Urbanist;
+  font-weight: 600;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.view-candidate-info-text62 {
+  top: 126px;
+  left: 159px;
+  color: rgba(0, 0, 0, 1);
+  width: 363px;
+  height: auto;
+  position: absolute;
+  font-size: 15px;
+  align-self: auto;
+  font-style: SemiBold;
+  text-align: center;
+  font-family: Urbanist;
+  font-weight: 600;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.view-candidate-info-text64 {
+  top: 103px;
+  left: 111px;
+  color: var(--dl-color-default-dark);
+  width: 140px;
+  height: auto;
+  position: absolute;
+  font-size: 20px;
+  align-self: auto;
+  font-style: SemiBold;
+  text-align: center;
+  font-family: Urbanist;
+  font-weight: 600;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.view-candidate-info-text69 {
+  top: 103px;
+  left: 270px;
+  color: var(--dl-color-default-dark);
+  width: 140px;
+  height: auto;
+  position: absolute;
+  font-size: 20px;
+  align-self: auto;
+  font-style: SemiBold;
+  text-align: center;
+  font-family: Urbanist;
+  font-weight: 600;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.view-candidate-info-pratheep {
+  top: 0px;
+  left: 129px;
+  width: 103px;
+  height: 103px;
+  position: absolute;
+  border-color: transparent;
+}
+.view-candidate-info-malletheader {
+  top: 0px;
+  left: 0px;
+  width: 550px;
+  height: 394px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  border-radius: 0px 0px 0px 0px;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: transparent;
+}
+.view-candidate-info-image61 {
+  top: 349px;
+  left: 373px;
+  width: 45px;
+  height: 45px;
+  position: absolute;
+  border-color: transparent;
+}
+.view-candidate-info-image2 {
+  top: 0px;
+  left: 0px;
+  width: 364px;
+  height: 229px;
+  position: absolute;
+  border-color: transparent;
+}
+.view-candidate-info-text74 {
+  top: 359px;
+  left: 410px;
+  color: var(--dl-color-default-dark);
+  width: 140px;
+  height: auto;
+  position: absolute;
+  font-size: 20px;
+  align-self: auto;
+  font-style: SemiBold;
+  text-align: center;
+  font-family: Urbanist;
+  font-weight: 600;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.view-candidate-info-text79 {
+  top: 791px;
+  left: 999px;
+  color: rgba(0, 0, 0, 1);
+  width: 363px;
+  height: auto;
+  position: absolute;
+  font-size: 15px;
+  align-self: auto;
+  font-style: SemiBold;
+  text-align: center;
+  font-family: Urbanist;
+  font-weight: 600;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.view-candidate-info-text81 {
+  top: 768px;
+  left: 1110px;
+  color: var(--dl-color-default-dark);
+  width: 140px;
+  height: auto;
+  position: absolute;
+  font-size: 20px;
+  align-self: auto;
+  font-style: SemiBold;
+  text-align: center;
+  font-family: Urbanist;
+  font-weight: 600;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.view-candidate-info-fakelhl1 {
+  top: 664px;
+  left: 265px;
+  width: 107px;
+  height: 107px;
+  position: absolute;
+  border-color: transparent;
+}
+.view-candidate-info-seans-v16fv-l-u-u35sunsplash1 {
+  top: 1485px;
+  left: 3204px;
+  width: 823px;
+  height: 1266px;
+  position: absolute;
+  border-color: transparent;
+}
+.view-candidate-info-seans-v16fv-l-u-u35sunsplash2 {
+  top: 664px;
+  left: 999px;
+  width: 103px;
+  height: 103px;
+  position: absolute;
+  border-color: transparent;
+}
+.view-candidate-info-piqsels1 {
+  top: 662px;
+  left: 546px;
+  width: 107px;
+  height: 107px;
+  position: absolute;
+  border-color: transparent;
+}
+.view-candidate-info-brunorodrigues279x-i-hym-p-y-yunsplash1 {
+  top: 660px;
+  left: 1126px;
+  width: 107px;
+  height: 107px;
+  position: absolute;
+  border-color: transparent;
+}
+
+.button {
+  background-color: rgba(183, 10, 19, 1);
+  border: 1px solid rgba(183, 10, 19, 1);
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 16px;
+  min-height: 40px;
+  outline: 0;
+  padding: 12px 14px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+}
+
+.button:hover,
+.button-24:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: rgba(183, 10, 19, 1);
+}
+
+.button:active {
+  opacity: .5;
+}
+
+.main-container{
+  box-sizing: border-box;
+  border: 1px solid rgba(183, 10, 19, 1);
+  width: 1440px;
+  padding: 12px 14px;
+}

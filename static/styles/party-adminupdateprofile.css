@@ -1,0 +1,1838 @@
+.party-adminupdateprofile-container {
+  min-height: 100vh;
+}
+.party-adminupdateprofile-party-adminupdateprofile {
+  width: 100%;
+  height: 1048px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.10000000149011612) ;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+  border-radius: 8px;
+  background-color: var(--dl-color-light_background-secondary);
+}
+.party-adminupdateprofile-rectangle6 {
+  top: -16px;
+  left: 0px;
+  width: 296px;
+  height: 1048px;
+  position: absolute;
+  border-color: transparent;
+}
+.party-adminupdateprofile-rectangle7 {
+  top: -16px;
+  left: 0px;
+  width: 296px;
+  height: 1048px;
+  position: absolute;
+  border-color: transparent;
+}
+.party-adminupdateprofile-frame7 {
+  top: 104px;
+  left: 24px;
+  width: 240px;
+  height: 24px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-text {
+  top: 4px;
+  color: var(--dl-color-primary-300);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 16px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-adminupdateprofile-frame69 {
+  top: 468px;
+  left: 24px;
+  width: 240px;
+  height: 24px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-frame1one-line {
+  top: 136px;
+  left: 12px;
+  width: 272px;
+  height: 44px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+  border-radius: 8px;
+  background-color: var(--dl-color-light_background-blue);
+}
+.party-adminupdateprofile-x-base1one-line-left-label-icon {
+  top: 0px;
+  left: 0px;
+  width: 192px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-text02 {
+  top: 10px;
+  left: 48px;
+  color: var(--dl-color-primary-100);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-adminupdateprofile-dashboard {
+  top: 10px;
+  left: 12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-icon {
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  position: absolute;
+}
+.party-adminupdateprofile-frame1one-line01 {
+  top: 500px;
+  left: 12px;
+  width: 272px;
+  height: 44px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-frame1one-line02 {
+  top: 180px;
+  left: 12px;
+  width: 272px;
+  height: 44px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-x-base1one-line-left-label-icon01 {
+  top: 0px;
+  left: 0px;
+  width: 192px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-text04 {
+  top: 10px;
+  left: 48px;
+  color: var(--dl-color-light_grayscale-200);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-adminupdateprofile-apps {
+  top: 10px;
+  left: 12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-icon01 {
+  top: 4px;
+  left: 4px;
+  width: 16px;
+  height: 16px;
+  position: absolute;
+}
+.party-adminupdateprofile-icon02 {
+  top: 19px;
+  left: 244px;
+  width: 10px;
+  height: 6px;
+  position: absolute;
+}
+.party-adminupdateprofile-frame1one-line03 {
+  top: 224px;
+  left: 12px;
+  width: 272px;
+  height: 44px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-x-base1one-line-right-icon {
+  top: 0px;
+  left: 192px;
+  width: 80px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-arrowdropdown {
+  top: 10px;
+  left: 44px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-x-base1one-line-left-label-icon02 {
+  top: 0px;
+  left: 0px;
+  width: 192px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-text06 {
+  top: 10px;
+  left: 48px;
+  color: var(--dl-color-light_grayscale-200);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-adminupdateprofile-security {
+  top: 10px;
+  left: 12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-icon03 {
+  top: 0.1875px;
+  left: 3px;
+  width: 18px;
+  height: 22px;
+  position: absolute;
+}
+.party-adminupdateprofile-frame1one-line04 {
+  top: 268px;
+  left: 12px;
+  width: 272px;
+  height: 44px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-x-base1one-line-left-label-icon03 {
+  top: 0px;
+  left: 0px;
+  width: 192px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-text08 {
+  top: 10px;
+  left: 48px;
+  color: var(--dl-color-light_grayscale-200);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-adminupdateprofile-assignment {
+  top: 10px;
+  left: 12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-icon04 {
+  top: 1px;
+  left: 3px;
+  width: 18px;
+  height: 20px;
+  position: absolute;
+}
+.party-adminupdateprofile-frame1one-line05 {
+  top: 312px;
+  left: 12px;
+  width: 272px;
+  height: 44px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-x-base1one-line-left-label-icon04 {
+  top: 0px;
+  left: 0px;
+  width: 192px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-text10 {
+  top: 10px;
+  left: 48px;
+  color: var(--dl-color-light_grayscale-200);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-adminupdateprofile-supervisedusercircle {
+  top: 10px;
+  left: 12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-icon05 {
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+}
+.party-adminupdateprofile-frame1one-line06 {
+  top: 356px;
+  left: 12px;
+  width: 272px;
+  height: 44px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-x-base1one-line-left-label-icon05 {
+  top: 0px;
+  left: 0px;
+  width: 192px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-text12 {
+  top: 10px;
+  left: 48px;
+  color: var(--dl-color-light_grayscale-200);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-adminupdateprofile-work {
+  top: 10px;
+  left: 12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-icon06 {
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 19px;
+  position: absolute;
+}
+.party-adminupdateprofile-frame1one-line07 {
+  top: 400px;
+  left: 12px;
+  width: 272px;
+  height: 44px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-x-base1one-line-right-counter {
+  top: 0px;
+  left: 192px;
+  width: 80px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-counter {
+  top: 14px;
+  left: 39px;
+  width: 29px;
+  height: 16px;
+  display: flex;
+  padding: 0 4px;
+  position: absolute;
+  align-items: center;
+  flex-shrink: 0;
+  border-color: transparent;
+  border-radius: 96px;
+  flex-direction: column;
+  background-color: var(--dl-color-light_blue-base);
+}
+.party-adminupdateprofile-text14 {
+  color: var(--dl-color-default-white);
+  height: auto;
+  align-self: auto;
+  text-align: center;
+  line-height: 16px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-adminupdateprofile-x-base1one-line-left-label-icon06 {
+  top: 0px;
+  left: 0px;
+  width: 192px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-text16 {
+  top: 10px;
+  left: 48px;
+  color: var(--dl-color-light_grayscale-200);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-adminupdateprofile-chat {
+  top: 10px;
+  left: 12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-icon07 {
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+}
+.party-adminupdateprofile-group1 {
+  top: 26px;
+  left: 96px;
+  width: 138px;
+  height: 52px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  margin-right: 0;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: transparent;
+}
+.party-adminupdateprofile-text18 {
+  color: var(--dl-color-primary-100);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 28px;
+}
+.party-adminupdateprofile-text20 {
+  top: 28px;
+  color: var(--dl-color-primary-300);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+}
+.party-adminupdateprofile-logo {
+  top: 24px;
+  left: 24px;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  margin-right: 0;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: rgba(255, 255, 255, 1);
+}
+.party-adminupdateprofile-bluron {
+  top: 12px;
+  left: 12px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-search-bar {
+  top: 24px;
+  left: 344px;
+  width: 744px;
+  height: 40px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  border-color: transparent;
+  border-radius: 8px;
+}
+.party-adminupdateprofile-left {
+  top: 0px;
+  left: 0px;
+  width: 712px;
+  height: 40px;
+  display: flex;
+  padding: 12px 20px;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  border-color: transparent;
+}
+.party-adminupdateprofile-search {
+  top: 10px;
+  left: 12px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-icon08 {
+  top: 2.499476194381714px;
+  left: 2.499478578567505px;
+  width: 14px;
+  height: 14px;
+  position: absolute;
+}
+.party-adminupdateprofile-text-state {
+  top: 8px;
+  left: 40px;
+  width: 672px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-text22 {
+  color: var(--dl-color-primary-300);
+  width: 672px;
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-adminupdateprofile-frame71 {
+  top: 24px;
+  left: 1188px;
+  width: 280px;
+  display: flex;
+  position: absolute;
+  align-items: center;
+  border-color: transparent;
+}
+.party-adminupdateprofile-group10 {
+  width: 28px;
+  height: 24px;
+  display: flex;
+  padding: 0;
+  position: relative;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  margin-right: 24px;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: transparent;
+}
+.party-adminupdateprofile-notifications {
+  top: 0px;
+  left: 0px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-icon09 {
+  top: 2.5px;
+  left: 4.413522720336914px;
+  width: 15px;
+  height: 19px;
+  position: absolute;
+}
+.party-adminupdateprofile-counter1 {
+  top: 0px;
+  left: 13px;
+  display: flex;
+  padding: 0 4px;
+  position: absolute;
+  align-items: center;
+  border-color: transparent;
+  border-radius: 96px;
+  background-color: var(--dl-color-light_blue-base);
+}
+.party-adminupdateprofile-text24 {
+  color: var(--dl-color-default-white);
+  height: auto;
+  align-self: auto;
+  text-align: center;
+  line-height: 16px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-adminupdateprofile-frame71 {
+  display: flex;
+  position: relative;
+  align-items: center;
+  border-color: transparent;
+  margin-right: 24px;
+}
+.party-adminupdateprofile-avatar {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: rgba(231, 231, 231, 1);
+  border-style: solid;
+  border-width: 1px;
+  margin-right: 8px;
+  border-radius: 256px;
+  background-size: cover;
+  background-image: url("public/playground_assets/adb66bbd-77dd-42f6-b4b1-8c6a4a244a76-2pnv-200h.undefined");
+}
+.party-adminupdateprofile-status {
+  top: 24px;
+  left: 24px;
+  width: 8px;
+  height: 8px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  box-sizing: content-box;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: rgba(255, 255, 255, 1);
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 100px;
+  background-color: var(--dl-color-light_blue-base);
+}
+.party-adminupdateprofile-arrowdropdown1 {
+  width: 24px;
+  height: 24px;
+  position: relative;
+}
+.party-adminupdateprofile-frame6 {
+  display: flex;
+  position: relative;
+  align-items: center;
+  border-color: transparent;
+}
+.party-adminupdateprofile-avatar-one-line {
+  display: flex;
+  position: relative;
+  align-items: center;
+  border-color: transparent;
+  margin-right: 8px;
+}
+.party-adminupdateprofile-avatar1 {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+  margin-right: 8px;
+  border-radius: 256px;
+  background-color: var(--dl-color-light_background-blue);
+}
+.party-adminupdateprofile-text25 {
+  top: 6px;
+  left: 12px;
+  color: var(--dl-color-light_blue-base);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: center;
+  line-height: 20px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-adminupdateprofile-text26 {
+  color: var(--dl-color-primary-100);
+  height: auto;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-adminupdateprofile-arrowdropdown2 {
+  width: 24px;
+  height: 24px;
+  position: relative;
+}
+.party-adminupdateprofile-text28 {
+  top: 88px;
+  left: 344px;
+  color: var(--dl-color-primary-100);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 48px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-adminupdateprofile-frame3 {
+  top: 224px;
+  left: 350px;
+  width: 1116px;
+  height: 808px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.10000000149011612) ;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+  border-radius: 8px;
+  background-color: var(--dl-color-light_background-primary);
+}
+.party-adminupdateprofile-horizontal {
+  top: 24px;
+  left: 24px;
+  width: 1068px;
+  height: 28px;
+  display: flex;
+  position: absolute;
+  align-self: stretch;
+  align-items: flex-start;
+  border-color: transparent;
+}
+.party-adminupdateprofile-action {
+  top: 179px;
+  left: 102px;
+  width: 79px;
+  display: flex;
+  position: absolute;
+  align-items: center;
+  border-color: transparent;
+}
+.party-adminupdateprofile-button {
+  top: 105px;
+  left: 246px;
+  width: 79px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  border-color: transparent;
+}
+.party-adminupdateprofile-NewName {
+  top: 52px;
+  left: 411px;
+  width: 200px;
+  height: 28px;
+  display: flex;
+  padding: 4px 8px;
+  overflow: hidden;
+  position: absolute;
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.05999999865889549) ;
+  align-items: center;
+  flex-shrink: 0;
+  border-color: rgba(92, 115, 219, 1);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 12px;
+}
+.party-adminupdateprofile-text30 {
+  color: var(--dl-color-primary-100);
+  height: auto;
+  align-self: auto;
+  text-align: center;
+  line-height: 20px;
+  margin-right: 4px;
+  margin-bottom: 0;
+}
+.party-adminupdateprofile-chevronright {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-button2 {
+  top: 718.712158203125px;
+  left: 964px;
+  width: auto;
+  display: flex;
+  padding: 4px 8px;
+  overflow: hidden;
+  position: absolute;
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.05999999865889549) ;
+  align-items: center;
+  border-color: rgba(231, 231, 231, 1);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 8px;
+  background-color: var(--dl-color-light_background-primary);
+}
+.party-adminupdateprofile-text32 {
+  color: var(--dl-color-primary-100);
+  height: auto;
+  align-self: auto;
+  text-align: center;
+  line-height: 20px;
+  margin-right: 4px;
+  margin-bottom: 0;
+}
+.party-adminupdateprofile-text34 {
+  top: 52px;
+  left: 88px;
+  color: var(--dl-color-primary-100);
+  width: 209px;
+  height: auto;
+  position: absolute;
+  font-size: 20px;
+  align-self: auto;
+  font-style: Medium;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 500;
+  line-height: 24px;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.party-adminupdateprofile-group30 {
+  top: 387px;
+  left: 88px;
+  width: 451px;
+  height: 194px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  margin-right: 0;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: transparent;
+}
+.party-adminupdateprofile-frame76 {
+  top: 170px;
+  left: 342px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  border-color: transparent;
+  flex-direction: column;
+}
+.party-adminupdateprofile-text-icon {
+  top: 0px;
+  left: 0px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: center;
+  border-color: transparent;
+  border-radius: 8px;
+}
+.party-adminupdateprofile-text36 {
+  color: var(--dl-color-primary-100);
+  height: auto;
+  font-size: 20px;
+  align-self: auto;
+  font-style: Medium;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 500;
+  line-height: 24px;
+  font-stretch: normal;
+  margin-right: 8px;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.party-adminupdateprofile-chevronright1 {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-text-icon1 {
+  top: 411px;
+  left: 430px;
+  width: 109px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: center;
+  border-color: transparent;
+  border-radius: 8px;
+}
+.party-adminupdateprofile-text-icon2 {
+  top: 231px;
+  left: 88px;
+  width: 96px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: center;
+  border-color: transparent;
+  border-radius: 8px;
+}
+.party-adminupdateprofile-text38 {
+  top: 155px;
+  left: 93px;
+  color: var(--dl-color-primary-100);
+  height: auto;
+  position: absolute;
+  font-size: 20px;
+  align-self: auto;
+  font-style: Medium;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 500;
+  line-height: 24px;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.party-adminupdateprofile-horizontal1 {
+  top: 203px;
+  left: 24px;
+  width: 1068px;
+  height: 1px;
+  position: absolute;
+}
+.party-adminupdateprofile-horizontal2 {
+  top: 371px;
+  left: 24px;
+  width: 1068px;
+  height: 1px;
+  position: absolute;
+}
+.party-adminupdateprofile-text40 {
+  top: 481px;
+  left: 360px;
+  color: var(--dl-color-light_blue-base);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-adminupdateprofile-frame18 {
+  top: 195px;
+  left: 88px;
+  width: 700px;
+  display: flex;
+  padding: 16px;
+  position: absolute;
+  align-self: stretch;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: rgba(92, 115, 219, 1);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 12px;
+  resize:none;
+}
+
+.party-adminupdateprofile-frame17 {
+  
+  border-color: rgba(92, 115, 219, 1);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 12px;
+}
+
+.party-adminupdateprofile-text42 {
+  color: var(--dl-color-gray-900);
+  height: auto;
+  font-size: 14px;
+  align-self: auto;
+  font-style: Regular;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.party-adminupdateprofile-frame77 {
+  top: 52px;
+  left: 231px;
+  width: 109px;
+  height: 22px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+  flex-direction: column;
+}
+.party-adminupdateprofile-frame74 {
+  display: flex;
+  position: relative;
+  align-items: center;
+  border-color: transparent;
+  margin-bottom: 8px;
+}
+.party-adminupdateprofile-text-icon3 {
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  align-items: center;
+  border-color: transparent;
+  border-radius: 8px;
+}
+.party-adminupdateprofile-text44 {
+  color: var(--dl-color-light_grayscale-200);
+  height: auto;
+  width: auto;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 8px;
+  margin-bottom: 0;
+  border-color: rgba(92, 115, 219, 1);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 12px;
+}
+.party-adminupdateprofile-frame75 {
+  display: flex;
+  position: relative;
+  align-items: center;
+  border-color: transparent;
+}
+.party-adminupdateprofile-button3 {
+  top: 510px;
+  left: 360px;
+  
+  display: flex;
+  padding: 4px 8px;
+  overflow: hidden;
+  position: absolute;
+  box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.05999999865889549) ;
+  align-items: center;
+  border-color: rgba(231, 231, 231, 1);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 8px;
+  background-color: var(--dl-color-light_background-primary);
+}
+.party-adminupdateprofile-text46 {
+  color: var(--dl-color-primary-100);
+  height: auto;
+  align-self: auto;
+  text-align: center;
+  line-height: 20px;
+  margin-right: 4px;
+  margin-bottom: 0;
+}
+.party-adminupdateprofile-rectangle178 {
+  top: 424px;
+  left: 94px;
+  width: 230px;
+  height: 230px;
+  position: absolute;
+  border-color: rgba(0, 0, 0, 1);
+  border-style: solid;
+  border-width: 1px;
+}
+.party-adminupdateprofile-png-item2011113 {
+  top: 435px;
+  left: 132px;
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  border-color: transparent;
+}
+.party-adminupdateprofile-text48 {
+  top: 144px;
+  left: 344px;
+  color: var(--dl-color-primary-300);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 28px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-adminupdateprofile-text-icon4 {
+  top: 148px;
+  left: 1378px;
+  width: 110px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: center;
+  border-color: transparent;
+  border-radius: 8px;
+}
+.party-adminupdateprofile-text50 {
+  color: var(--dl-color-primary-100);
+  height: auto;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 8px;
+  margin-bottom: 0;
+}
+.party-adminupdateprofile-right-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-icon10 {
+  top: 1.6666667461395264px;
+  left: 1.8922226428985596px;
+  width: 16px;
+  height: 17px;
+  position: absolute;
+}
+.party-adminupdateprofile-png-item2011111 {
+  top: 30px;
+  left: 35px;
+  width: 34px;
+  height: 45px;
+  position: absolute;
+  border-color: transparent;
+}
+.party-adminupdateprofile-rectangle8 {
+  top: -16px;
+  left: 0px;
+  width: 296px;
+  height: 1048px;
+  position: absolute;
+  border-color: transparent;
+}
+.party-adminupdateprofile-frame72 {
+  top: 104px;
+  left: 24px;
+  width: 240px;
+  height: 24px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-text52 {
+  top: 4px;
+  color: var(--dl-color-primary-300);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 16px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-adminupdateprofile-frame73 {
+  top: 468px;
+  left: 24px;
+  width: 240px;
+  height: 24px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-frame1one-line08 {
+  top: 136px;
+  left: 12px;
+  width: 272px;
+  height: 44px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+  border-radius: 8px;
+  background-color: var(--dl-color-light_background-blue);
+}
+.party-adminupdateprofile-x-base1one-line-left-label-icon07 {
+  top: 0px;
+  left: 0px;
+  width: 192px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-text54 {
+  top: 10px;
+  left: 48px;
+  color: var(--dl-color-primary-100);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-adminupdateprofile-dashboard1 {
+  top: 10px;
+  left: 12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-icon11 {
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  position: absolute;
+}
+.party-adminupdateprofile-frame1one-line09 {
+  top: 500px;
+  left: 12px;
+  width: 272px;
+  height: 44px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-frame1one-line10 {
+  top: 180px;
+  left: 12px;
+  width: 272px;
+  height: 44px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-x-base1one-line-left-label-icon08 {
+  top: 0px;
+  left: 0px;
+  width: 192px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-text56 {
+  top: 10px;
+  left: 48px;
+  color: var(--dl-color-light_grayscale-200);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-adminupdateprofile-apps1 {
+  top: 10px;
+  left: 12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-icon12 {
+  top: 4px;
+  left: 4px;
+  width: 16px;
+  height: 16px;
+  position: absolute;
+}
+.party-adminupdateprofile-frame1one-line11 {
+  top: 224px;
+  left: 12px;
+  width: 272px;
+  height: 44px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-x-base1one-line-right-icon1 {
+  top: 0px;
+  left: 192px;
+  width: 80px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-arrowdropdown3 {
+  top: 10px;
+  left: 44px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-x-base1one-line-left-label-icon09 {
+  top: 0px;
+  left: 0px;
+  width: 192px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-text58 {
+  top: 10px;
+  left: 48px;
+  color: var(--dl-color-light_grayscale-200);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-adminupdateprofile-security1 {
+  top: 10px;
+  left: 12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-icon13 {
+  top: 0.1875px;
+  left: 3px;
+  width: 18px;
+  height: 22px;
+  position: absolute;
+}
+.party-adminupdateprofile-frame1one-line12 {
+  top: 268px;
+  left: 12px;
+  width: 272px;
+  height: 44px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-x-base1one-line-left-label-icon10 {
+  top: 0px;
+  left: 0px;
+  width: 192px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-text60 {
+  top: 10px;
+  left: 48px;
+  color: var(--dl-color-light_grayscale-200);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-adminupdateprofile-assignment1 {
+  top: 10px;
+  left: 12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-icon14 {
+  top: 1px;
+  left: 3px;
+  width: 18px;
+  height: 20px;
+  position: absolute;
+}
+.party-adminupdateprofile-frame1one-line13 {
+  top: 312px;
+  left: 12px;
+  width: 272px;
+  height: 44px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-x-base1one-line-left-label-icon11 {
+  top: 0px;
+  left: 0px;
+  width: 192px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-text62 {
+  top: 10px;
+  left: 48px;
+  color: var(--dl-color-light_grayscale-200);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-adminupdateprofile-supervisedusercircle1 {
+  top: 10px;
+  left: 12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-icon15 {
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+}
+.party-adminupdateprofile-frame1one-line14 {
+  top: 356px;
+  left: 12px;
+  width: 272px;
+  height: 44px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-x-base1one-line-left-label-icon12 {
+  top: 0px;
+  left: 0px;
+  width: 192px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-text64 {
+  top: 10px;
+  left: 48px;
+  color: var(--dl-color-light_grayscale-200);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-adminupdateprofile-work1 {
+  top: 10px;
+  left: 12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-icon16 {
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 19px;
+  position: absolute;
+}
+.party-adminupdateprofile-frame1one-line15 {
+  top: 400px;
+  left: 12px;
+  width: 272px;
+  height: 44px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-x-base1one-line-right-counter1 {
+  top: 0px;
+  left: 192px;
+  width: 80px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-counter2 {
+  top: 14px;
+  left: 39px;
+  width: 29px;
+  height: 16px;
+  display: flex;
+  padding: 0 4px;
+  position: absolute;
+  align-items: center;
+  flex-shrink: 0;
+  border-color: transparent;
+  border-radius: 96px;
+  flex-direction: column;
+  background-color: var(--dl-color-light_blue-base);
+}
+.party-adminupdateprofile-text66 {
+  color: var(--dl-color-default-white);
+  height: auto;
+  align-self: auto;
+  text-align: center;
+  line-height: 16px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-adminupdateprofile-x-base1one-line-left-label-icon13 {
+  top: 0px;
+  left: 0px;
+  width: 192px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-text68 {
+  top: 10px;
+  left: 48px;
+  color: var(--dl-color-light_grayscale-200);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-adminupdateprofile-chat1 {
+  top: 10px;
+  left: 12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-icon17 {
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+}
+.party-adminupdateprofile-group2 {
+  top: 26px;
+  left: 96px;
+  width: 138px;
+  height: 52px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  margin-right: 0;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: transparent;
+}
+.party-adminupdateprofile-text70 {
+  color: var(--dl-color-primary-100);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 28px;
+}
+.party-adminupdateprofile-text72 {
+  top: 28px;
+  color: var(--dl-color-primary-300);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+}
+.party-adminupdateprofile-logo1 {
+  top: 24px;
+  left: 24px;
+  width: 56px;
+  height: 56px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  margin-right: 0;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: rgba(255, 255, 255, 1);
+}
+.party-adminupdateprofile-bluron1 {
+  top: 12px;
+  left: 12px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-adminupdateprofile-png-item2011112 {
+  top: 30px;
+  left: 35px;
+  width: 34px;
+  height: 45px;
+  position: absolute;
+  border-color: transparent;
+}
+.party-adminupdateprofile-frame741 {
+  top: 33px;
+  left: 1477px;
+  width: 18px;
+  height: 20px;
+  position: absolute;
+}

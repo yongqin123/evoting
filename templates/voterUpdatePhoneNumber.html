@@ -1,25 +1,50 @@
-<html>
-    <head>
-        <style>
-            
-            table,td,th {  border-collapse: collapse; border:1px solid black}
-        </style>
-    </head>
 
-    <body>   
-        <form action="#" method="POST">       
-            <table>
-                <tr><th colspan="2">New Phone Number</th></tr>
-                <tr>
-                    <td class="form_td"><label>Phone Number: </label><input onchange="this.style.width = ((this.value.length + 1) * 9) + 'px';" required name="phone_number" id="phone_number" type="number"></td>
-                </tr>
-                
-                <tr><td><button type="submit">submit</button></td></tr>
-            </table>
-        </form>      
+    {% extends 'web-voter-homepage.html' %}
+    {% block voterUpdatePhoneNumber %}
+    <link href="/static/styles/voterUpdatePhoneNumber.css" rel="stylesheet" />
+    <style>
         
-    <script>
+        table,td,th {  border-collapse: collapse; border:1px solid black}
+    </style>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Update Phone Number</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <form action="#" method="POST">   
+            <div class="modal-body">      
+                <label>Phone Number: </label><input style="border:2px solid black" onchange="this.style.width = ((this.value.length + 1) * 9) + 'px';" required name="phone_number" id="phone_number" type="number"></td>
+                        
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" id="submit_button"><span id="submit_button_text">Save changes</spans></button>
+            </div>
+        </form> 
+        </div>
+        </div>
+    </div>
 
+
+
+    {% endblock %}
+    {% block script%}
+    <script>
+        $(document).ready(function() {
+            console.log("window is loaded");
+            $("#exampleModal").modal("show");
+        })
     </script>
-    </body>
-</html>
+
+    {% endblock %}
+        
+    
+
+   
+        
+    

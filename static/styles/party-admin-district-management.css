@@ -1,0 +1,2319 @@
+.party-admin-district-management-container {
+  min-height: 100vh;
+}
+.party-admin-district-management-party-admin-district-management {
+  width: 100%;
+  height: 1024px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+  background-color: var(--dl-color-gray-50);
+}
+.party-admin-district-management-frame72 {
+  top: 30px;
+  left: 1408px;
+  width: 18px;
+  height: 20px;
+  position: absolute;
+}
+.party-admin-district-management-text {
+  top: 125px;
+  left: 323px;
+  color: var(--dl-color-default-black);
+  height: auto;
+  position: absolute;
+  font-size: 32px;
+  align-self: auto;
+  font-style: Semi Bold;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 700;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.party-admin-district-management-frame73 {
+  top: 176px;
+  left: 323px;
+  width: 1104px;
+  display: flex;
+  padding: 16px 20px;
+  position: absolute;
+  box-sizing: content-box;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: rgba(71, 99, 228, 1);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 10px;
+  background-color: var(--dl-color-default-white);
+}
+.party-admin-district-management-frame82 {
+  width: 16px;
+  height: 16px;
+  position: relative;
+  margin-right: 8px;
+}
+.party-admin-district-management-text002 {
+  color: var(--dl-color-gray-400);
+  height: auto;
+  font-size: 14px;
+  align-self: auto;
+  font-style: Regular;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.party-admin-district-management-rectangle9 {
+  top: 305px;
+  left: 323px;
+  width: 1104px;
+  height: 681px;
+  position: absolute;
+  box-sizing: content-box;
+  border-color: transparent;
+  border-radius: 12px;
+}
+.party-admin-district-management-frame123 {
+  top: 337px;
+  left: 323px;
+  width: 1104px;
+  display: flex;
+  position: absolute;
+  align-items: center;
+  border-color: transparent;
+  flex-direction: column;
+}
+.party-admin-district-management-frame75 {
+  width: 1040px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  flex-shrink: 0;
+  border-color: transparent;
+  margin-bottom: 32px;
+}
+.party-admin-district-management-text004 {
+  color: var(--dl-color-gray-400);
+  height: auto;
+  flex-grow: 1;
+  font-size: 16px;
+  align-self: auto;
+  font-style: Medium;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 500;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 8px;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.party-admin-district-management-text006 {
+  color: var(--dl-color-gray-400);
+  height: auto;
+  flex-grow: 1;
+  font-size: 16px;
+  align-self: auto;
+  font-style: Medium;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 500;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 8px;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.party-admin-district-management-text008 {
+  color: var(--dl-color-gray-400);
+  height: auto;
+  flex-grow: 1;
+  font-size: 16px;
+  align-self: auto;
+  font-style: Medium;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 500;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 8px;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.party-admin-district-management-text010 {
+  color: var(--dl-color-gray-400);
+  height: auto;
+  flex-grow: 1;
+  font-size: 16px;
+  align-self: auto;
+  font-style: Medium;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 500;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 8px;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.party-admin-district-management-text012 {
+  color: var(--dl-color-gray-400);
+  width: 181px;
+  height: auto;
+  font-size: 16px;
+  align-self: auto;
+  font-style: Medium;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 500;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 8px;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+
+
+.button:hover {background-color: #3e8e41}
+
+
+.party-admin-district-management-text014 {
+  color: var(--dl-color-gray-400);
+  width: 116px;
+  height: auto;
+  font-size: 16px;
+  align-self: auto;
+  font-style: Medium;
+  text-align: right;
+  font-family: Inter;
+  font-weight: 500;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.party-admin-district-management-frame87 {
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  border-color: transparent;
+  flex-direction: column;
+}
+.party-admin-district-management-frame85 {
+  display: flex;
+  position: relative;
+  align-items: center;
+  border-color: transparent;
+  margin-bottom: 20px;
+  flex-direction: column;
+}
+.party-admin-district-management-frame76 {
+  width: 1040px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  flex-shrink: 0;
+  border-color: transparent;
+  margin-bottom: 12px;
+}
+.party-admin-district-management-frame77 {
+  display: flex;
+  position: relative;
+  flex-grow: 1;
+  align-self: stretch;
+  align-items: flex-start;
+  border-color: transparent;
+  margin-right: 8px;
+}
+.party-admin-district-management-text016 {
+  color: var(--dl-color-gray-800);
+  height: auto;
+  font-size: 14px;
+  align-self: auto;
+  font-style: Regular;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.party-admin-district-management-frame78 {
+  display: flex;
+  position: relative;
+  flex-grow: 1;
+  align-self: stretch;
+  align-items: flex-start;
+  border-color: transparent;
+  margin-right: 8px;
+}
+.party-admin-district-management-text018 {
+  color: var(--dl-color-gray-800);
+  height: auto;
+  font-size: 14px;
+  align-self: auto;
+  font-style: Regular;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.party-admin-district-management-frame79 {
+  display: flex;
+  position: left;
+  flex-grow: 1;
+  align-self: stretch;
+  align-items: flex-start;
+  border-color: transparent;
+  margin-right: 10px;
+}
+.party-admin-district-management-text020 {
+  color: var(--dl-color-gray-800);
+  height: auto;
+  flex-grow: 1;
+  font-size: 14px;
+  align-self: auto;
+  font-style: Regular;
+  text-align: center;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.party-admin-district-management-frame80 {
+  height: 18px;
+  display: flex;
+  position: relative;
+  flex-grow: 1;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+  margin-right: 8px;
+}
+.party-admin-district-management-text027 {
+  color: var(--dl-color-gray-800);
+  height: auto;
+  font-size: 14px;
+  align-self: auto;
+  font-style: Regular;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.party-admin-district-management-frame36 {
+  display: flex;
+  position: relative;
+  align-self: stretch;
+  align-items: center;
+  flex-shrink: 0;
+  border-color: transparent;
+  margin-right: 8px;
+  border-radius: 12px;
+}
+.party-admin-district-management-basic-gray {
+  height: 19px;
+  display: flex;
+  padding: 2px 10px;
+  overflow: hidden;
+  position: relative;
+  align-items: center;
+  flex-shrink: 0;
+  border-color: transparent;
+  border-radius: 10px;
+  background-color: var(--dl-color-green-100);
+}
+.party-admin-district-management-text029 {
+  color: var(--dl-color-green-800);
+  height: auto;
+  align-self: auto;
+  text-align: left;
+  line-height: 16px;
+  margin-right: 6px;
+  margin-bottom: 0;
+}
+.party-admin-district-management-frame81 {
+  display: flex;
+  padding: 0 0 19px 0;
+  position: relative;
+  flex-grow: 1;
+  align-self: stretch;
+  align-items: flex-start;
+  border-color: transparent;
+}
+.party-admin-district-management-frame83 {
+  display: flex;
+  padding: 8px;
+  position: relative;
+  flex-grow: 1;
+  align-items: center;
+  border-color: rgba(92, 115, 219, 1);
+  border-style: solid;
+  border-width: 1px;
+  margin-right: 4px;
+  border-radius: 10px;
+  justify-content: center;
+}
+.party-admin-district-management-text031 {
+  color: rgba(92, 115, 219, 1);
+  height: auto;
+  font-size: 12px;
+  align-self: auto;
+  font-style: Medium;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 500;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+  
+}
+.party-admin-district-management-frame84 {
+  display: flex;
+  padding: 8px;
+  position: relative;
+  flex-grow: 1;
+  align-items: center;
+  border-color: transparent;
+  border-radius: 10px;
+  justify-content: center;
+  background-color: var(--dl-color-red-600);
+}
+.party-admin-district-management-text033 {
+  color: var(--dl-color-default-white);
+  height: auto;
+  font-size: 12px;
+  align-self: auto;
+  font-style: Medium;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 500;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.party-admin-district-management-rectangle10 {
+  width: 1104px;
+  height: 1px;
+  position: relative;
+  border-color: transparent;
+}
+.party-admin-district-management-frame86 {
+  display: flex;
+  position: relative;
+  align-items: center;
+  border-color: transparent;
+  margin-bottom: 20px;
+  flex-direction: column;
+}
+.party-admin-district-management-frame761 {
+  width: 1040px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  flex-shrink: 0;
+  border-color: transparent;
+  margin-bottom: 12px;
+}
+.party-admin-district-management-frame771 {
+  height: 18px;
+  display: flex;
+  position: relative;
+  flex-grow: 1;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+  margin-right: 8px;
+}
+.party-admin-district-management-text035 {
+  color: var(--dl-color-gray-800);
+  height: auto;
+  font-size: 14px;
+  align-self: auto;
+  font-style: Regular;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.party-admin-district-management-frame781 {
+  height: 17px;
+  display: flex;
+  position: relative;
+  flex-grow: 1;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+  margin-right: 8px;
+}
+.party-admin-district-management-text037 {
+  color: var(--dl-color-gray-800);
+  width: 30px;
+  height: auto;
+  font-size: 14px;
+  align-self: auto;
+  font-style: Regular;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.party-admin-district-management-frame791 {
+  display: flex;
+  position: relative;
+  flex-grow: 1;
+  align-self: stretch;
+  align-items: flex-start;
+  border-color: transparent;
+  margin-right: 8px;
+}
+.party-admin-district-management-text039 {
+  color: var(--dl-color-gray-800);
+  height: auto;
+  flex-grow: 1;
+  font-size: 14px;
+  align-self: auto;
+  font-style: Regular;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.party-admin-district-management-frame801 {
+  display: flex;
+  position: relative;
+  flex-grow: 1;
+  align-self: stretch;
+  align-items: flex-start;
+  border-color: transparent;
+  margin-right: 8px;
+}
+.party-admin-district-management-text048 {
+  color: var(--dl-color-gray-800);
+  height: auto;
+  font-size: 14px;
+  align-self: auto;
+  font-style: Regular;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.party-admin-district-management-frame361 {
+  width: 115px;
+  height: 32px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  flex-shrink: 0;
+  border-color: transparent;
+  margin-right: 8px;
+  border-radius: 12px;
+}
+.party-admin-district-management-basic-gray1 {
+  display: flex;
+  padding: 2px 10px;
+  overflow: hidden;
+  position: relative;
+  align-items: center;
+  border-color: transparent;
+  border-radius: 10px;
+  background-color: var(--dl-color-orange-100);
+}
+.party-admin-district-management-text050 {
+  color: var(--dl-color-orange-800);
+  height: auto;
+  align-self: auto;
+  text-align: left;
+  line-height: 16px;
+  margin-right: 6px;
+  margin-bottom: 0;
+}
+.party-admin-district-management-frame811 {
+  height: 31px;
+  display: flex;
+  position: relative;
+  flex-grow: 1;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-frame851 {
+  display: flex;
+  padding: 8px;
+  position: relative;
+  flex-grow: 1;
+  align-items: center;
+  border-color: rgba(92, 115, 219, 1);
+  border-style: solid;
+  border-width: 1px;
+  margin-right: 4px;
+  border-radius: 10px;
+  justify-content: center;
+}
+.party-admin-district-management-text052 {
+  color: rgba(92, 115, 219, 1);
+  height: auto;
+  font-size: 12px;
+  align-self: auto;
+  font-style: Medium;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 500;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.party-admin-district-management-frame841 {
+  display: flex;
+  padding: 8px;
+  position: relative;
+  flex-grow: 1;
+  align-items: center;
+  border-color: transparent;
+  border-radius: 10px;
+  justify-content: center;
+  background-color: rgba(220, 38, 38, 1);
+}
+.party-admin-district-management-text054 {
+  color: var(--dl-color-default-white);
+  height: auto;
+  font-size: 12px;
+  align-self: auto;
+  font-style: Medium;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 500;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.party-admin-district-management-rectangle101 {
+  width: 1104px;
+  height: 1px;
+  position: relative;
+  border-color: transparent;
+}
+.party-admin-district-management-frame871 {
+  display: flex;
+  position: relative;
+  align-items: center;
+  border-color: transparent;
+  flex-direction: column;
+}
+.party-admin-district-management-frame762 {
+  width: 1040px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  flex-shrink: 0;
+  border-color: transparent;
+  margin-bottom: 12px;
+}
+.party-admin-district-management-frame772 {
+  display: flex;
+  position: relative;
+  flex-grow: 1;
+  align-self: stretch;
+  align-items: flex-start;
+  border-color: transparent;
+  margin-right: 8px;
+}
+.party-admin-district-management-text056 {
+  color: var(--dl-color-gray-800);
+  height: auto;
+  font-size: 14px;
+  align-self: auto;
+  font-style: Regular;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.party-admin-district-management-frame782 {
+  display: flex;
+  position: relative;
+  flex-grow: 1;
+  align-self: stretch;
+  align-items: flex-start;
+  border-color: transparent;
+  margin-right: 8px;
+}
+.party-admin-district-management-text058 {
+  color: var(--dl-color-gray-800);
+  height: auto;
+  font-size: 14px;
+  align-self: auto;
+  font-style: Regular;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.party-admin-district-management-frame792 {
+  display: flex;
+  position: relative;
+  flex-grow: 1;
+  align-self: stretch;
+  align-items: flex-start;
+  border-color: transparent;
+  margin-right: 8px;
+}
+.party-admin-district-management-text060 {
+  color: var(--dl-color-gray-800);
+  height: auto;
+  flex-grow: 1;
+  font-size: 14px;
+  align-self: auto;
+  font-style: Regular;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.party-admin-district-management-frame802 {
+  display: flex;
+  position: relative;
+  flex-grow: 1;
+  align-self: stretch;
+  align-items: flex-start;
+  border-color: transparent;
+  margin-right: 8px;
+}
+.party-admin-district-management-text062 {
+  color: var(--dl-color-gray-800);
+  height: auto;
+  font-size: 14px;
+  align-self: auto;
+  font-style: Regular;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.party-admin-district-management-frame362 {
+  display: flex;
+  position: relative;
+  align-self: stretch;
+  align-items: center;
+  flex-shrink: 0;
+  border-color: transparent;
+  margin-right: 8px;
+  border-radius: 12px;
+}
+.party-admin-district-management-basic-gray2 {
+  height: 19px;
+  display: flex;
+  padding: 2px 10px;
+  overflow: hidden;
+  position: relative;
+  align-items: center;
+  flex-shrink: 0;
+  border-color: transparent;
+  border-radius: 10px;
+  background-color: var(--dl-color-red-100);
+}
+.party-admin-district-management-text064 {
+  color: var(--dl-color-red-800);
+  height: auto;
+  align-self: auto;
+  text-align: left;
+  line-height: 16px;
+  margin-right: 6px;
+  margin-bottom: 0;
+}
+.party-admin-district-management-frame812 {
+  display: flex;
+  position: relative;
+  flex-grow: 1;
+  align-self: stretch;
+  align-items: flex-start;
+  border-color: transparent;
+}
+.party-admin-district-management-frame831 {
+  display: flex;
+  padding: 8px;
+  position: relative;
+  flex-grow: 1;
+  align-items: center;
+  border-color: rgba(92, 115, 219, 1);
+  border-style: solid;
+  border-width: 1px;
+  margin-right: 4px;
+  border-radius: 10px;
+  justify-content: center;
+}
+.party-admin-district-management-text066 {
+  color: rgba(92, 115, 219, 1);
+  height: auto;
+  font-size: 12px;
+  align-self: auto;
+  font-style: Medium;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 500;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.party-admin-district-management-frame842 {
+  display: flex;
+  padding: 8px;
+  position: relative;
+  flex-grow: 1;
+  align-items: center;
+  border-color: transparent;
+  border-radius: 10px;
+  justify-content: center;
+  background-color: rgba(220, 38, 38, 1);
+}
+.party-admin-district-management-text068 {
+  color: var(--dl-color-default-white);
+  height: auto;
+  font-size: 12px;
+  align-self: auto;
+  font-style: Medium;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 500;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.party-admin-district-management-rectangle102 {
+  width: 1104px;
+  height: 1px;
+  position: relative;
+  border-color: transparent;
+}
+.party-admin-district-management-frame124 {
+  top: 937px;
+  left: 355px;
+  width: 1040px;
+  display: flex;
+  position: absolute;
+  align-items: center;
+  flex-shrink: 0;
+  border-color: transparent;
+  justify-content: space-between;
+}
+.party-admin-district-management-text070 {
+  color: var(--dl-color-gray-400);
+  height: auto;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+}
+.party-admin-district-management-desktop {
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  align-items: flex-start;
+  border-color: rgba(228, 228, 231, 1);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 8px;
+}
+.party-admin-district-management-start-default {
+  height: 38px;
+  display: flex;
+  padding: 8px;
+  overflow: hidden;
+  position: relative;
+  align-items: center;
+  flex-shrink: 0;
+  border-color: rgba(212, 212, 216, 1);
+  border-style: solid;
+  border-width: 1px;
+  margin-right: 0px;
+  border-radius: 6px 0 0 6px;
+  background-color: var(--dl-color-default-white);
+}
+.party-admin-district-management-chevronleft {
+  width: 20px;
+  height: 20px;
+  position: relative;
+}
+.party-admin-district-management-middle-default {
+  display: flex;
+  padding: 8px 16px;
+  overflow: hidden;
+  position: relative;
+  align-self: stretch;
+  align-items: center;
+  border-color: transparent;
+  margin-right: 0px;
+  background-color: rgba(183, 10, 19, 1);
+}
+.party-admin-district-management-text072 {
+  color: var(--dl-color-default-white);
+  height: auto;
+  align-self: auto;
+  text-align: left;
+  line-height: 20px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-admin-district-management-divider {
+  width: 1px;
+  height: 38px;
+  position: relative;
+  border-color: transparent;
+  margin-right: 0px;
+}
+.party-admin-district-management-middle-default1 {
+  display: flex;
+  padding: 8px 16px;
+  overflow: hidden;
+  position: relative;
+  align-self: stretch;
+  align-items: center;
+  border-color: transparent;
+  margin-right: 0px;
+  background-color: var(--dl-color-default-white);
+}
+.party-admin-district-management-text073 {
+  color: var(--dl-color-gray-800);
+  height: auto;
+  align-self: auto;
+  text-align: left;
+  line-height: 20px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-admin-district-management-divider1 {
+  width: 1px;
+  height: 38px;
+  position: relative;
+  border-color: transparent;
+  margin-right: 0px;
+}
+.party-admin-district-management-middle-default2 {
+  display: flex;
+  padding: 8px 16px;
+  overflow: hidden;
+  position: relative;
+  align-self: stretch;
+  align-items: center;
+  border-color: transparent;
+  margin-right: 0px;
+  background-color: var(--dl-color-default-white);
+}
+.party-admin-district-management-text074 {
+  color: var(--dl-color-gray-800);
+  height: auto;
+  align-self: auto;
+  text-align: left;
+  line-height: 20px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-admin-district-management-divider2 {
+  width: 1px;
+  height: 38px;
+  position: relative;
+  border-color: transparent;
+  margin-right: 0px;
+}
+.party-admin-district-management-middle-default3 {
+  display: flex;
+  padding: 8px 16px;
+  overflow: hidden;
+  position: relative;
+  align-self: stretch;
+  align-items: center;
+  border-color: transparent;
+  margin-right: 0px;
+  background-color: var(--dl-color-default-white);
+}
+.party-admin-district-management-text075 {
+  color: var(--dl-color-gray-800);
+  height: auto;
+  align-self: auto;
+  text-align: left;
+  line-height: 20px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-admin-district-management-divider3 {
+  width: 1px;
+  height: 38px;
+  position: relative;
+  border-color: transparent;
+  margin-right: 0px;
+}
+.party-admin-district-management-middle-default4 {
+  display: flex;
+  padding: 8px 16px;
+  overflow: hidden;
+  position: relative;
+  align-self: stretch;
+  align-items: center;
+  border-color: transparent;
+  margin-right: 0px;
+  background-color: var(--dl-color-default-white);
+}
+.party-admin-district-management-text077 {
+  color: var(--dl-color-gray-800);
+  height: auto;
+  align-self: auto;
+  text-align: left;
+  line-height: 20px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-admin-district-management-divider4 {
+  width: 1px;
+  height: 38px;
+  position: relative;
+  border-color: transparent;
+  margin-right: 0px;
+}
+.party-admin-district-management-middle-default5 {
+  display: flex;
+  padding: 8px 16px;
+  overflow: hidden;
+  position: relative;
+  align-self: stretch;
+  align-items: center;
+  border-color: transparent;
+  margin-right: 0px;
+  background-color: var(--dl-color-default-white);
+}
+.party-admin-district-management-text078 {
+  color: var(--dl-color-gray-800);
+  height: auto;
+  align-self: auto;
+  text-align: left;
+  line-height: 20px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-admin-district-management-divider5 {
+  width: 1px;
+  height: 38px;
+  position: relative;
+  border-color: transparent;
+  margin-right: 0px;
+}
+.party-admin-district-management-middle-default6 {
+  display: flex;
+  padding: 8px 16px;
+  overflow: hidden;
+  position: relative;
+  align-self: stretch;
+  align-items: center;
+  border-color: transparent;
+  margin-right: 0px;
+  background-color: var(--dl-color-default-white);
+}
+.party-admin-district-management-text079 {
+  color: var(--dl-color-gray-800);
+  height: auto;
+  align-self: auto;
+  text-align: left;
+  line-height: 20px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-admin-district-management-end-default {
+  height: 38px;
+  display: flex;
+  padding: 8px;
+  overflow: hidden;
+  position: relative;
+  align-items: center;
+  flex-shrink: 0;
+  border-color: rgba(212, 212, 216, 1);
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 0 6px 6px 0;
+  background-color: var(--dl-color-default-white);
+}
+.party-admin-district-management-chevronright {
+  width: 20px;
+  height: 20px;
+  position: relative;
+}
+
+.Candidate-NameInput{
+  border: solid;
+  border-width: 1px;
+}
+
+.Candidate-NricInput{
+  border: solid;
+  border-width: 1px;
+  width : 100px
+}
+
+.party-admin-district-management-frame2 {
+  top: 241px;
+  left: 323px;
+  width: 215px;
+  height: 48px;
+  display: flex;
+  padding: 16px;
+  position: absolute;
+  align-items: center;
+  flex-shrink: 0;
+  border-color: transparent;
+  border-radius: 10px;
+  justify-content: center;
+  background-color: rgba(183, 10, 19, 1);
+}
+.party-admin-district-management-text081 {
+  color: var(--dl-color-default-white);
+  height: auto;
+  font-size: 18px;
+  align-self: auto;
+  font-style: Regular;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 8px;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.party-admin-district-management-frame93 {
+  width: 10px;
+  height: 10px;
+  position: relative;
+}
+.party-admin-district-management-frame127 {
+  top: 245px;
+  left: 1261px;
+  width: 134px;
+  height: 48px;
+  display: flex;
+  padding: 16px;
+  position: absolute;
+  align-items: center;
+  flex-shrink: 0;
+  border-color: transparent;
+  border-radius: 10px;
+  justify-content: center;
+  background-color: rgba(183, 10, 19, 1);
+}
+.party-admin-district-management-text083 {
+  color: var(--dl-color-default-white);
+  height: auto;
+  font-size: 18px;
+  align-self: auto;
+  font-style: Regular;
+  text-align: left;
+  font-family: Inter;
+  font-weight: 400;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 8px;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.party-admin-district-management-icon {
+  width: 10px;
+  height: 6px;
+  position: relative;
+}
+.party-admin-district-management-rectangle6 {
+  top: 3px;
+  left: 10px;
+  width: 273px;
+  height: 985px;
+  position: absolute;
+}
+.party-admin-district-management-rectangle7 {
+  top: 3px;
+  left: -8px;
+  width: 254px;
+  height: 985px;
+  position: absolute;
+  border-color: transparent;
+}
+.party-admin-district-management-frame7 {
+  top: 120px;
+  left: 32px;
+  width: 222px;
+  height: 23px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-text085 {
+  top: 4px;
+  color: var(--dl-color-primary-300);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 16px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-admin-district-management-frame69 {
+  top: 475px;
+  left: 32px;
+  width: 222px;
+  height: 23px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-frame1one-line {
+  top: 506px;
+  left: 21px;
+  width: 251px;
+  height: 43px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-frame1one-line01 {
+  top: 194px;
+  left: 21px;
+  width: 251px;
+  height: 43px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-x-base1one-line-left-label-icon {
+  top: 0px;
+  left: 0px;
+  width: 171px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-text087 {
+  top: 10px;
+  left: 48px;
+  color: var(--dl-color-light_grayscale-200);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-admin-district-management-apps {
+  top: 10px;
+  left: 12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-icon01 {
+  top: 4px;
+  left: 4px;
+  width: 16px;
+  height: 16px;
+  position: absolute;
+}
+.party-admin-district-management-icon02 {
+  top: 18.56818199157715px;
+  left: 225.16175842285156px;
+  width: 9px;
+  height: 6px;
+  position: absolute;
+}
+.party-admin-district-management-frame1one-line02 {
+  top: 237px;
+  left: 21px;
+  width: 251px;
+  height: 43px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-x-base1one-line-right-icon {
+  top: 0px;
+  left: 171px;
+  width: 80px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-arrowdropdown {
+  top: 10px;
+  left: 44px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-x-base1one-line-left-label-icon01 {
+  top: 0px;
+  left: 0px;
+  width: 171px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-text089 {
+  top: 10px;
+  left: 48px;
+  color: var(--dl-color-light_grayscale-200);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-admin-district-management-security {
+  top: 10px;
+  left: 12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-icon03 {
+  top: 0.1875px;
+  left: 3px;
+  width: 18px;
+  height: 22px;
+  position: absolute;
+}
+.party-admin-district-management-frame1one-line03 {
+  top: 280px;
+  left: 21px;
+  width: 251px;
+  height: 43px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-x-base1one-line-left-label-icon02 {
+  top: 0px;
+  left: 0px;
+  width: 171px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-text091 {
+  top: 10px;
+  left: 48px;
+  color: var(--dl-color-light_grayscale-200);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-admin-district-management-assignment {
+  top: 10px;
+  left: 12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-icon04 {
+  top: 1px;
+  left: 3px;
+  width: 18px;
+  height: 20px;
+  position: absolute;
+}
+.party-admin-district-management-frame1one-line04 {
+  top: 323px;
+  left: 21px;
+  width: 251px;
+  height: 43px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-x-base1one-line-left-label-icon03 {
+  top: 0px;
+  left: 0px;
+  width: 171px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-text093 {
+  top: 10px;
+  left: 48px;
+  color: var(--dl-color-light_grayscale-200);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-admin-district-management-supervisedusercircle {
+  top: 10px;
+  left: 12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-icon05 {
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+}
+.party-admin-district-management-frame1one-line05 {
+  top: 366px;
+  left: 21px;
+  width: 251px;
+  height: 43px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-x-base1one-line-left-label-icon04 {
+  top: 0px;
+  left: 0px;
+  width: 171px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-text095 {
+  top: 10px;
+  left: 48px;
+  color: var(--dl-color-light_grayscale-200);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-admin-district-management-work {
+  top: 10px;
+  left: 12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-icon06 {
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 19px;
+  position: absolute;
+}
+.party-admin-district-management-group1 {
+  top: 34px;
+  left: 99px;
+  width: 127.21172332763672px;
+  height: 27.29739761352539px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  margin-right: 0;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: transparent;
+}
+.party-admin-district-management-text097 {
+  color: var(--dl-color-primary-100);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 28px;
+
+  color: var(--dl-color-primary-100);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 28px;
+
+}
+.party-admin-district-management-logo {
+  top: 41.99627685546875px;
+  left: 32.263671875px;
+  width: 51.62215042114258px;
+  height: 54.59479522705078px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  margin-right: 0;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: rgba(255, 255, 255, 1);
+}
+.party-admin-district-management-bluron {
+  top: 12px;
+  left: 12px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+  
+}
+.party-admin-district-management-png-item2011111 {
+  top: 48px;
+  left: 42px;
+  width: 32px;
+  height: 44px;
+  position: absolute;
+  border-color: transparent;
+}
+.party-admin-district-management-frame125 {
+  top: 120px;
+  left: 32px;
+  width: 222px;
+  height: 23px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-text099 {
+  top: 4px;
+  color: var(--dl-color-primary-300);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 16px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-admin-district-management-frame126 {
+  top: 475px;
+  left: 32px;
+  width: 222px;
+  height: 23px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-frame1one-line06 {
+  top: 506px;
+  left: 21px;
+  width: 251px;
+  height: 43px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-frame1one-line07 {
+  top: 194px;
+  left: 21px;
+  width: 251px;
+  height: 43px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-x-base1one-line-left-label-icon05 {
+  top: 0px;
+  left: 0px;
+  width: 171px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-text101 {
+  top: 10px;
+  left: 48px;
+  color: var(--dl-color-light_grayscale-200);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-admin-district-management-apps1 {
+  top: 10px;
+  left: 12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-icon07 {
+  top: 4px;
+  left: 4px;
+  width: 16px;
+  height: 16px;
+  position: absolute;
+}
+.party-admin-district-management-icon08 {
+  top: 18.56818199157715px;
+  left: 225.16175842285156px;
+  width: 9px;
+  height: 6px;
+  position: absolute;
+}
+.party-admin-district-management-frame1one-line08 {
+  top: 0px;
+  left: 0px;
+  width: 251px;
+  height: 43px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+  border-radius: 8px;
+  background-color: var(--dl-color-light_background-blue);
+}
+.party-admin-district-management-x-base1one-line-left-label-icon06 {
+  top: 0px;
+  left: 0px;
+  width: 171px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-text103 {
+  top: 10px;
+  left: 48px;
+  color: var(--dl-color-primary-100);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-admin-district-management-dashboard {
+  top: 10px;
+  left: 12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-icon09 {
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  position: absolute;
+}
+.party-admin-district-management-frame1one-line09 {
+  top: 237px;
+  left: 21px;
+  width: 251px;
+  height: 43px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-x-base1one-line-right-icon1 {
+  top: 0px;
+  left: 171px;
+  width: 80px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-arrowdropdown1 {
+  top: 10px;
+  left: 44px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-x-base1one-line-left-label-icon07 {
+  top: 0px;
+  left: 0px;
+  width: 171px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-text105 {
+  top: 10px;
+  left: 48px;
+  color: var(--dl-color-light_grayscale-200);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-admin-district-management-security1 {
+  top: 10px;
+  left: 12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-icon10 {
+  top: 0.1875px;
+  left: 3px;
+  width: 18px;
+  height: 22px;
+  position: absolute;
+}
+.party-admin-district-management-frame1one-line10 {
+  top: 280px;
+  left: 21px;
+  width: 251px;
+  height: 43px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-x-base1one-line-left-label-icon08 {
+  top: 0px;
+  left: 0px;
+  width: 171px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-text107 {
+  top: 10px;
+  left: 48px;
+  color: var(--dl-color-light_grayscale-200);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-admin-district-management-assignment1 {
+  top: 10px;
+  left: 12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-icon11 {
+  top: 1px;
+  left: 3px;
+  width: 18px;
+  height: 20px;
+  position: absolute;
+}
+.party-admin-district-management-frame1one-line11 {
+  top: 323px;
+  left: 21px;
+  width: 251px;
+  height: 43px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-x-base1one-line-left-label-icon09 {
+  top: 0px;
+  left: 0px;
+  width: 171px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-text109 {
+  top: 10px;
+  left: 48px;
+  color: var(--dl-color-light_grayscale-200);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-admin-district-management-supervisedusercircle1 {
+  top: 10px;
+  left: 12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-icon12 {
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+}
+.party-admin-district-management-group2 {
+  top: 92px;
+  left: 99px;
+  width: 77px;
+  height: 24px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  margin-right: 0;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: transparent;
+}
+.party-admin-district-management-text111 {
+  
+  color: var(--dl-color-primary-300);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+}
+.party-admin-district-management-logo1 {
+  top: 41.99627685546875px;
+  left: 32.263671875px;
+  width: 51.62215042114258px;
+  height: 54.59479522705078px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  margin-right: 0;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: rgba(255, 255, 255, 1);
+}
+.party-admin-district-management-bluron1 {
+  top: 12px;
+  left: 12px;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+  
+}
+.party-admin-district-management-png-item2011112 {
+  top: 48px;
+  left: 42px;
+  width: 32px;
+  height: 44px;
+  position: absolute;
+  border-color: transparent;
+}
+.party-admin-district-management-search-bar {
+  top: 37px;
+  left: 314px;
+  width: 744px;
+  height: 40px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  border-color: transparent;
+  border-radius: 8px;
+}
+.party-admin-district-management-left {
+  top: 0px;
+  left: 0px;
+  width: 712px;
+  height: 40px;
+  display: flex;
+  padding: 12px 20px;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  border-color: transparent;
+}
+.party-admin-district-management-search {
+  top: 10px;
+  left: 12px;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-icon13 {
+  top: 2.499476194381714px;
+  left: 2.499478578567505px;
+  width: 14px;
+  height: 14px;
+  position: absolute;
+}
+.party-admin-district-management-text-state {
+  top: 8px;
+  left: 40px;
+  width: 672px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-text113 {
+  color: var(--dl-color-primary-300);
+  width: 672px;
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-admin-district-management-frame71 {
+  top: 22px;
+  left: 1115px;
+  width: 280px;
+  display: flex;
+  position: absolute;
+  align-items: center;
+  border-color: transparent;
+}
+.party-admin-district-management-group10 {
+  width: 28px;
+  height: 24px;
+  display: flex;
+  padding: 0;
+  position: relative;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  margin-right: 24px;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: transparent;
+}
+.party-admin-district-management-notifications {
+  top: 0px;
+  left: 0px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-icon14 {
+  top: 2.5px;
+  left: 4.413522720336914px;
+  width: 15px;
+  height: 19px;
+  position: absolute;
+}
+.party-admin-district-management-counter {
+  top: 0px;
+  left: 13px;
+  display: flex;
+  padding: 0 4px;
+  position: absolute;
+  align-items: center;
+  border-color: transparent;
+  border-radius: 96px;
+  background-color: var(--dl-color-light_blue-base);
+}
+.party-admin-district-management-text115 {
+  color: var(--dl-color-default-white);
+  height: auto;
+  align-self: auto;
+  text-align: center;
+  line-height: 16px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-admin-district-management-frame71 {
+  display: flex;
+  position: relative;
+  align-items: center;
+  border-color: transparent;
+  margin-right: 24px;
+}
+.party-admin-district-management-avatar {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: rgba(231, 231, 231, 1);
+  border-style: solid;
+  border-width: 1px;
+  margin-right: 8px;
+  border-radius: 256px;
+  background-size: cover;
+  background-image: url("public/playground_assets/ff6cdc5c-3e2b-4aec-8557-14f3d9b69569-j0dq-200h.undefined");
+}
+.party-admin-district-management-status {
+  top: 24px;
+  left: 24px;
+  width: 8px;
+  height: 8px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  box-sizing: content-box;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: rgba(255, 255, 255, 1);
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 100px;
+  background-color: var(--dl-color-light_blue-base);
+}
+.party-admin-district-management-arrowdropdown2 {
+  width: 24px;
+  height: 24px;
+  position: relative;
+}
+.party-admin-district-management-frame6 {
+  display: flex;
+  position: relative;
+  align-items: center;
+  border-color: transparent;
+}
+.party-admin-district-management-avatar-one-line {
+  display: flex;
+  position: relative;
+  align-items: center;
+  border-color: transparent;
+  margin-right: 8px;
+}
+.party-admin-district-management-avatar1 {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  position: relative;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+  margin-right: 8px;
+  border-radius: 256px;
+  background-color: var(--dl-color-light_background-blue);
+}
+.party-admin-district-management-text116 {
+  top: 6px;
+  left: 12px;
+  color: var(--dl-color-light_blue-base);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: center;
+  line-height: 20px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-admin-district-management-text117 {
+  color: var(--dl-color-primary-100);
+  height: auto;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-admin-district-management-arrowdropdown3 {
+  width: 24px;
+  height: 24px;
+  position: relative;
+}
+.party-admin-district-management-frame1one-line12 {
+  top: 150px;
+  left: 20px;
+  width: 272px;
+  height: 44px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-x-base1one-line-left-label-icon10 {
+  top: 0px;
+  left: 0px;
+  width: 192px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-text119 {
+  top: 10px;
+  left: 48px;
+  color: var(--dl-color-light_grayscale-200);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.party-admin-district-management-apps2 {
+  top: 10px;
+  left: 12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.party-admin-district-management-icon15 {
+  top: 4px;
+  left: 4px;
+  width: 16px;
+  height: 16px;
+  position: absolute;
+}

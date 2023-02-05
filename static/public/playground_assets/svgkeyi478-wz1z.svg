@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg width='42' height='43' viewBox='0 0 42 43' fill='none' xmlns='http://www.w3.org/2000/svg'>
+<g filter='url(#filter0_d_108_150)'>
+<rect width='42' height='42' rx='4.6' fill='white'/>
+</g>
+<path d='M17.1368 23.2934H12.5007C12.0592 23.2934 11.8346 22.7621 12.142 22.4448L21.1412 13.152C21.3375 12.9493 21.6625 12.9493 21.8588 13.152L30.858 22.4448C31.1654 22.7621 30.9408 23.2934 30.4993 23.2934H25.8625V28.7997C25.8625 29.076 25.6388 29.3 25.3628 29.3H17.6366C17.3606 29.3 17.1368 29.076 17.1368 28.7997V23.2934Z' fill='black'/>
+<defs>
+<filter id='filter0_d_108_150' x='0' y='0' width='42' height='43' filterUnits='userSpaceOnUse' color-interpolation-filters='sRGB'>
+<feFlood flood-opacity='0' result='BackgroundImageFix'/>
+<feColorMatrix in='SourceAlpha' type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0' result='hardAlpha'/>
+<feOffset dy='1'/>
+<feColorMatrix type='matrix' values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.3 0'/>
+<feBlend mode='normal' in2='BackgroundImageFix' result='effect1_dropShadow_108_150'/>
+<feBlend mode='normal' in='SourceGraphic' in2='effect1_dropShadow_108_150' result='shape'/>
+</filter>
+</defs>
+</svg>

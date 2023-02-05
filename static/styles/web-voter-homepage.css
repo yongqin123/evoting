@@ -1,0 +1,914 @@
+.party-admin-district-management-frame36_1 {
+  display: flex;
+  position:absolute;
+  background-color:white;
+  
+  flex-shrink: 0;
+  
+  margin-right: 8px;
+  border-radius: 100px;
+  left: 100%;
+  top: 60%;
+}
+
+.party-admin-district-management-frame36_2 {
+  display: flex;
+  position:absolute;
+  background-color:white;
+  flex-shrink: 0;
+  
+  margin-right: 8px;
+  border-radius: 100px;
+  left: 100%;
+  top: 90%;
+}
+
+
+.web-voter-homepage-container {
+  min-height: 100vh;
+}
+.web-voter-homepage-web-voter-homepage {
+  width: 100%;
+  height: 1024px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  align-items: flex-start;
+  border-color: transparent;
+  background-color: rgba(240, 240, 240, 1);
+}
+.web-voter-homepage-frame16desktopsiteheading {
+  top: 0px;
+  left: 0px;
+  width: 1440px;
+  width: 100%;
+  height: 84px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+  background-color: rgba(255, 255, 255, 1);
+}
+.web-voter-homepage-text {
+  top: 26px;
+  left: 64px;
+  color: rgba(0, 0, 0, 1);
+  height: auto;
+  position: absolute;
+  font-size: 24px;
+  align-self: auto;
+  font-style: Black;
+  text-align: left;
+  font-family: Nunito;
+  font-weight: 900;
+  line-height: 129.99999523162842%;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.web-voter-homepage-pageitems {
+  top: 20px;
+  
+  right: 0;
+  width: 705px;
+  display: flex;
+  position: absolute;
+  align-items: center;
+  border-color: transparent;
+}
+.web-voter-homepage-text02 {
+  color: rgba(0, 0, 0, 1);
+  height: auto;
+  font-size: 20px;
+  align-self: auto;
+  font-style: Bold;
+  text-align: left;
+  font-family: Nunito;
+  font-weight: 700;
+  line-height: 129.99999523162842%;
+  font-stretch: normal;
+  margin-right: 48px;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.web-voter-homepage-text04 {
+  color: rgba(0, 0, 0, 1);
+  height: auto;
+  font-size: 20px;
+  align-self: auto;
+  font-style: Bold;
+  text-align: left;
+  font-family: Nunito;
+  font-weight: 700;
+  line-height: 129.99999523162842%;
+  font-stretch: normal;
+  margin-right: 48px;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.web-voter-homepage-text06 {
+  color: rgba(0, 0, 0, 1);
+  height: auto;
+  font-size: 20px;
+  align-self: auto;
+  font-style: Bold;
+  text-align: left;
+  font-family: Nunito;
+  font-weight: 700;
+  line-height: 129.99999523162842%;
+  font-stretch: normal;
+  margin-right: 48px;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.web-voter-homepage-text08 {
+  color: rgba(0, 0, 0, 1);
+  height: auto;
+  font-size: 20px;
+  align-self: auto;
+  font-style: Bold;
+  text-align: left;
+  font-family: Nunito;
+  font-weight: 700;
+  line-height: 129.99999523162842%;
+  font-stretch: normal;
+  margin-right: 48px;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.web-voter-homepage-frame28cart-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+  margin-right: 48px;
+}
+.web-voter-homepage-frame03filled-button {
+  height: 44px;
+  display: flex;
+  padding: 8px 16px;
+  position: relative;
+  align-items: center;
+  flex-shrink: 0;
+  border-color: transparent;
+  border-radius: 8px;
+  justify-content: center;
+  background-color: rgba(183, 10, 19, 1);
+}
+.web-voter-homepage-text10 {
+  color: rgba(255, 255, 255, 1);
+  height: auto;
+  font-size: 17px;
+  align-self: auto;
+  font-style: Bold;
+  text-align: left;
+  font-family: Nunito;
+  font-weight: 700;
+  line-height: 129.99999523162842%;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.web-voter-homepage-s-v-g25home-icon {
+  top: 29px;
+  left: 88%;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+}
+.web-voter-homepage-text12 {
+  top: 123px;
+  left: 80px;
+  color: rgba(0, 0, 0, 1);
+  width: 473px;
+  height: auto;
+  position: absolute;
+  font-size: 40px;
+  align-self: auto;
+  font-style: Bold;
+  text-align: left;
+  font-family: Nunito;
+  font-weight: 700;
+  line-height: 129.99999523162842%;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.web-voter-homepage-rectangle14 {
+  top: 186px;
+  left: 130px;
+  width: 1254px;
+  width: 85%;
+  height: 823px;
+  position: absolute;
+  border-color: transparent;
+  border-radius: 15px 15px 0 0;
+}
+.web-voter-homepage-login-button {
+  top: 778px;
+  left: 831px;
+  width: 479px;
+  height: 63px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  margin-right: 0;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: rgba(183, 10, 19, 1);
+}
+.web-voter-homepage-text14 {
+  top: 21.375001907348633px;
+  left: 50.802947998046875px;
+  color: var(--dl-color-default-white);
+  width: 363px;
+  height: auto;
+  position: absolute;
+  font-size: 15px;
+  align-self: auto;
+  font-style: SemiBold;
+  text-align: center;
+  font-family: Urbanist;
+  font-weight: 600;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.web-voter-homepage-text16 {
+  top: 810px;
+  left: 272px;
+  color: rgba(183, 10, 19, 1);
+  width: 300px;
+  height: auto;
+  position: absolute;
+  font-size: 25px;
+  align-self: auto;
+  font-style: ExtraBold;
+  text-align: center;
+  font-family: Urbanist;
+  font-weight: 800;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.web-voter-homepage-login-button1 {
+  top: 639px;
+  left: 207px;
+  width: 479px;
+  height: 63px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  margin-right: 0;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: rgba(255, 255, 255, 1);
+}
+.web-voter-homepage-text18 {
+  top: 21.375001907348633px;
+  left: 50.802947998046875px;
+  color: rgba(0, 0, 0, 1);
+  width: 363px;
+  height: auto;
+  position: absolute;
+  font-size: 15px;
+  align-self: auto;
+  font-style: SemiBold;
+  text-align: center;
+  font-family: Urbanist;
+  font-weight: 600;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.web-voter-homepage-login-button2 {
+  top: 328px;
+  left: 204px;
+  width: 480px;
+  height: 283px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  margin-right: 0;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: rgba(255, 255, 255, 1);
+}
+.web-voter-homepage-login-button3 {
+  top: 280px;
+  left: 831px;
+  width: 479px;
+  height: 63px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  margin-right: 0;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: rgba(255, 255, 255, 1);
+}
+
+.web-voter-homepage-login-button31 {
+  top: 280px;
+  left: 500px;
+  width: 479px;
+  height: 63px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  margin-right: 0;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: rgba(255, 255, 255, 1);
+}
+
+
+.web-voter-homepage-text20 {
+  top: 21.375001907348633px;
+  left: 50.802947998046875px;
+  color: rgba(0, 0, 0, 1);
+  width: 363px;
+  height: auto;
+  position: absolute;
+  font-size: 15px;
+  align-self: auto;
+  font-style: SemiBold;
+  text-align: center;
+  font-family: Urbanist;
+  font-weight: 600;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.web-voter-homepage-login-button4 {
+  top: 851px;
+  left: 831px;
+  width: 479px;
+  height: 63px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  margin-right: 0;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: rgba(208, 208, 208, 1);
+}
+.web-voter-homepage-text22 {
+  top: 21.3749942779541px;
+  left: 50.80322265625px;
+  color: var(--dl-color-default-white);
+  width: 363px;
+  height: auto;
+  position: absolute;
+  font-size: 15px;
+  align-self: auto;
+  font-style: SemiBold;
+  text-align: center;
+  font-family: Urbanist;
+  font-weight: 600;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.web-voter-homepage-register-button {
+  top: 778px;
+  left: 124px;
+  width: 596px;
+  height: 18px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  margin-right: 0;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: transparent;
+}
+.web-voter-homepage-text24 {
+  color: var(--dl-color-default-dark);
+  width: 596px;
+  height: auto;
+  position: absolute;
+  font-size: 20px;
+  align-self: auto;
+  font-style: SemiBold;
+  text-align: center;
+  font-family: Urbanist;
+  font-weight: 600;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.web-voter-homepage-text26 {
+  top: 969px;
+  left: 153px;
+  color: var(--dl-color-default-dark);
+  width: 301px;
+  height: auto;
+  position: absolute;
+  font-size: 10px;
+  align-self: auto;
+  font-style: SemiBold;
+  text-align: left;
+  font-family: Urbanist;
+  font-weight: 600;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.web-voter-homepage-text31 {
+  top: 229px;
+  left: 749px;
+  width: 631px;
+  height: 33px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  margin-right: 0;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: transparent;
+}
+.web-voter-homepage-text32 {
+  color: var(--dl-color-default-dark);
+  width: 631px;
+  height: auto;
+  position: absolute;
+  font-size: 20px;
+  align-self: auto;
+  font-style: Bold;
+  text-align: center;
+  font-family: Urbanist;
+  font-weight: 700;
+  line-height: 129.99999523162842%;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.web-voter-homepage-text33 {
+  font-weight: 700;
+}
+.web-voter-homepage-text34 {
+  font-weight: 800;
+}
+.web-voter-homepage-s-v-g31lock-icon {
+  top: 976px;
+  left: 1042px;
+  width: 19px;
+  height: 19px;
+  position: absolute;
+}
+.web-voter-homepage-text35 {
+  top: 976px;
+  left: 1070px;
+  color: var(--dl-color-default-dark);
+  width: 301px;
+  height: auto;
+  position: absolute;
+  font-size: 10px;
+  align-self: auto;
+  font-style: SemiBold;
+  text-align: center;
+  font-family: Urbanist;
+  font-weight: 600;
+  line-height: normal;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.web-voter-homepage-ellipse14 {
+  top: 117px;
+  left: 468px;
+  width: 62px;
+  height: 62px;
+  position: absolute;
+  border-color: transparent;
+}
+.web-voter-homepage-s-v-g27info-icon {
+  top: 932px;
+  left: 1061px;
+  width: 19px;
+  height: 19px;
+  position: absolute;
+}
+.web-voter-homepage-text40 {
+  top: 903px;
+  left: 281px;
+  color: var(--dl-color-default-gray);
+  width: 918px;
+  height: auto;
+  position: absolute;
+  font-size: 10px;
+  align-self: auto;
+  font-style: Medium;
+  text-align: center;
+  font-family: Urbanist;
+  font-weight: 500;
+  line-height: 150%;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.web-voter-homepage-image2 {
+  top: 349px;
+  left: 767px;
+  right: 5%;
+  width: 591px;
+  height: 416px;
+  position: absolute;
+  border-color: transparent;
+}
+.web-voter-homepage-frame72 {
+  top: 348px;
+  left: 232px;
+  width: 162px;
+  height: 24px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.web-voter-homepage-text49 {
+  top: 4px;
+  color: rgba(0, 0, 0, 1);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 16px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.web-voter-homepage-frame1one-line {
+  top: 380px;
+  left: 224px;
+  width: 183px;
+  height: 44px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 1);
+}
+.web-voter-homepage-x-base1one-line-left-label-icon {
+  top: 0px;
+  left: 0px;
+  width: 103px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.web-voter-homepage-text51 {
+  top: 10px;
+  left: 48px;
+  color: var(--dl-color-primary-100);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.web-voter-homepage-dashboard {
+  top: 10px;
+  left: 12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.web-voter-homepage-icon {
+  top: 3px;
+  left: 3px;
+  width: 18px;
+  height: 18px;
+  position: absolute;
+}
+.web-voter-homepage-frame1one-line1 {
+  top: 424px;
+  left: 224px;
+  width: 183px;
+  height: 44px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.web-voter-homepage-x-base1one-line-left-label-icon1 {
+  top: 0px;
+  left: 0px;
+  width: 103px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.web-voter-homepage-text53 {
+  top: 10px;
+  left: 48px;
+  color: rgba(0, 0, 0, 1);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.web-voter-homepage-apps {
+  top: 10px;
+  left: 12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.web-voter-homepage-icon1 {
+  top: 4px;
+  left: 4px;
+  width: 16px;
+  height: 16px;
+  position: absolute;
+}
+.web-voter-homepage-frame1one-line2 {
+  top: 512px;
+  left: 224px;
+  width: 183px;
+  height: 44px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.web-voter-homepage-x-base1one-line-left-label-icon2 {
+  top: 0px;
+  left: 0px;
+  width: 103px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.web-voter-homepage-text55 {
+  top: 10px;
+  left: 48px;
+  color: rgba(0, 0, 0, 1);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.web-voter-homepage-assignment {
+  top: 10px;
+  left: 12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.web-voter-homepage-icon2 {
+  top: 1px;
+  left: 3px;
+  width: 18px;
+  height: 20px;
+  position: absolute;
+}
+.web-voter-homepage-frame1one-line3 {
+  top: 556px;
+  left: 224px;
+  width: 183px;
+  height: 44px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.web-voter-homepage-x-base1one-line-left-label-icon3 {
+  top: 0px;
+  left: 0px;
+  width: 103px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.web-voter-homepage-text57 {
+  top: 10px;
+  left: 48px;
+  color: rgba(0, 0, 0, 1);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.web-voter-homepage-supervisedusercircle {
+  top: 10px;
+  left: 12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.web-voter-homepage-icon3 {
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+}
+.web-voter-homepage-frame1one-line4 {
+  top: 469px;
+  left: 224px;
+  width: 183px;
+  height: 44px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.web-voter-homepage-x-base1one-line-left-label-icon4 {
+  top: 0px;
+  left: 0px;
+  width: 103px;
+  height: 44px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.web-voter-homepage-text59 {
+  top: 10px;
+  left: 48px;
+  color: rgba(0, 0, 0, 1);
+  height: auto;
+  position: absolute;
+  align-self: auto;
+  text-align: left;
+  line-height: 24px;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+.web-voter-homepage-chat {
+  top: 10px;
+  left: 12px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+}
+.web-voter-homepage-icon4 {
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+}
+.web-voter-homepage-text61 {
+  top: 400px;
+  left: 370px;
+  color: rgba(0, 0, 0, 1);
+  width: 320px;
+  height: auto;
+  position: absolute;
+  font-size: 16px;
+  align-self: auto;
+  font-style: SemiBold;
+  text-align: center;
+  font-family: Urbanist;
+  font-weight: 600;
+  line-height: 20px;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}

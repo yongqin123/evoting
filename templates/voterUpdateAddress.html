@@ -1,41 +1,54 @@
-<html>
-    <head>
-        <style>
+{% extends 'web-voter-homepage.html' %}
+    {% block voterUpdatePhoneNumber %}
+    <link href="/static/styles/voterUpdatePhoneNumber.css" rel="stylesheet" />
+    <style>
             
-            table,td,th {  border-collapse: collapse; border:1px solid black}
-        </style>
-    </head>
-
-    <body>
-            <table id="form_table">
-                <tr><th colspan="2">Update Address</th></tr>
-
+        table,td,th {  border-collapse: collapse; border:1px solid black}
+    </style>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Update Address</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+               
+            <div class="modal-body">      
+                <label>Postal Code: </label><input style="border:2px solid black" required name="postalCode" id="postalCode" type="number">
                 
-                <tr><td class="form_td"><label>Postal Code: </label><input required name="postalCode" id="postalCode" type="number"></td></tr>
-                <tr><td colspan="2"><button id="fad" onclick="findAddress()">Find Address</button></td></tr>
-            </table>
-            
-        <form action="#" method="POST">       
-            <table>
-                <tr>
-                    <td class="form_td"><label>Block/Street Number: </label><input onchange="this.style.width = ((this.value.length + 1) * 9) + 'px';" required name="streetName" id="streetName" type="text"></td>
-                </tr>
-                <tr>
-                    <td class="form_td"><label>Unit Number: </label><input required name="unitNumber" id="unitNumber" type="text"></td>
-                </tr>
-                <tr><td><button type="submit">submit</button></td></tr>
-            </table>
-        </form>      
-        
+                <button class="btn btn-primary" id="submit_button" onclick="findAddress()"><span id="submit_button_text">Find Address</span></button>
+                <br>
+                <form action="#" method="POST"> 
+                    <label>Block/Street Number: </label><input style="border:2px solid black"  onchange="this.style.width = ((this.value.length + 1) * 9) + 'px';" required name="streetName" id="streetName" type="text">
+                    <br>
+                    <label>Unit Number: </label><input style="border:2px solid black" required name="unitNumber" id="unitNumber" type="text">
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary" id="submit_button"><span id="submit_button_text">Save changes</span></button>
+            </div>
+        </form> 
+        </div>
+        </div>
+    </div>
+
+
+
+    {% endblock %}
+    {% block script2%}
     <script>
         $(document).ready(function() {
-            $("#fad").click(function(event) {
+            console.log("window is loaded");
+            $("#exampleModal").modal("show");
+            $("#submit_button").click(function(event) {
                 event.preventDefault();
                 
             });
-        });
-
-
+        })
+        
         function findAddress() {
             var postalCode = document.getElementById("postalCode").value
             var streetName = document.getElementById("streetName")
@@ -58,5 +71,6 @@
         }
 
     </script>
-    </body>
-</html>
+
+    {% endblock %}
+        

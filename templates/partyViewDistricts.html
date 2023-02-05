@@ -1,110 +1,140 @@
-<html>
+<!DOCTYPE html>
+<html lang="english">
   <head>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <style>
-      .cnds {
-        margin: 0 auto;
-        max-width: 1000px;
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
-        grid-auto-rows: auto;
-        gap: 20px;
-        font-family: sans-serif;
-        padding-top: 30px;
-      }
+    <title>View Candidate Info</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta property="twitter:card" content="summary_large_image" />
 
-      .cnds * {
-        box-sizing: border-box;
-      }
-
-      .cnd__image {
-        width: 100%;
-        height: 150px;
-        object-fit: cover;
-        display: block;
-        border-top: 2px solid #333333;
-        border-right: 2px solid #333333;
-        border-left: 2px solid #333333;
-      }
-
-      .cnd__content {
-        line-height: 1.5;
-        font-size: 0.9em;
-        padding: 15px;
-        background: #fafafa;
-        border-right: 2px solid #333333;
-        border-left: 2px solid #333333;
-      }
-
-      .cnd_content > p:first-of-type {
-        margin-top: 0;
-      }
-
-      .cnd__content > p:last-of-type {
-        margin-bottom: 0;
-      }
-
-      .cnd__info {
-        padding: 15px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        color: #555555;
-        background: #eeeeee;
-        font-size: 0.8em;
-        border-bottom: 2px solid #333333;
-        border-right: 2px solid #333333;
-        border-left: 2px solid #333333;
-      }
-
-      .cnd__info i {
-        font-size: 0.9em;
-        margin-right: 8px;
-      }
-
-      
-      
-      .regular {
-        position: relative;
-        padding: 0 40px;
-      }
-      .regular::before {
-        content: "\201C";
-        position: absolute;
-        font-weight: bold;
-        font-size: 4em;
-        color: green;
-        top: -30px;
-        left: 0px;
-        font-family: Georgia, Times, serif;
-      }
-      .regular::after {
-        content: "\201D";
-        position: absolute;
-        font-weight: bold;
-        font-size: 4em;
-        color: green;
-        bottom: -50px;
-        right: 0px;
-        font-family: Georgia, Times, serif;
-      }
-      
+    <style data-tag="reset-style-sheet">
+      html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
     </style>
+    <style data-tag="default-style-sheet">
+      html {
+        font-family: Inter;
+        font-size: 16px;
+      }
+
+      body {
+        font-weight: 400;
+        font-style:normal;
+        text-decoration: none;
+        text-transform: none;
+        letter-spacing: normal;
+        line-height: 1.15;
+        color: var(--dl-color-gray-black);
+        background-color: var(--dl-color-gray-white);
+
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link rel="stylesheet" href="/static/styles/style.css" />
   </head>
   <body>
-    <form action="#" method="POST">
-      <label>Select district: </label>
-      <select name="districtName" id="districtName">
-        <option disabled selected value> -- select an option -- </option>
-        {% for n in districts %}
-        <option value="{{ n }}">{{ n }}</option>
-        {% endfor %}
-      </select>
-      <button onclick="myFunction()">Search</button>
-    </form> 
+    <div>
+      <link href="/static/styles/view-candidate-info.css" rel="stylesheet" />
+
       
-  <script>
-  </script>
+        <div class="view-candidate-info-view-candidate-info">
+          <div style="position: absolute;
+          top: 50%;
+          left: 50%;
+          margin-right: -50%;
+          transform: translate(-50%, -50%);">
+          <form action="#" method="POST">
+            <label>Select District: </label>
+            <select name="districtName" id="districtName" required>
+              <option disabled selected value> -- select an option -- </option>
+              {% for n in districts %}
+              <option value="{{ n }}">{{ n }}</option>
+              {% endfor %}
+            </select>
+            <button class="button" type = "submit">Search</button>  
+          </form>
+          
+        
+      
+
+        </div>
+          <div class="view-candidate-info-frame16desktopsiteheading">
+            <span class="view-candidate-info-text">
+              <span>{{party}}</span>
+            </span>
+            <div class="view-candidate-info-pageitems">
+              <span class="view-candidate-info-text02">
+                <span>Elections Info</span>
+              </span>
+              <span class="view-candidate-info-text04">
+                <span>Security</span>
+              </span>
+              <span class="view-candidate-info-text06">
+                <span>Contact Us</span>
+              </span>
+              <span class="view-candidate-info-text08"><span>FAQ</span></span>
+              <div class="view-candidate-info-frame28cart-icon"></div>
+              <button class="view-candidate-info-frame03filled-button">
+                <span class="view-candidate-info-text10">
+                  <span>Log Out</span>
+                </span>
+              </button>
+            </div>
+          </div>
+          
+          <img
+            src="/static/public/playground_assets/svg25homeicon5113-gfxa.svg"
+            alt="SVG25HomeIcon5113"
+            class="view-candidate-info-s-v-g25home-icon"
+          />
+          
+          
+          <div class="view-candidate-info-login-button1">
+            <span class="view-candidate-info-text14">
+              <span>
+                <span>Back to Home</span>
+                <br />
+                <span></span>
+              </span>
+            </span>
+          </div>
+          <div class="view-candidate-info-login-button2">
+            <span class="view-candidate-info-text19">
+              <span>View Results: NOT AVAILABLE</span>
+            </span>
+          </div>
+          <span class="view-candidate-info-text21">
+            <span>
+              <span>Time of last login: 17 Dec 2022, 3:29pm (SGT)</span>
+              <br />
+              <span>IP Address: 192.168.1.2</span>
+            </span>
+          </span>
+          <div class="view-candidate-info-text26">
+            <span class="view-candidate-info-text27">
+              <span>View Candidate Info: Electoral Division - {{ district }}</span>
+            </span>
+          </div>
+          
+          
+      </div>
+    </div>
   </body>
 </html>
