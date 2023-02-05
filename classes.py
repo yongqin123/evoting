@@ -1,4 +1,6 @@
 ### IMPORTS ###
+import time
+from fhe import *
 import decimal
 from re import sub
 from decimal import Decimal
@@ -6,7 +8,7 @@ from inspect import _void
 from random import vonmisesvariate
 from flask import Flask, redirect ,url_for, render_template, request, session, flash
 import psycopg2, psycopg2.extras, datetime, re
-from datetime import timedelta, date, datetime
+from datetime import timedelta, date
 from bs4 import BeautifulSoup
 from werkzeug.utils import secure_filename
 import requests
@@ -25,6 +27,9 @@ db_host = 'db-postgresql-sgp1-68432-do-user-13104720-0.b.db.ondigitalocean.com'
 db_name = 'defaultdb'
 db_user = 'doadmin'
 db_pw = 'AVNS_dzEhcpyafmLeNwHBmDN'
+
+key_pairs = fhe()
+
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
@@ -119,6 +124,7 @@ class UserAccount():
                 print(parties)
         return parties
 
+
 ### party Use case ###
 class PartyPage:
     def __init__(self) -> None:
@@ -129,6 +135,7 @@ class PartyPage:
 
     def buttonClicked(self, request_form):
         self.button_id = request_form["button_type"]
+        #button_value = request_form["edit_remove"]
 
         if self.button_id=="b1":
             return redirect(url_for("CreatePartyProfile"))
@@ -140,6 +147,18 @@ class PartyPage:
             return redirect(url_for("getDistrict"))
         elif self.button_id == "b5":
             return redirect(url_for("PartyViewDistrict"))
+        elif self.button_id == "b6":
+            return redirect(url_for("Test")) # change fn name
+        else:
+            if self.button_id.split("_")[1] == "edit":
+                session["districtName"] = self.button_id.split("_")[0]
+                return redirect(url_for("Edit"))
+            """ elif self.button_id.split("_")[1] == "remove":
+                session["districtName"] = self.button_id.split("_")[0]
+                return redirect(url_for("Remove")) """
+       
+
+   
 
     def partyTemplateProfileCreate(self, party):
         return render_template("partyProfileCreate.html", party=party)
@@ -147,8 +166,11 @@ class PartyPage:
     def updatePartyTemplate(self, party):
         return render_template("partyUpdateProfile.html", party=party)
     
-    def partyDistrictTemplateCreate(self, party, zones):
-        return render_template("partyDistrictCreate.html", party=party, zones = zones)
+    def partyDistrictTemplateCreate(self, party, data, zones):
+        return render_template("partyDistrictCreate.html", party=party, data = data , zones = zones)
+
+    def partyDistrictTemplateModal(self, party, data , zones):
+        return render_template("addDistrictModal.html", party=party, data= data, zones = zones)
 
     def partyGetDistrict(self, zones):
         return render_template("partyGetDistrict.html", zones = zones)
@@ -159,11 +181,14 @@ class PartyPage:
     def partyDistrictTemplateUpdate(self, data):
         return render_template("partyDistrictUpdate.html", data=data)
     
-    def partyTemplateViewDistricts(self, districts):
-        return render_template("partyViewDistricts.html", districts=districts)
+    def partyTemplateViewDistricts(self, districts, party):
+        return render_template("partyViewDistricts.html", districts=districts, party=party)
     
-    def partyTemplateViewCandidates(self, districts, candidates):
-        return render_template("partyViewCandidates.html", districts=districts, candidates=candidates)
+    def partyTemplateViewCandidates(self, districts, candidates, currentDistrict, party):
+        return render_template("partyViewCandidates.html", districts=districts, candidates=candidates, currentDistrict = currentDistrict, party = party)
+
+    #def partyEditDistrictTemplateModal(self, data):
+        #return render_template("updateDistrictModal.html", data=data)
 
 # Party Controller    
 class PartyPageController:
@@ -215,10 +240,10 @@ class PartyPageController:
         return self.entity.createNewDistrictProfile()
     
 
-    def getCandidatesByDistrict(self, request, party):
-        self.entity.districtName = request["districtName"]
+    def getCandidatesByDistrict(self, party):
+        self.entity.districtName = session["districtName"]
         self.entity.party = party
-        session["districtName"] = self.entity.districtName
+        #session["districtName"] = self.entity.districtName
         session["party"] = self.entity.party
         return self.entity.getCandidates()
 
@@ -234,8 +259,8 @@ class PartyPageController:
         self.entity.name=request_list("newName[]")
     
         self.entity.image = request("img[]")
-        self.entity.party = session["districtName"]
-        self.entity.districtName = session["party"]
+        self.entity.party = session["party"]
+        self.entity.districtName = session["districtName"]
         return self.entity.updateNewDistrictProfile()
 
     def getContestingZones(self):
@@ -244,11 +269,39 @@ class PartyPageController:
     def getImages(self, filepath,):
         return self.entity.load_image(filepath)
 
-    
+    def getAll(self, party):
+        self.entity.party = party
+        return self.entity.getAllDistrictData()
+        
+    def delete(self, party, district):
+        self.entity.party = party
+        self.entity.district = district
+        return self.entity.deleteData()
 
 
 #Party Entity
 class PartyDetails:
+    def deleteData(self):
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute('DELETE FROM public."PartyElectionArea" WHERE "election_area" = %s and "party" = %s',(self.district, self.party, ))
+                cursor.execute('DELETE FROM public."Candidate" WHERE "DistrictName" = %s and "Party_name" = %s',(self.district, self.party, ))
+                db.commit()
+
+
+    #get Candidate's data from specific district 
+    def getAllDistrictData(self):
+        result = []
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                districts = self.PartyDistricts()
+                for district in districts:
+                    cursor.execute('SELECT * FROM public."Candidate" WHERE "Party_name" = %s and "DistrictName" = %s ' ,(self.party,district, ))
+                    temp = cursor.fetchall()
+                    result.append(temp)
+        return result
+
+    #get party's data
     def partyDetailsAll(self):
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
@@ -257,6 +310,7 @@ class PartyDetails:
                 print(result)
                 return result
 
+    #get already contested district 
     def PartyDistricts(self):
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
@@ -288,13 +342,20 @@ class PartyDetails:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute('SELECT "Name", "Image" FROM public."Candidate" WHERE "DistrictName" = %s AND "Party_name" = %s;', (self.districtToView, session["party"]))
                 result = cursor.fetchall()
-                return result
+                return result, self.districtToView
 
     def getDbDistrictName(self):
+        result = []
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                existing = self.PartyDistricts() # get already contested district
+
                 cursor.execute('SELECT * FROM public."ContestingZone" ORDER BY "DistrictName" ASC')
-                result = cursor.fetchall()
+                districts = cursor.fetchall()
+
+                for district in districts:
+                    if district[0] not in existing:
+                        result.append(district[0])
         return result 
 
     
@@ -315,7 +376,6 @@ class PartyDetails:
                 print(result)
                 db.commit()
 
-                
                 if result != None: 
                     return True #there is a result, hence party already exists
                 else: 
@@ -349,7 +409,7 @@ class PartyDetails:
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:     
                 if self.manifesto and self.logo.filename != "":
-                    cursor.execute('UPDATE public."Party" set "Logo" = %s AND "Manifesto" = %s WHERE "Party_name" = %s', (self.party + ".png", self.manifesto, self.party, ))
+                    cursor.execute('UPDATE public."Party" set "Logo" = %s , "Manifesto" = %s WHERE "Party_name" = %s', (self.party + ".png", self.manifesto, self.party, ))
                     db.commit()
                     self.uploadImagePartyLogo()
                 elif self.manifesto == "" and self.logo.filename != "": 
@@ -418,65 +478,88 @@ class PartyDetails:
         print(self.name)
         print(self.image)
 
+
+        #run a validation check on existing nric with the new updated nric
+        existing_candidate = []
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                for i in range(len(self.Oldnric)):
-                    #new nric field is not blank and image is blank
-                    if self.nric[i] != "" and self.image[i].filename == "":
-                        #Open image of old file using old nric
-                        img1 = Image.open(os.path.join(app.config['UPLOAD FOLDER'], secure_filename(self.Oldnric[i] + ".png")))
+                #check if candidate is already registered
+                for i in range(len(self.nric)):
+                    nric = self.nric[i]
+                    cursor.execute('SELECT * FROM public."Candidate" WHERE "NRIC" = %s ;',(nric,))
+                    candidate = cursor.fetchone()
 
-                        #Update candidate old nric column with new nric 
-                        cursor.execute('UPDATE public."Candidate" SET "NRIC" = %s WHERE "NRIC" = %s',(self.nric[i], self.Oldnric[i],))
+                    if candidate == None:
+                        continue
+                
+                    else:
+                        existing_candidate.append(candidate)
+                
+        if len(existing_candidate) == 0:
+            with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+                with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                    for i in range(len(self.Oldnric)):
+                        #new nric field is not blank and image is blank
+                        if self.nric[i] != "" and self.image[i].filename == "":
+                            #Open image of old file using old nric
+                            img1 = Image.open(os.path.join(app.config['UPLOAD FOLDER'], secure_filename(self.Oldnric[i] + ".png")))
 
-                        #Update candidate old image path with new iamge path
-                        cursor.execute('UPDATE public."Candidate" SET "Image" = %s WHERE "NRIC" = %s',(self.nric[i] + ".png", self.nric[i],))
+                            #Update candidate old nric column with new nric 
+                            cursor.execute('UPDATE public."Candidate" SET "NRIC" = %s WHERE "NRIC" = %s',(self.nric[i], self.Oldnric[i],))
 
-                        #save iamge as new image file name
-                        img1.save(os.path.join(app.config['UPLOAD FOLDER'], secure_filename(self.nric[i] + ".png")))
+                            #Update candidate old image path with new iamge path
+                            cursor.execute('UPDATE public."Candidate" SET "Image" = %s WHERE "NRIC" = %s',(self.nric[i] + ".png", self.nric[i],))
 
-                        #delete old image
-                        os.remove(os.path.join(app.config['UPLOAD FOLDER'], secure_filename(self.Oldnric[i] + ".png")))
+                            #save iamge as new image file name
+                            img1.save(os.path.join(app.config['UPLOAD FOLDER'], secure_filename(self.nric[i] + ".png")))
 
-                    #new nric field is blank and image is not blank
-                    if self.nric[i] == "" and self.image[i].filename != "":
-                        #Open image of old file using old nric
-                        img1 = Image.open(os.path.join(app.config['UPLOAD FOLDER'], secure_filename(self.Oldnric[i] + ".png")))
+                            #delete old image
+                            os.remove(os.path.join(app.config['UPLOAD FOLDER'], secure_filename(self.Oldnric[i] + ".png")))
+
+                        #new nric field is blank and image is not blank
+                        if self.nric[i] == "" and self.image[i].filename != "":
+                            #Open image of old file using old nric
+                            img1 = Image.open(os.path.join(app.config['UPLOAD FOLDER'], secure_filename(self.Oldnric[i] + ".png")))
+                            
+                            #Update candidate old image path with new iamge path **technically file name remains the same
+                            cursor.execute('UPDATE public."Candidate" SET "Image" = %s WHERE "NRIC" = %s',(self.Oldnric[i] + ".png", self.Oldnric[i],))
+
+                            img1 = Image.open(self.image[i])
+                            img1 = img1.resize((512, 512))
+
+                            #save img as new image file name **replace the files too since using same object instance
+                            img1.save(os.path.join(app.config['UPLOAD FOLDER'], secure_filename(self.Oldnric[i] + ".png")))
+
+                        #new nric field is not blank and image field is not blank
+                        if self.nric[i] != "" and self.image[i].filename != "":
+                            #self.updateCandidateImage(i)
+                            #Update image old image path, old nric, old name
+                            img1 = Image.open(self.image[i])
+                            img1 = img1.resize((512, 512))
+                            #cursor.execute('UPDATE public."Candidate" SET "Image" = %s WHERE "NRIC" = %s AND "Name" = %s',(self.Oldnric[i] + ".png", self.Oldnric[i], self.Oldname[i],))
+                            cursor.execute('UPDATE public."Candidate" SET "Image" = %s WHERE "NRIC" = %s',(self.nric[i] + ".png", self.Oldnric[i],))
+                        #
+                            #Update candidate old nric column with new nric 
+                            cursor.execute('UPDATE public."Candidate" SET "NRIC" = %s WHERE "NRIC" = %s',(self.nric[i], self.Oldnric[i],))
+
+                            img1.save(os.path.join(app.config['UPLOAD FOLDER'], secure_filename(self.nric[i] + ".png")))
+                            os.remove(os.path.join(app.config['UPLOAD FOLDER'], secure_filename(self.Oldnric[i] + ".png")))
+                            
+                            #else:
+                            #   img1.save(os.path.join(app.config['UPLOAD FOLDER'], secure_filename(self.Oldnric[i] + ".png")))
+
+
+                        #set name column to new name in db
+                        if self.name[i] != "":
+                            cursor.execute('UPDATE public."Candidate" SET "Name" = %s WHERE "Name" = %s AND "NRIC" = %s',(self.name[i], self.Oldname[i], self.Oldnric[i],))
+
                         
-                        #Update candidate old image path with new iamge path **technically file name remains the same
-                        cursor.execute('UPDATE public."Candidate" SET "Image" = %s WHERE "NRIC" = %s',(self.Oldnric[i] + ".png", self.Oldnric[i],))
+                    db.commit() 
+                    return existing_candidate, True
 
-                        img1 = Image.open(self.image[i])
-                        img1 = img1.resize((512, 512))
-
-                        #save img as new image file name **replace the files too since using same object instance
-                        img1.save(os.path.join(app.config['UPLOAD FOLDER'], secure_filename(self.Oldnric[i] + ".png")))
-
-                    #new nric field is not blank and image field is not blank
-                    if self.nric[i] != "" and self.image[i].filename != "":
-                        #self.updateCandidateImage(i)
-                        #Update image old image path, old nric, old name
-                        img1 = Image.open(self.image[i])
-                        img1 = img1.resize((512, 512))
-                        #cursor.execute('UPDATE public."Candidate" SET "Image" = %s WHERE "NRIC" = %s AND "Name" = %s',(self.Oldnric[i] + ".png", self.Oldnric[i], self.Oldname[i],))
-                        cursor.execute('UPDATE public."Candidate" SET "Image" = %s WHERE "NRIC" = %s',(self.nric[i] + ".png", self.Oldnric[i],))
-                    #
-                        #Update candidate old nric column with new nric 
-                        cursor.execute('UPDATE public."Candidate" SET "NRIC" = %s WHERE "NRIC" = %s',(self.nric[i], self.Oldnric[i],))
-
-                        img1.save(os.path.join(app.config['UPLOAD FOLDER'], secure_filename(self.nric[i] + ".png")))
-                        os.remove(os.path.join(app.config['UPLOAD FOLDER'], secure_filename(self.Oldnric[i] + ".png")))
-                        
-                        #else:
-                         #   img1.save(os.path.join(app.config['UPLOAD FOLDER'], secure_filename(self.Oldnric[i] + ".png")))
-
-
-                    #set name column to new name in db
-                    if self.name[i] != "":
-                        cursor.execute('UPDATE public."Candidate" SET "Name" = %s WHERE "Name" = %s AND "NRIC" = %s',(self.name[i], self.Oldname[i], self.Oldnric[i],))
-
-                    
-                db.commit() 
+        else:
+            return existing_candidate, False
+            
 
 
     
@@ -512,37 +595,34 @@ class VoterPage:
             return redirect(url_for("index"))
 
 
-    def voterTemplate(self, username, details, constituency):
-        return render_template("voterHome.html", username=username, details=details, constituency=constituency)
+    def voterTemplate(self, username, details):
+        #return render_template("voterHome.html", username=username, details=details, constituency=constituency)
+        return render_template("web-voter-homepage.html", username=username, details=details)
 
-    def voterTemplateUpdateAddress(self, username):
-        return render_template("voterUpdateAddress.html", username=username)
+    def voterTemplateUpdateAddress(self, username, details):
+        return render_template("voterUpdateAddress.html", username=username,details=details)
 
-    def voterTemplateUpdatePhoneNumber(self, username):
-        return render_template("voterUpdatePhoneNumber.html", username=username)
+    def voterTemplateUpdatePhoneNumber(self, username, details):
+        return render_template("voterUpdatePhoneNumber.html", username=username, details=details)
 
-    def voterTemplateViewParties(self, username, parties):
-        return render_template("voterViewParties.html", username=username, parties=parties)
+    def voterTemplateViewParties(self, username, parties, district):
+        #return render_template("voterViewParties.html", username=username, parties=parties)
+        return render_template("view-party-info.html", username=username, parties=parties, district=district)
     
-    def voterTemplateViewCandidates(self, username, parties, candidates, chosen_party):
-        return render_template("voterViewCandidates.html", username=username, parties=parties, candidates=candidates, chosen_party=chosen_party)
+    def voterTemplateViewCandidates(self, username, parties, district, candidates, chosen_party):
+        #return render_template("voterViewCandidates.html", username=username, parties=parties, candidates=candidates, chosen_party=chosen_party)
+        return render_template("view-candidate-info.html", username=username, parties=parties, district=district,  candidates=candidates, chosen_party=chosen_party)
     
     def voterTemplateVoteParty(self,username,parties,constituency):
         return render_template("voterVote.html",username=username,parties=parties,constituency=constituency)
+    
+    def voterTemplateVoteLive(self, username, details, constituency, liveResult):
+        return render_template("voterLiveVotes.html", username=username, details=details, constituency=constituency, liveResult=liveResult)
 
     
 class VoterPageController:
     def __init__(self) -> None:
         self.entity = VoterDetails()
-
-    def getName(self):
-        return self.entity.voterGetName()
-
-    def getPhoneNumber(self):
-        return self.entity.voterGetPhoneNumber()
-
-    def getAddress(self):
-        return self.entity.voterGetAddress()
 
     def getDetails(self):
         return self.entity.voterDetails()
@@ -578,46 +658,28 @@ class VoterPageController:
     def getConstituency(self):
         return self.entity.voterGetConstituency()
 
-    def voterVote(self,request,constituency):
+    def voterVote(self,request,constituency,parties):
         #self.entity.chosen_party = request.form.get("parties")
         #session["chosen_party"] = self.entity.chosen_party
+        self.entity.addedToBallot(request,parties,constituency)
         return self.entity.voterVote(request,constituency)
 
     def hasVoterVoted(self):
         return self.entity.hasVote()
+
+    def getLiveResult(self,constituency):
+        return self.entity.liveResult(constituency)
+
 vote_count = 0
 class VoterDetails:
     def voterDetails(self):
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute(f'SELECT name, address, postal_code, phone_number FROM public."Voter" WHERE nric = %s; ', (session["username"],))
-                result = cursor.fetchall()
-                db.commit()
-                return result[0]
-
-    def voterGetName(self) -> str:
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
-            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute(f'SELECT name FROM public."Voter" WHERE nric = %s; ', (session["username"],))
-                result = cursor.fetchall()
-                db.commit()
-                return result[0][0]
-    
-    def voterGetAddress(self) -> list:
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
-            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute(f'SELECT address, postal_code FROM public."Voter" WHERE nric = %s; ', (session["username"],))
-                result = cursor.fetchall()
-                db.commit()
-                return result[0]
-
-    def voterGetPhoneNumber(self):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
-            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute(f'SELECT phone_number FROM public."Voter" WHERE nric = %s; ', (session["username"],))
+                cursor.execute(f'SELECT name, address, postal_code, phone_number, "contestingZone", "voted" FROM public."Voter" WHERE nric = %s; ', (session["username"],))
                 result = cursor.fetchone()
                 db.commit()
-                return result[0]
+                session['districtName'] = result[4]
+                return result
 
     def voterNewAddress(self) -> None:
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
@@ -656,7 +718,9 @@ class VoterDetails:
     def voterGetParties(self):
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute(f'SELECT "Party_name", "Manifesto" FROM public."Party";')
+                session['districtName'] =  self.voterDistrictName()
+                cursor.execute(f'SELECT "party" FROM public."PartyElectionArea" WHERE "election_area" = %s;', (session['districtName'],))
+                
                 result = cursor.fetchall()
                 return result
 
@@ -723,6 +787,43 @@ class VoterDetails:
                 
                 db.commit()
                 return result
+
+    def addedToBallot(self, election_party_title, parties, constituency):
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                
+                for i in parties:
+                    
+                    if i[0] == election_party_title:
+                        x = 1
+                    else:
+                        x = 0
+                    ciph = key_pairs.fhe_encrypt([x,x,x,x], constituency, i[0], "election1")
+                    cursor.execute(f'INSERT INTO public."Ballot"(election_area_title, election_party_title, election_title, encrypted_value_c0, encrypted_value_c1, "time_stamp") VALUES (%s, %s, %s, %s, %s, %s);', (constituency, i[0], "election1", f"{constituency}_{i[0]}_election1_c0.txt", f"{constituency}_{i[0]}_election1_c1.txt",datetime.datetime.now(),))
+
+    def liveResult(self,constituency):
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute(f'SELECT voted_party,vote_count FROM public."Votes" WHERE "contestingZone"=%s',(constituency,))
+                result = cursor.fetchall()
+                db.commit()
+                print(result)
+                arrFinal=[]
+                final_str = ""
+                for i in result:
+                    print(i)
+                    final_result = str(i)[1:-1]
+                    final_final = final_result.replace("'","")
+                    final_final_result = final_final.replace(",","")
+                    print(final_final_result)
+                    print(type(final_final_result))
+                    final_str += final_final_result + "\n" 
+                print("Printing final str")
+                print(final_str)
+                return final_str
+                
+                #return result
+
 
 ### superadmin Use case ###
 class superadminPage:
