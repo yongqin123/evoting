@@ -1,0 +1,84 @@
+
+{% extends 'partyDistrictCreate.html' %}
+{% block Test %}
+
+
+<!-- Modal -->
+<form action="" method="POST" enctype="multipart/form-data">     
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Select District</h5>
+          
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="window.location.href = '{{url_for('CreateDistrictProfile')}}'">
+                <span aria-hidden="true">&times;</span>
+            </button>
+     
+          
+        </div>
+        <div class="modal-body">
+            <label><b>Party Name</b></label>
+            <input name = "PartyName" value = "{{party}}" readonly>
+            <br>
+            <label><b>Contesting Zone</b></label>
+            <select name = "districtName" id = "districtName" onchange ="create()" required>
+                <option value="" selected disabled hidden>Choose here</option>
+                {% for zone in zones %}
+                    <option>{{zone}}</option>
+                {% endfor %}
+            </select>
+            <br><br>
+          
+
+            <div id='smc' ></div>
+            <div id="grc" ></div>
+        </div>
+        <div class="modal-footer">
+            
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="window.location.href = '{{url_for('CreateDistrictProfile')}}'">Close</button>
+         
+          
+          <button id = "submit_button" type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form> 
+
+  <script>
+    $(document).ready(function() {
+        console.log("window is loaded");
+        $("#exampleModal").modal("show");
+        
+    })
+
+    function create()
+        {
+            selected = document.getElementById("districtName")
+            if (selected.options[selected.selectedIndex].value.includes("SMC"))
+            {
+                //reset 
+                const g = document.getElementById("grc");
+                g.innerHTML= '';
+
+                const e = document.getElementById("smc");
+                e.innerHTML= '<h4>Candidate 1</h4><label><b>Name</b> &nbsp;</label><input class = "Candidate-NameInput" type ="text" placeholder ="Candidate 1" name = "Name[]"  id="a1" >&nbsp;<label><b>NRIC</b>&nbsp;</label><input type ="text" class = "Candidate-NricInput" placeholder ="S1234567Z" name = "NRIC[]"  id="a2" ><br><br><label><b>Upload Image</b></label><input type="file" name = "img[]" id="a3" /><span>Upload your jpeg/jpg image. Max size 50 MB</span><br><br>'
+                //document.getElementById('smc').appendChild(e)
+            }
+
+            else if (selected.options[selected.selectedIndex].value.includes("GRC"))
+            {
+                const s = document.getElementById("smc");
+                s.innerHTML = '';
+                
+                const e = document.getElementById("grc");
+                e.innerHTML= '';
+                for (let i =0; i < 5; i++) {
+                    e.innerHTML = e.innerHTML + '<h4>Candidate ' + (i+1) +'</h4><label><b>Name</b>&nbsp;</label><input type ="text" class = "Candidate-NameInput" placeholder ="Candidate ' + (i+1) +'" name = "Name[]"  id="a' + (i+1) +'" >&nbsp;<label><b>NRIC</b>&nbsp;</label><input type ="text" class = "Candidate-NricInput" placeholder ="S1234567Z" name = "NRIC[]"  id="a2" ><br><br><label><b>Upload Image</b></label><input type="file" name = "img[]" id="a3" /><span>Upload your jpeg/jpg image. Max size 50 MB</span><br><br>'
+                }
+            }
+
+        }
+</script>
+{% endblock %}

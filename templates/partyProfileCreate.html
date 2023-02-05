@@ -1,47 +1,548 @@
-<html>
-<head>
-    <style>
-        
+<!DOCTYPE html>
+<html lang="english">
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script> 
+    
+    <title>exported project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta property="twitter:card" content="summary_large_image" />
+
+    <style data-tag="reset-style-sheet">
+      html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
     </style>
-    
-</head>
+    <style data-tag="default-style-sheet">
+      html {
+        font-family: Inter;
+        font-size: 16px;
+      }
 
-<body>
-    <div class="existing"  role = "alert ">
-        {% with messages = get_flashed_messages() %} 
-            
-            {% for msg in messages[0] %}
-                <h1>{{msg[0]}} is already created!</h1>
-            {% endfor %}
-        {% endwith %}
+      body {
+        font-weight: 400;
+        font-style:normal;
+        text-decoration: none;
+        text-transform: none;
+        letter-spacing: normal;
+        line-height: 1.15;
+        color: var(--dl-color-gray-black);
+        background-color: var(--dl-color-gray-white);
+
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link rel="stylesheet" href="/static/styles/style.css" />
+  </head>
+  <body>
+  <form action="#" method="POST" enctype="multipart/form-data">
+    <div>
+      <link href="/static/styles/party-adminupdateprofile.css" rel="stylesheet" />
+
+      <div class="party-adminupdateprofile-container">
+        <div class="party-adminupdateprofile-party-adminupdateprofile">
+          <img
+            src="/static/public/playground_assets/rectangle65334-qbqj-1100h.png"
+            alt="Rectangle65334"
+            class="party-adminupdateprofile-rectangle6"
+          />
+          <img
+            src="/static/public/playground_assets/rectangle75111-uzdd-1100h.png"
+            alt="Rectangle75111"
+            class="party-adminupdateprofile-rectangle7"
+          />
+          <div class="party-adminupdateprofile-frame7">
+            <span class="party-adminupdateprofile-text CapsCaps2-12Regular">
+              <span>main menu</span>
+            </span>
+          </div>
+          <div class="party-adminupdateprofile-frame69"></div>
+          <div class="party-adminupdateprofile-frame1one-line">
+            <div
+              class="party-adminupdateprofile-x-base1one-line-left-label-icon"
+            >
+              <span class="party-adminupdateprofile-text02 HeadingH5-16">
+                <span>Update profile</span>
+              </span>
+              <div class="party-adminupdateprofile-dashboard">
+                <img
+                  src="/static/public/playground_assets/icon5335-zshn.svg"
+                  alt="Icon5335"
+                  class="party-adminupdateprofile-icon"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="party-adminupdateprofile-frame1one-line01"></div>
+          <div class="party-adminupdateprofile-frame1one-line02">
+            <div
+              class="party-adminupdateprofile-x-base1one-line-left-label-icon01"
+            >
+              <span class="party-adminupdateprofile-text04 ParagraphP2-16">
+                <span>Update Districts</span>
+              </span>
+              <div class="party-adminupdateprofile-apps">
+                <img
+                  src="/static/public/playground_assets/icon5335-txu.svg"
+                  alt="Icon5335"
+                  class="party-adminupdateprofile-icon01"
+                />
+              </div>
+            </div>
+            <img
+              src="/static/public/playground_assets/icon5335-u6l8.svg"
+              alt="Icon5335"
+              class="party-adminupdateprofile-icon02"
+            />
+          </div>
+          <div class="party-adminupdateprofile-frame1one-line03">
+            <div class="party-adminupdateprofile-x-base1one-line-right-icon">
+              <div class="party-adminupdateprofile-arrowdropdown"></div>
+            </div>
+            <div
+              class="party-adminupdateprofile-x-base1one-line-left-label-icon02"
+            >
+              <span class="party-adminupdateprofile-text06 ParagraphP2-16">
+                <span>Security</span>
+              </span>
+              <div class="party-adminupdateprofile-security">
+                <img
+                  src="/static/public/playground_assets/icon5335-n9sm.svg"
+                  alt="Icon5335"
+                  class="party-adminupdateprofile-icon03"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="party-adminupdateprofile-frame1one-line04">
+            <div
+              class="party-adminupdateprofile-x-base1one-line-left-label-icon03"
+            >
+              <span class="party-adminupdateprofile-text08 ParagraphP2-16">
+                <span>Reports</span>
+              </span>
+              <div class="party-adminupdateprofile-assignment">
+                <img
+                  src="/static/public/playground_assets/icon5335-gqf.svg"
+                  alt="Icon5335"
+                  class="party-adminupdateprofile-icon04"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="party-adminupdateprofile-frame1one-line05">
+            <div
+              class="party-adminupdateprofile-x-base1one-line-left-label-icon04"
+            >
+              <span class="party-adminupdateprofile-text10 ParagraphP2-16">
+                <span>Candidates</span>
+              </span>
+              <div class="party-adminupdateprofile-supervisedusercircle">
+                <img
+                  src="/static/public/playground_assets/icon5336-5b46.svg"
+                  alt="Icon5336"
+                  class="party-adminupdateprofile-icon05"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="party-adminupdateprofile-frame1one-line06">
+            <div
+              class="party-adminupdateprofile-x-base1one-line-left-label-icon05"
+            >
+              <span class="party-adminupdateprofile-text12 ParagraphP2-16">
+                <span>Teams</span>
+              </span>
+              <div class="party-adminupdateprofile-work">
+                <img
+                  src="/static/public/playground_assets/icon5336-3clv.svg"
+                  alt="Icon5336"
+                  class="party-adminupdateprofile-icon06"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="party-adminupdateprofile-frame1one-line07">
+            <div class="party-adminupdateprofile-x-base1one-line-right-counter">
+              <div class="party-adminupdateprofile-counter">
+                <span
+                  class="party-adminupdateprofile-text14 CapsCaps3-10SemiBold"
+                >
+                  <span>453</span>
+                </span>
+              </div>
+            </div>
+            <div
+              class="party-adminupdateprofile-x-base1one-line-left-label-icon06"
+            >
+              <span class="party-adminupdateprofile-text16 ParagraphP2-16">
+                <span>Request</span>
+              </span>
+              <div class="party-adminupdateprofile-chat">
+                <img
+                  src="/static/public/playground_assets/icon5336-xh9t.svg"
+                  alt="Icon5336"
+                  class="party-adminupdateprofile-icon07"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="party-adminupdateprofile-group1">
+            <span class="party-adminupdateprofile-text18 HeadingH4-20">
+              <span>Thunder Party</span>
+            </span>
+            <span class="party-adminupdateprofile-text20 ParagraphP2-16">
+              <span>Singapore</span>
+            </span>
+          </div>
+          <div class="party-adminupdateprofile-logo">
+            <div class="party-adminupdateprofile-bluron"></div>
+          </div>
+          
+          <div>
+            <div class="party-adminupdateprofile-group10">
+              <div class="party-adminupdateprofile-notifications">
+                <img
+                  src="/static/public/playground_assets/icon5336-8fd.svg"
+                  alt="Icon5336"
+                  class="party-adminupdateprofile-icon09"
+                />
+              </div>
+              <div class="party-adminupdateprofile-counter1">
+                <span
+                  class="party-adminupdateprofile-text24 CapsCaps3-10SemiBold"
+                >
+                  2
+                </span>
+              </div>
+            </div>
+            <div class="party-adminupdateprofile-frame71">
+              <div class="party-adminupdateprofile-avatar">
+                <div class="party-adminupdateprofile-status"></div>
+              </div>
+              <img
+                src="/static/public/playground_assets/arrowdropdown5336-2p5a.svg"
+                alt="arrowdropdown5336"
+                class="party-adminupdateprofile-arrowdropdown1"
+              />
+            </div>
+            <div class="party-adminupdateprofile-frame6">
+              <div class="party-adminupdateprofile-avatar-one-line">
+                <div class="party-adminupdateprofile-avatar1">
+                  <span class="party-adminupdateprofile-text25 HeadingH6-13">
+                    P
+                  </span>
+                </div>
+                <span class="party-adminupdateprofile-text26 HeadingH5-16">
+                  <span>Paul Doe</span>
+                </span>
+              </div>
+              <img
+                src="/static/public/playground_assets/arrowdropdown5337-xl6o.svg"
+                alt="arrowdropdown5337"
+                class="party-adminupdateprofile-arrowdropdown2"
+              />
+            </div>
+          </div>
+          <span class="party-adminupdateprofile-text28 HeadingH2-36">
+            <span>Update Profile</span>
+          </span>
+          <div class="party-adminupdateprofile-frame3">
+            <div class="party-adminupdateprofile-horizontal"></div>
+            <div class="party-adminupdateprofile-action"></div>
+            <button class="party-adminupdateprofile-button"></button>
+
+            <button class="party-adminupdateprofile-button2">
+              Submit 
+            </button>
+            <span class="party-adminupdateprofile-text34">
+              <span>Party Name</span>
+            </span>
+            <div class="party-adminupdateprofile-group30">
+              <div class="party-adminupdateprofile-frame76"></div>
+              <div class="party-adminupdateprofile-text-icon">
+                <span class="party-adminupdateprofile-text36">
+                  <span>Party Logo</span>
+                </span>
+                <div class="party-adminupdateprofile-chevronright1"></div>
+              </div>
+            </div>
+            <div class="party-adminupdateprofile-text-icon1"></div>
+            <div class="party-adminupdateprofile-text-icon2"></div>
+            <span class="party-adminupdateprofile-text38">
+              <span>Manifesto</span>
+            </span>
+            <img
+              src="/static/public/playground_assets/horizontal5340-7wj.svg"
+              alt="Horizontal5340"
+              class="party-adminupdateprofile-horizontal1"
+            />
+            <img
+              src="/static/public/playground_assets/horizontal5341-gn5s5.svg"
+              alt="Horizontal5341"
+              class="party-adminupdateprofile-horizontal2"
+            />
+            <span class="party-adminupdateprofile-text40 HeadingH5-16">
+              <span>Accepted formats: .jpg .jpeg .png, max size 50mb</span>
+            </span>
+            <div>
+                <textarea class="party-adminupdateprofile-frame18" name = "PartyManifesto" required> </textarea><!---input box new manifesto -->
+            </div>
+            <div class="party-adminupdateprofile-frame77">
+              <div class="party-adminupdateprofile-frame74">
+                <div class="party-adminupdateprofile-text-icon3">
+                  <div>
+                    <input class="party-adminupdateprofile-text44 ParagraphP2-16" type = "text" name = "PartyName" value = {{party}} readonly> <!---input box new party name-->
+                    <!--<span>Line 342</span>-->
+                  </div>
+                </div>
+              </div>
+              <div class="party-adminupdateprofile-frame75"></div>
+            </div>
+            <div class="party-adminupdateprofile-button3">
+              <input class="form-control form-control-lg" id="formFileLg" type="file" name ="logo" onchange="readURL(this);" required />
+            </div>
+            <img
+              src="/static/public/playground_assets/rectangle1785113-hv8-200h.png"
+              alt="Rectangle1785113"
+              class="party-adminupdateprofile-rectangle178"
+            />
+            <img
+              id = "newImage"
+              name = "newlogo"
+              src="#"
+              alt="No Image"  
+              class="party-adminupdateprofile-png-item2011113"
+            /> <!---alt can change to old party image -->
+          </div>
+          <span class="party-adminupdateprofile-text48 ParagraphP1-20">
+            <span>
+              Please fill in the form to create a profile for your party.
+            </span>
+          </span>
+          <div class="party-adminupdateprofile-text-icon4">
+            <span class="party-adminupdateprofile-text50 HeadingH5-16">
+              <span>Customize</span>
+            </span>
+            <div class="party-adminupdateprofile-right-icon">
+              <img
+                src="/static/public/playground_assets/icon5340-zlep.svg"
+                alt="Icon5340"
+                class="party-adminupdateprofile-icon10"
+              />
+            </div>
+          </div>
+          <img
+            src="/static/public/playground_assets/pngitem20111115111-dbk-200w.png"
+            alt="PngItem20111115111"
+            class="party-adminupdateprofile-png-item2011111"
+          />
+          <img
+            src="/static/public/playground_assets/rectangle85111-jsx-1100h.png"
+            alt="Rectangle85111"
+            class="party-adminupdateprofile-rectangle8"
+          />
+          <div class="party-adminupdateprofile-frame72">
+            <span class="party-adminupdateprofile-text52 CapsCaps2-12Regular">
+              <span>main menu</span>
+            </span>
+          </div>
+          <div class="party-adminupdateprofile-frame73"></div>
+          <div class="party-adminupdateprofile-frame1one-line08">
+            <div
+              class="party-adminupdateprofile-x-base1one-line-left-label-icon07"
+            >
+              <span class="party-adminupdateprofile-text54 HeadingH5-16">
+                <span>Update Profile</span>
+              </span>
+              <div class="party-adminupdateprofile-dashboard1">
+                <img
+                  src="/static/public/playground_assets/icon5112-2xjr.svg"
+                  alt="Icon5112"
+                  class="party-adminupdateprofile-icon11"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="party-adminupdateprofile-frame1one-line09"></div>
+          <div class="party-adminupdateprofile-frame1one-line10">
+            <div
+              class="party-adminupdateprofile-x-base1one-line-left-label-icon08"
+            >
+              <span class="party-adminupdateprofile-text56 ParagraphP2-16">
+                <span>Update Districts</span>
+              </span>
+              <div class="party-adminupdateprofile-apps1">
+                <img
+                  src="/static/public/playground_assets/icon5112-uz2i.svg"
+                  alt="Icon5112"
+                  class="party-adminupdateprofile-icon12"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="party-adminupdateprofile-frame1one-line11">
+            <div class="party-adminupdateprofile-x-base1one-line-right-icon1">
+              <div class="party-adminupdateprofile-arrowdropdown3"></div>
+            </div>
+            <div
+              class="party-adminupdateprofile-x-base1one-line-left-label-icon09"
+            >
+              <span class="party-adminupdateprofile-text58 ParagraphP2-16">
+                <span>Security</span>
+              </span>
+              <div class="party-adminupdateprofile-security1">
+                <img
+                  src="/static/public/playground_assets/icon5112-no4n.svg"
+                  alt="Icon5112"
+                  class="party-adminupdateprofile-icon13"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="party-adminupdateprofile-frame1one-line12">
+            <div
+              class="party-adminupdateprofile-x-base1one-line-left-label-icon10"
+            >
+              <span class="party-adminupdateprofile-text60 ParagraphP2-16">
+                <span>Reports</span>
+              </span>
+              <div class="party-adminupdateprofile-assignment1">
+                <img
+                  src="/static/public/playground_assets/icon5112-virt.svg"
+                  alt="Icon5112"
+                  class="party-adminupdateprofile-icon14"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="party-adminupdateprofile-frame1one-line13">
+            <div
+              class="party-adminupdateprofile-x-base1one-line-left-label-icon11"
+            >
+              <span class="party-adminupdateprofile-text62 ParagraphP2-16">
+                <span>Candidates</span>
+              </span>
+              <div class="party-adminupdateprofile-supervisedusercircle1">
+                <img
+                  src="/static/public/playground_assets/icon5112-z418.svg"
+                  alt="Icon5112"
+                  class="party-adminupdateprofile-icon15"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="party-adminupdateprofile-frame1one-line14">
+            <div
+              class="party-adminupdateprofile-x-base1one-line-left-label-icon12"
+            >
+              <span class="party-adminupdateprofile-text64 ParagraphP2-16">
+                <span>Teams</span>
+              </span>
+              <div class="party-adminupdateprofile-work1">
+                <img
+                  src="/static/public/playground_assets/icon5112-u6zn.svg"
+                  alt="Icon5112"
+                  class="party-adminupdateprofile-icon16"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="party-adminupdateprofile-frame1one-line15">
+            <div
+              class="party-adminupdateprofile-x-base1one-line-right-counter1"
+            >
+              <div class="party-adminupdateprofile-counter2">
+                <span
+                  class="party-adminupdateprofile-text66 CapsCaps3-10SemiBold"
+                >
+                  <span>453</span>
+                </span>
+              </div>
+            </div>
+            <div
+              class="party-adminupdateprofile-x-base1one-line-left-label-icon13"
+            >
+              <span class="party-adminupdateprofile-text68 ParagraphP2-16">
+                <span>Request</span>
+              </span>
+              <div class="party-adminupdateprofile-chat1">
+                <img
+                  src="/static/public/playground_assets/icon5112-1c5h.svg"
+                  alt="Icon5112"
+                  class="party-adminupdateprofile-icon17"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="party-adminupdateprofile-group2">
+            <span class="party-adminupdateprofile-text70 HeadingH4-20">
+              <span>{{party}}</span> <!--- {{session["party"]}}-->
+            </span>
+            <span class="party-adminupdateprofile-text72 ParagraphP2-16">
+              <span>Singapore</span>
+            </span>
+          </div>
+          <div class="party-adminupdateprofile-logo1">
+            <div class="party-adminupdateprofile-bluron1"></div>
+          </div>
+          <img
+            src="{{ url_for('static', filename = 'photos/' + party +'.png' ) }}"
+            alt="PngItem20111125112"
+            class="party-adminupdateprofile-png-item2011112"
+          />
+          <img
+            src="/static/public/playground_assets/frame745354-d4a4.svg"
+            alt="Frame745354"
+            class="party-adminupdateprofile-frame741"
+          />
+        </div>
+      </div>
     </div>
-
-
-  
-    <form  action="#" method="POST" enctype="multipart/form-data">
-    <div class = "Party">
-        <h1>Create profile</h1>
-        <p>Please fill in the form to create a profile for your party</p>
-
-        <label><b>Party Name</b></label>
-        <select name = "PartyName">
-            <option>{{party}}</option>
-        </select>
-        <br><br>
-
-        <label><b>Menifesto</b></label>
-        <textarea placeholder ="Manifesto for frontpage" name = "PartyManifesto" required></textarea>
-        <br><br>
-
-        <label><b>Upload Party Logo</b></label>
-        <input class="form-control form-control-lg" id="formFileLg" type="file" name = "logo" value = "test1.jfif" required /><span>Upload your jpeg/jpg image. Max size 50 MB</span>
-
-       
-
-    </div>
-    
-    <button type="submit" value="submit"> Submit </button>
   </form>
 
-</body>
+
+  <script>
+    function readURL(input) 
+    {
+      if (input.files && input.files[0]) 
+      {
+        var reader = new FileReader();
+
+        reader.onload = function (e) 
+        {
+          $('#newImage').attr('src', e.target.result).width(150).height(200);
+        }
+
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+
+    function test()
+    {
+      console.log(this.value);
+    }
+  </script>      
+  </body>
 </html>

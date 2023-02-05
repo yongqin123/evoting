@@ -1,0 +1,125 @@
+
+{% extends 'partyDistrictCreate.html' %}
+{% block Edit %}
+
+
+<!-- Modal -->
+<form action="" method="POST" enctype="multipart/form-data">     
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Update District</h5>
+          
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="window.location.href = '{{url_for('CreateDistrictProfile')}}'">
+                <span aria-hidden="true">&times;</span>
+            </button>
+     
+          
+        </div>
+        
+        <form  action="#" method="POST" enctype="multipart/form-data">
+            <div class = "Candidate" id = "Candidate">
+                {% if data|length == 1 %}
+                <h3>Candidate 1</h3>
+                <label><b>Name</b></label>
+                <input type ="text" name = "oldName[]" value="{{data[0][1]}}" readonly>
+                <label><b>New Name</b></label>
+                <input type ="text" placeholder ="Optional" name = "newName[]" ><br><br>
+                <label><b>NRIC</b></label>
+                <input type ="text" name = "oldNRIC[]" value = "{{data[0][0]}}" readonly>
+                <label><b>New NRIC</b></label>
+                <input type ="text" placeholder ="Optional" name = "newNRIC[]" id="1"><span id = "error"></span><br><br>
+                <label><b>Upload New Image</b> (Optional)</label>
+                <input class="form-control form-control-lg" id="formFileLg" type="file" name = "img[]" value = "test1.jfif" /><span>Upload your jpeg/jpg image. Max size 50 MB</span>
+                <br><br>
+        
+                {% else %}
+                <h3>Candidate 1</h3>
+                <label><b>Name</b></label>
+                <input type ="text" name = "oldName[]" value="{{data[0][1]}}" readonly>
+                <label><b>New Name</b></label>
+                <input type ="text" placeholder ="Optional" name = "newName[]" ><br><br>
+                <label><b>NRIC</b></label>
+                <input type ="text" name = "oldNRIC[]" value = "{{data[0][0]}}" readonly>
+                <label><b>New NRIC</b></label>
+                <input type ="text" placeholder ="Optional" name = "newNRIC[]" id="1"><span id = "error"></span><br><br>
+                <label><b>Upload New Image</b> (Optional)</label>
+                <input class="form-control form-control-lg" id="formFileLg" type="file" name = "img[]" value = "test1.jfif" /><span>Upload your jpeg/jpg image. Max size 50 MB</span>
+                <br><br>
+        
+                <h3>Candidate 2</h3>
+                <label><b>Name</b></label>
+                <input type ="text" name = "oldName[]" value="{{data[1][1]}}" readonly>
+                <label><b>New Name</b></label>
+                <input type ="text" placeholder ="Optional" name = "newName[]" ><br><br>
+                <label><b>NRIC</b></label>
+                <input type ="text" name = "oldNRIC[]" value = "{{data[1][0]}}" readonly>
+                <label><b>New NRIC</b></label>
+                <input type ="text" placeholder ="Optional" name = "newNRIC[]" id="2"><span id = "error"></span><br><br>
+                <label><b>Upload New Image</b> (Optional)</label>
+                <input class="form-control form-control-lg" id="formFileLg" type="file" name = "img[]" value = "test1.jfif" /><span>Upload your jpeg/jpg image. Max size 50 MB</span>
+                <br><br>
+        
+                <h3>Candidate 3</h3>
+                <label><b>Name</b></label>
+                <input type ="text" name = "oldName[]" value="{{data[2][1]}}" readonly>
+                <label><b>New Name</b></label>
+                <input type ="text" placeholder ="Optional" name = "newName[]" ><br><br>
+                <label><b>NRIC</b></label>
+                <input type ="text" name = "oldNRIC[]"  value = "{{data[2][0]}}" readonly>
+                <label><b>New NRIC</b></label>
+                <input type ="text" placeholder ="Optional"  name = "newNRIC[]" id="3"><span id = "error"></span><br><br>
+                <label><b>Upload New Image</b> (Optional)</label>
+                <input class="form-control form-control-lg" id="formFileLg" type="file" name = "img[]" value = "test1.jfif" /><span>Upload your jpeg/jpg image. Max size 50 MB</span>
+                <br><br>
+        
+                <h3>Candidate 4</h3>
+                <label><b>Name</b></label>
+                <input type ="text" name = "oldName[]" value="{{data[3][1]}}" readonly>
+                <label><b>New Name</b></label>
+                <input type ="text" placeholder ="Optional" name = "newName[]" ><br><br>
+                <label><b>NRIC</b></label>
+                <input type ="text" name = "oldNRIC[]" value = "{{data[3][0]}}" readonly>
+                <label><b>New NRIC</b></label>
+                <input type ="text" placeholder ="Optional" name = "newNRIC[]" id="4"><span id = "error"></span><br><br>
+                <label><b>Upload New Image</b> (Optional)</label>
+                <input class="form-control form-control-lg" id="formFileLg" type="file" name = "img[]" value = "test1.jfif" /><span>Upload your jpeg/jpg image. Max size 50 MB</span>
+                <br><br>
+        
+                <h3>Candidate 5</h3>
+                <label><b>Name</b></label>
+                <input type ="text" name = "oldName[]" value="{{data[4][1]}}" readonly>
+                <label><b>New Name</b></label>
+                <input type ="text" placeholder ="Optional" name = "newName[]" ><br><br>
+                <label><b>NRIC</b></label>
+                <input type ="text" name = "oldNRIC[]" value = "{{data[4][0]}}" readonly>
+                <label><b>New NRIC</b></label>
+                <input type ="text" placeholder ="Optional" name = "newNRIC[]" id="5"><span id = "error"></span><br><br>
+                <label><b>Upload New Image</b> (Optional)</label>
+                <input class="form-control form-control-lg" id="formFileLg" type="file" name = "img[]" value = "test1.jfif" /><span>Upload your jpeg/jpg image. Max size 50 MB</span>
+                <br><br>          
+                {% endif %} 
+            </div>
+        <div class="modal-footer">
+            
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="window.location.href = '{{url_for('CreateDistrictProfile')}}'">Close</button>
+         
+          
+          <button id = "submit_button" type="submit" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</form> 
+
+  <script>
+    $(document).ready(function() {
+        console.log("window is loaded");
+        $("#exampleModal").modal("show");
+        
+    })
+
+    
+    </script>
+{% endblock %}
