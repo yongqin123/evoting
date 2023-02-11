@@ -81,13 +81,13 @@
             </span>
             <div class="view-candidate-info-pageitems">
               <span class="view-candidate-info-text02">
-                <span>Elections Info</span>
+                <a href = "{{url_for('UpdatePartyProfile')}}">Update Profile</a>
               </span>
               <span class="view-candidate-info-text04">
-                <span>Security</span>
+                <a href = "{{url_for('CreateDistrictProfile')}}">Update Districts</a>
               </span>
               <span class="view-candidate-info-text06">
-                <span>Contact Us</span>
+                <a href = "{{url_for('PartyViewDistrict')}}">View Candidates</a>
               </span>
               <span class="view-candidate-info-text08"><span>FAQ</span></span>
               <div class="view-candidate-info-frame28cart-icon"></div>
@@ -99,22 +99,14 @@
             </div>
           </div>
           
-          <img
-            src="/static/public/playground_assets/svg25homeicon5113-gfxa.svg"
-            alt="SVG25HomeIcon5113"
-            class="view-candidate-info-s-v-g25home-icon"
-          />
+          <a href = "{{url_for('party')}}">
+            <img
+              src="/static/public/playground_assets/svg25homeicon5113-gfxa.svg"
+              alt="SVG25HomeIcon5113"
+              class="view-candidate-info-s-v-g25home-icon"
+            />
+          </a>
           
-          
-          <div class="view-candidate-info-login-button1">
-            <span class="view-candidate-info-text14">
-              <span>
-                <span>Back to Home</span>
-                <br />
-                <span></span>
-              </span>
-            </span>
-          </div>
           <div class="view-candidate-info-login-button2">
             <span class="view-candidate-info-text19">
               <span>View Results: NOT AVAILABLE</span>
