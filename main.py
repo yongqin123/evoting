@@ -62,14 +62,14 @@ def party():
     print(partyDetails)
     if "username" in session:
         if request.method == "GET":
- 
             return boundary.partyTemplate(session["username"], session["party"], partyDetails)
         elif request.method == "POST":
-            print("partypost")
+            #print("partypost")
             return boundary.buttonClicked(request.form)
     else:
         flash("login first!")
         return redirect(url_for("index"))
+
 
 @app.route("/CreatePartyProfile", methods=["GET", "POST"])
 def CreatePartyProfile():
