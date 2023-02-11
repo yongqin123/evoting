@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+
+{% block title %} Election Area {% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <div class="row">
+        <div class="col md-12">
+            <div class="jumbotron p-3">
+                <h2>Manage <b>Election Area</b> <button type="button" class="btn btn-success float-right"
+                    data-toggle="modal" data-target="#mymodal">Add New Election Area</button> </h2>
+                    
+                    {% with messages = get_flashed_messages() %}
+
+                    {% if messages %}
+
+                    {% for message in messages %}
+                    
+                    <div class="alert alert-success alert-dismissable" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                            <span aria-hidden="true">x</span>
+                        </button>
+                        {{ message }}
+                    </div>
+
+                    {% endfor %}
+
+                    {% endif %}
+
+                    {% endwith %}
+                    <table class="table table-hover table-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Action</th>
+                        </tr>
+                        {% for row in election_areas %}
+                        <tr>
+                            <td>{{row.id}}</td>
+                            <td>{{row.title}}</td>
+                            <td>{{row.description}}</td>
+                            <td>
+                                <a href="/admin/update_election_area/{{row.id}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.id}}">Edit</a>
+                                <a href="/admin/delete_election_area/{{row.id}}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure about deleting?')">Delete</a>
+                            </td>
+                        </tr>
+
+                        <div id="modaledit{{row.id}}" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Update Information</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{{url_for('admin.update_election_area')}}" method="POST">
+                                            <div class="form-group">
+                                                <label>Title:</label>
+                                                <input type="hidden" name="id" value="{{row.id}}">
+                                                <input type="text" class="form-control" name="title" value="{{row.title}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Description:</label>
+                                                <input type="text" class="form-control" name="description" value="{{row.description}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <button class="btn btn-primary" type="submit">Update</button>
+                                            </div>
+            
+                                        </form>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </table>
+            </div>
+
+            <div id="mymodal" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Add Election Area</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{url_for('admin.insert_election_area')}}" method="POST">
+                                <div class="form-group">
+                                    <label>Title:</label>
+                                    <input type="text" class="form-control" name="title" required="1">
+                                </div>
+                                <div class="form-group">
+                                    <label>Description:</label>
+                                    <input type="text" class="form-control" name="description" required="1">
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary" type="submit">Add Election Area</button>
+                                </div>
+
+                            </form>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

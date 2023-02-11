@@ -6,26 +6,41 @@ import psycopg2, psycopg2.extras, datetime, re
 from datetime import timedelta, date, datetime, time
 from werkzeug.utils import secure_filename
 from classes import * # import all classes from classes.py
+from app import app
+from app import db
+from admin.blueprint import admin
+#import views
 
+
+app.register_blueprint(admin, url_prefix='/admin')
 '''
 ### POSTGRESQL CONFIG ###
 db_host = 'satao.db.elephantsql.com'
 db_name = 'jwwfjrox'
 db_user = 'jwwfjrox'
 db_pw = 'jQiFAyGF07Tghwk44c4GButvW2uKzsLi'
-'''
+
 ### POSTGRESQL CONFIG ###
 db_host = 'ec2-34-234-240-121.compute-1.amazonaws.com'
 db_name = 'dcgsvhb0enfgfd'
 db_user = 'ampoosmqdvdzte'
 db_pw = '1494a152d2acffe248186b855286562322f43ab69a4ae0cd1b061bef24f36bf3'
-
+'''
+###AWS POSTGRESQL CONFIG###
+db_host = "fyp-22-s4-30.cuhxaq43l2oj.ap-southeast-1.rds.amazonaws.com"
+db_name = 'postgres'
+db_user = 'evotingsystem'
+db_pw = 'EmXAdCIbKic5IL6TL9e3'
 
 ### SESSION CONFIG (password & period) ###
 app = Flask(__name__)
 app.secret_key = "e_voting"
 app.permanent_session_lifetime = timedelta(minutes=60)
 
+##admin page##
+@app.route("/admin", methods=["GET", "POST"])
+def admin():
+    return render_template('index.html')
 
 ### LOGIN PAGE ###
 @app.route("/", methods=["GET", "POST"])

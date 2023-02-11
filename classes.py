@@ -23,10 +23,17 @@ import os
 app = Flask(__name__)
 app.config['UPLOAD FOLDER'] = os.path.join(os.getcwd(), "static/photos")
 ### POSTGRESQL CONFIG ###
+'''
 db_host = 'db-postgresql-sgp1-68432-do-user-13104720-0.b.db.ondigitalocean.com'
 db_name = 'defaultdb'
 db_user = 'doadmin'
 db_pw = 'AVNS_dzEhcpyafmLeNwHBmDN'
+'''
+###AWS POSTGRESQL CONFIG###
+db_host = "fyp-22-s4-30.cuhxaq43l2oj.ap-southeast-1.rds.amazonaws.com"
+db_name = 'postgres'
+db_user = 'evotingsystem'
+db_pw = 'EmXAdCIbKic5IL6TL9e3'
 
 key_pairs = fhe()
 
@@ -50,7 +57,7 @@ class LoginPage:
         return render_template("login.html", profiles=profiles, parties=parties)
 
     def redirectPage(account_type):
-        default_profiles = ["party", "super_admin", "voter"]
+        default_profiles = ["party", "super_admin", "voter", 'admin']
         if account_type not in default_profiles:
             return redirect(url_for("otherProfiles", type=account_type))
         else:
@@ -74,7 +81,7 @@ class LoginPageController:
         return self.entity.doesUserExist()
 
     def redirectPage(account_type):
-        default_profiles = ["party", "admin", "voter"]
+        default_profiles = ["party", "admin", "voter", "super_admin"]
         if account_type not in default_profiles:
             return redirect(url_for("otherProfiles", type=account_type))
         else:
@@ -87,7 +94,7 @@ class LoginPageController:
 
 class UserAccount():
     def getAllProfiles(self) -> list:
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute(f'SELECT profile_name FROM public."Profile"')
                 profiles = cursor.fetchall()
@@ -95,7 +102,7 @@ class UserAccount():
 
     def doesUserExist(self) -> bool:
         # connect to db
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 if self.account_type == "party":
                     #check if party's name is correct
@@ -117,7 +124,7 @@ class UserAccount():
                 else: return False
 
     def getAllParties(self):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute(f'SELECT "Party_name" FROM public."Party"')
                 parties = cursor.fetchall()
@@ -282,7 +289,7 @@ class PartyPageController:
 #Party Entity
 class PartyDetails:
     def deleteData(self):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute('DELETE FROM public."PartyElectionArea" WHERE "election_area" = %s and "party" = %s',(self.district, self.party, ))
                 cursor.execute('DELETE FROM public."Candidate" WHERE "DistrictName" = %s and "Party_name" = %s',(self.district, self.party, ))
@@ -292,7 +299,7 @@ class PartyDetails:
     #get Candidate's data from specific district 
     def getAllDistrictData(self):
         result = []
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 districts = self.PartyDistricts()
                 for district in districts:
@@ -303,7 +310,7 @@ class PartyDetails:
 
     #get party's data
     def partyDetailsAll(self):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute('SELECT * FROM public."Party" WHERE "Party_name" = %s',(session["party"],))
                 result = cursor.fetchone()
@@ -312,7 +319,7 @@ class PartyDetails:
 
     #get already contested district 
     def PartyDistricts(self):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute('SELECT DISTINCT "DistrictName" FROM public."Candidate" WHERE "Party_name" = %s',(session["party"],))
                 result = cursor.fetchall()
@@ -338,7 +345,7 @@ class PartyDetails:
             img1.save(os.path.join(app.config['UPLOAD FOLDER'], secure_filename(self.nric[i] + ".png")))
         
     def getCandidatesToView(self):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute('SELECT "Name", "Image" FROM public."Candidate" WHERE "DistrictName" = %s AND "Party_name" = %s;', (self.districtToView, session["party"]))
                 result = cursor.fetchall()
@@ -346,7 +353,7 @@ class PartyDetails:
 
     def getDbDistrictName(self):
         result = []
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 existing = self.PartyDistricts() # get already contested district
 
@@ -360,7 +367,7 @@ class PartyDetails:
 
     
     def PartyName(self):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute(f'SELECT name FROM public."Login" WHERE profile = "Party"; ')
                 result = cursor.fetchall()
@@ -369,7 +376,7 @@ class PartyDetails:
                 return result
 
     def CheckPartyExist(self):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute('SELECT * FROM public."Party" WHERE "Party_name" = %s ;', (self.party,))
                 result = cursor.fetchone()
@@ -382,7 +389,7 @@ class PartyDetails:
                     return False
 
     def CheckDistrictExist(self):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute('SELECT COUNT("DistrictName") FROM public."Candidate" WHERE "DistrictName" = %s AND "Party_name" = %s group by "Party_name";', (self.district, self.party,))
                 result = cursor.fetchone()
@@ -396,7 +403,7 @@ class PartyDetails:
                     return False
 
     def createNewPartyProfile(self):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute('INSERT INTO public."Party" ("Party_name", "Manifesto", "Logo") VALUES (%s, %s, %s)', (self.party, self.manifesto, self.party + ".png", ))
                 db.commit()
@@ -406,7 +413,7 @@ class PartyDetails:
     def updateProfileParty(self):
         print(self.manifesto)
         print((self.logo))
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:     
                 if self.manifesto and self.logo.filename != "":
                     cursor.execute('UPDATE public."Party" set "Logo" = %s , "Manifesto" = %s WHERE "Party_name" = %s', (self.party + ".png", self.manifesto, self.party, ))
@@ -430,7 +437,7 @@ class PartyDetails:
         print(self.image)
 
         existing_candidate = []
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 #check if candidate is already registered
                 for i in range(len(self.nric)):
@@ -445,7 +452,7 @@ class PartyDetails:
                         existing_candidate.append(candidate)
 
         #insert candidates to db
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 if len(existing_candidate) == 0:
                     for i in range(len(self.nric)):
@@ -463,7 +470,7 @@ class PartyDetails:
 
 
     def getCandidates(self):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute('SELECT * FROM public."Candidate" WHERE "Party_name" = %s AND "DistrictName" = %s ', (self.party, self.districtName, ))
                 result = cursor.fetchall()
@@ -481,7 +488,7 @@ class PartyDetails:
 
         #run a validation check on existing nric with the new updated nric
         existing_candidate = []
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 #check if candidate is already registered
                 for i in range(len(self.nric)):
@@ -496,7 +503,7 @@ class PartyDetails:
                         existing_candidate.append(candidate)
                 
         if len(existing_candidate) == 0:
-            with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+            with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
                 with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                     for i in range(len(self.Oldnric)):
                         #new nric field is not blank and image is blank
@@ -673,7 +680,7 @@ class VoterPageController:
 vote_count = 0
 class VoterDetails:
     def voterDetails(self):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute(f'SELECT name, address, postal_code, phone_number, "contestingZone", "voted" FROM public."Voter" WHERE nric = %s; ', (session["username"],))
                 result = cursor.fetchone()
@@ -682,7 +689,7 @@ class VoterDetails:
                 return result
 
     def voterNewAddress(self) -> None:
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 print("testing")
                 url = f"https://www.parliament.gov.sg/mps/find-mps-in-my-constituency?SearchKeyword={self.postal_code}"
@@ -693,21 +700,21 @@ class VoterDetails:
                 db.commit()
     
     def voterNewPhoneNumber(self) -> None:
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute(f'UPDATE public."Voter" SET phone_number = %s WHERE nric = %s; ', (self.phone_number, session["username"],))
                 db.commit()
                 print("testing")
 
     def voterDistrictName(self):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute(f'SELECT "contestingZone" FROM public."Voter" WHERE nric = %s;', (session["username"],))
                 result = cursor.fetchone()
                 return result[0]
 
     def voterGetCandidatesByDistrict(self):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute(f'SELECT "Name", "Party_name", "Image", "DistrictName" FROM public."Candidate" WHERE "DistrictName" = %s AND "Party_name" = %s;', (self.districtName,self.chosen_party))
                 result = cursor.fetchall()
@@ -716,7 +723,7 @@ class VoterDetails:
                 return result
 
     def voterGetParties(self):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 session['districtName'] =  self.voterDistrictName()
                 cursor.execute(f'SELECT "party" FROM public."PartyElectionArea" WHERE "election_area" = %s;', (session['districtName'],))
@@ -725,7 +732,7 @@ class VoterDetails:
                 return result
 
     def voterGetSelectedParty(self):
-         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute(f'SELECT "Party_name", "Manifesto", "Logo" FROM public."Party" WHERE "Party_name" = %s;', (session["chosen_party"],))
                 result = cursor.fetchone()
@@ -733,7 +740,7 @@ class VoterDetails:
                 return result
     
     def voterVote(self,selected_party,constituency):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 toVoteArr=[]
                 
@@ -770,7 +777,7 @@ class VoterDetails:
                     print("Voter voted!")
                     db.commit()
     def hasVote(self):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute(f'SELECT "voted" FROM public."Voter"')
                 result = cursor.fetchone()
@@ -780,7 +787,7 @@ class VoterDetails:
                 return result
                 
     def voterGetConstituency(self):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute(f'SELECT "contestingZone" FROM public."Voter"')
                 result = cursor.fetchone()
@@ -789,7 +796,7 @@ class VoterDetails:
                 return result
 
     def addedToBallot(self, election_party_title, parties, constituency):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 
                 for i in parties:
@@ -802,7 +809,7 @@ class VoterDetails:
                     cursor.execute(f'INSERT INTO public."Ballot"(election_area_title, election_party_title, election_title, encrypted_value_c0, encrypted_value_c1, "time_stamp") VALUES (%s, %s, %s, %s, %s, %s);', (constituency, i[0], "election1", f"{constituency}_{i[0]}_election1_c0.txt", f"{constituency}_{i[0]}_election1_c1.txt",datetime.datetime.now(),))
 
     def liveResult(self,constituency):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute(f'SELECT voted_party,vote_count FROM public."Votes" WHERE "contestingZone"=%s',(constituency,))
                 result = cursor.fetchall()
@@ -853,7 +860,7 @@ class superadminControllerPage:
 class superadminDetails:
 
     def retrieveAdmin(self):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute(f'SELECT username,password,name FROM public."Login" where profile=%s;',('admin',))
                 result = cursor.fetchall()
@@ -861,7 +868,7 @@ class superadminDetails:
                 return result
 
     def deleteAdmin(self,username):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute(f'DELETE from public."Login" where profile = %s AND username = %s;',('admin',username,))
                 db.commit()
@@ -872,7 +879,7 @@ class superadminDetails:
                 return result
 
     def createAdmin(self,admin_username,admin_password,admin_name):
-        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=25060) as db:
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute(f'INSERT INTO public."Login"(username,password,name,profile) VALUES(%s,%s,%s,%s);',(admin_username,admin_password,admin_name,'admin',))
                 db.commit()
