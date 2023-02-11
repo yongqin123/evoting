@@ -980,7 +980,7 @@
 
 .main-container{
   box-sizing: border-box;
-  border: 1px solid rgba(183, 10, 19, 1);
+  border: 5px solid rgba(183, 10, 19, 1);
   width: 1440px;
   padding: 12px 14px;
 }
