@@ -1,0 +1,372 @@
+.bottomright {
+  position: absolute;
+  bottom: 10%;
+  text-align: center;
+  left:45%;
+  z-index: 1000;
+}
+
+.partySelect {
+  position: relative;
+  bottom: 20%;
+  text-align: center;
+  z-index: 1000;
+  margin: 0 auto;
+}
+
+.topright {
+  position: absolute;
+  background-color: rgba(240, 240, 240, 1);
+  top: 20px;
+  right: 20px;
+  font-size: 50px;
+  z-index: 1000;
+  
+}
+
+
+.voter-login-container {
+  min-height: 100vh;
+  z-index: 999;
+}
+.voter-login-voter-login {
+  width: 100%;
+  height: 1024px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  justify-content: center;
+  align-items: flex-start;
+  border-color: transparent;
+  background-color: rgba(183, 10, 19, 1);
+  margin-right: auto; margin-left: auto;
+}
+.voter-login-frame16desktopsiteheading {
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 84px;
+  display: flex;
+  overflow: hidden;
+  position: absolute;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+  background-color: rgba(240, 240, 240, 1);
+}
+.voter-login-text {
+  top: 26px;
+  left: 64px;
+  color: rgba(0, 0, 0, 1);
+  height: auto;
+  position: absolute;
+  font-size: 24px;
+  align-self: center;
+  font-style: Black;
+  text-align: center;
+  font-family: Nunito;
+  font-weight: 900;
+  line-height: 129.99999523162842%;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.voter-login-pageitems {
+  top: 20px;
+  left: 691px;
+  width: 685px;
+  display: flex;
+  position: absolute;
+  align-items: center;
+  border-color: transparent;
+}
+.voter-login-text02 {
+  color: rgba(0, 0, 0, 1);
+  height: auto;
+  font-size: 20px;
+  align-self: auto;
+  font-style: Bold;
+  text-align: left;
+  font-family: Nunito;
+  font-weight: 700;
+  line-height: 129.99999523162842%;
+  font-stretch: normal;
+  margin-right: 48px;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.voter-login-text04 {
+  color: rgba(0, 0, 0, 1);
+  height: auto;
+  font-size: 20px;
+  align-self: auto;
+  font-style: Bold;
+  text-align: left;
+  font-family: Nunito;
+  font-weight: 700;
+  line-height: 129.99999523162842%;
+  font-stretch: normal;
+  margin-right: 48px;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.voter-login-text06 {
+  color: rgba(0, 0, 0, 1);
+  height: auto;
+  font-size: 20px;
+  align-self: auto;
+  font-style: Bold;
+  text-align: left;
+  font-family: Nunito;
+  font-weight: 700;
+  line-height: 129.99999523162842%;
+  font-stretch: normal;
+  margin-right: 48px;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.voter-login-text08 {
+  color: rgba(0, 0, 0, 1);
+  height: auto;
+  font-size: 20px;
+  align-self: auto;
+  font-style: Bold;
+  text-align: left;
+  font-family: Nunito;
+  font-weight: 700;
+  line-height: 129.99999523162842%;
+  font-stretch: normal;
+  margin-right: 48px;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.voter-login-frame28cart-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  align-items: flex-start;
+  flex-shrink: 0;
+  border-color: transparent;
+  margin-right: 48px;
+}
+.voter-login-frame03filled-button {
+  height: 44px;
+  display: flex;
+  padding: 8px 16px;
+  position: relative;
+  align-items: center;
+  flex-shrink: 0;
+  border-color: transparent;
+  border-radius: 8px;
+  justify-content: center;
+  background-color: rgba(183, 10, 19, 1);
+}
+.voter-login-text10 {
+  color: rgba(240, 240, 240, 1);
+  height: auto;
+  font-size: 17px;
+  align-self: auto;
+  font-style: Bold;
+  text-align: left;
+  font-family: Nunito;
+  font-weight: 700;
+  line-height: 129.99999523162842%;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.voter-login-s-v-g31lock-icon {
+  top: 29px;
+  left: 1228px;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+}
+.voter-login-rectangle10 {
+  top: 176px;
+  
+  width: 590px;
+  height: 728px;
+  position: relative;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-color: transparent;
+  border-radius: 19px;
+}
+.voter-login-frame09input-field {
+  top: 267px;
+  left: 40%;
+  color: rgba(137, 137, 137, 1);
+  width: 358px;
+  height: 44px;
+  display: flex;
+  padding: 8px 16px;
+  position: absolute;
+  font-size: 17px;
+  text-align: left;
+  align-items: center;
+  flex-shrink: 0;
+  font-family: Nunito;
+  font-weight: 500;
+  border-color: rgba(0, 0, 0, 1);
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.03999999910593033);
+}
+.voter-login-s-v-g19account-icon {
+  top: 282px;
+  left: 37%;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+}
+.voter-login-frame09input-field1 {
+  top: 344px;
+  left: 40%;
+  color: rgba(137, 137, 137, 1);
+  width: 358px;
+  height: 44px;
+  display: flex;
+  padding: 8px 16px;
+  position: absolute;
+  font-size: 17px;
+  text-align: left;
+  align-items: center;
+  flex-shrink: 0;
+  font-family: Nunito;
+  font-weight: 500;
+  border-color: rgba(0, 0, 0, 1);
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 8px;
+  background-color: rgba(0, 0, 0, 0.03999999910593033);
+}
+.voter-login-s-v-g31lock-icon1 {
+  top: 354px;
+  left: 37%;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+}
+.voter-login-frame03filled-button1 {
+  top: 403px;
+  left: 45%;
+  width: 76px;
+  height: 44px;
+  display: flex;
+  padding: 8px 16px;
+  position: absolute;
+  align-items: center;
+  flex-shrink: 0;
+  border-color: transparent;
+  border-radius: 8px;
+  justify-content: center;
+  background-color: rgba(183, 10, 19, 1);
+}
+.voter-login-text12 {
+  color: rgba(240, 240, 240, 1);
+  height: auto;
+  font-size: 17px;
+  align-self: auto;
+  font-style: Bold;
+  text-align: left;
+  font-family: Nunito;
+  font-weight: 700;
+  line-height: 129.99999523162842%;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.voter-login-frame03filled-button2 {
+  top: 464px;
+  left: 45%;
+  width: 76px;
+  height: 44px;
+  display: flex;
+  padding: 8px 16px;
+  position: absolute;
+  align-items: center;
+  flex-shrink: 0;
+  border-color: transparent;
+  border-radius: 8px;
+  justify-content: center;
+  background-color: rgba(183, 10, 19, 1);
+}
+.voter-login-singpasslogowhite21 {
+  top: 480px;
+  left: 718px;
+  width: 104px;
+  height: 18px;
+  position: absolute;
+  border-color: transparent;
+}
+.voter-login-text14 {
+  top: 474px;
+  left: 45.5%;
+  color: rgba(240, 240, 240, 1);
+  width: 135px;
+  height: auto;
+  position: absolute;
+  font-size: 17px;
+  align-self: auto;
+  font-style: Bold;
+  text-align: left;
+  font-family: Nunito;
+  font-weight: 700;
+  line-height: 129.99999523162842%;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.voter-login-text16 {
+  top: 548px;
+  left: 657px;
+  color: rgba(1, 96, 200, 1);
+  width: 121px;
+  height: auto;
+  position: absolute;
+  font-size: 14px;
+  align-self: auto;
+  font-style: Medium;
+  text-align: left;
+  font-family: Nunito;
+  font-weight: 500;
+  line-height: 129.99999523162842%;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: underline;
+}
+.voter-login-text18 {
+  top: 523px;
+  left: 43%;
+  color: rgba(1, 96, 200, 1);
+  width: 140px;
+  height: auto;
+  position: absolute;
+  font-size: 14px;
+  align-self: auto;
+  font-style: Medium;
+  text-align: center;
+  font-family: Nunito;
+  font-weight: 500;
+  line-height: 129.99999523162842%;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: underline;
+}
+
+
+.main_content {
+  
+  margin-right: auto; margin-left: auto; width: 800px;
+}

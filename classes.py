@@ -54,7 +54,9 @@ class LoginPage:
         # get all profiles
         profiles = self.controller.getProfiles()
         parties = self.controller.getParties()
-        return render_template("login.html", profiles=profiles, parties=parties)
+        return render_template("voter-login.html", profiles=profiles, parties=parties)
+
+ 
 
     def redirectPage(account_type):
         default_profiles = ["party", "super_admin", "voter", 'admin']

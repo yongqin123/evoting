@@ -37,6 +37,11 @@ app = Flask(__name__)
 app.secret_key = "e_voting"
 app.permanent_session_lifetime = timedelta(minutes=60)
 
+###new login page ####
+@app.route("/newlogin", methods=["GET", "POST"])
+def newlogin():
+    return render_template("voter-login.html")
+
 ##admin page##
 @app.route("/admin", methods=["GET", "POST"])
 def admin():
@@ -52,21 +57,26 @@ def index():
 
     elif request.method == "POST":
         print("inside POST of login")
-        if boundary.controller.getCredentials(request.form): # B-C, C-E  
-            print("inside inside POST of login")
-            # login success - add username & account_type in session
-            session["username"] = request.form["username"]
-            session["account_type"] = request.form["type"]
-            
-            if request.form["type"] == "party":
-                session["party"] = request.form["party"]
+        if request.form["submit"] == "login":
+            if boundary.controller.getCredentials(request.form): # B-C, C-E  
+                print("inside inside POST of login")
+                # login success - add username & account_type in session
+                session["username"] = request.form["username"]
+                session["account_type"] = request.form["type"]
+                
+                if request.form["type"] == "party":
+                    session["party"] = request.form["party"]
 
-            # redirect page to candidate, admin, voter
-            return LoginPage.redirectPage(session["account_type"]) # C-B
+                # redirect page to candidate, admin, voter
+                return boundary.redirectPage(session["account_type"]) # C-B
 
-        else:
-            flash(request.form["username"] + " login failed!")
-            return boundary.loginTemplate() # redirect to login page
+            else:
+                flash(request.form["username"] + " login failed!")
+                return boundary.loginTemplate() # redirect to login page
+        elif request.form["submit"] == "resetpw":
+            pass
+        elif request.form["submit"] == "register":
+            pass
 
 
 ### PARTY PAGE ###
