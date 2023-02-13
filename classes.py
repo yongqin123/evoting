@@ -19,6 +19,10 @@ from PIL import Image
 import numpy as np
 import io
 import os
+import requests
+import pyotp
+import time 
+from twilio.rest import Client 
 
 app = Flask(__name__)
 app.config['UPLOAD FOLDER'] = os.path.join(os.getcwd(), "static/photos")
@@ -36,7 +40,8 @@ db_user = 'evotingsystem'
 db_pw = 'EmXAdCIbKic5IL6TL9e3'
 
 key_pairs = fhe()
-
+global otp_dic
+otp_dic = {}
 
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 
@@ -56,15 +61,22 @@ class LoginPage:
         parties = self.controller.getParties()
         return render_template("voter-login.html", profiles=profiles, parties=parties)
 
- 
+    def registerTemplate(self):
+        return render_template("voter-login-o-t-p.html")
 
-    def redirectPage(account_type):
+
+    def redirectToProfilePage(self,account_type):
         default_profiles = ["party", "super_admin", "voter", 'admin']
         if account_type not in default_profiles:
             return redirect(url_for("otherProfiles", type=account_type))
         else:
             return redirect(url_for(account_type))
 
+    def redirectToResetPasswordPage(self):
+        return redirect(url_for("resetPassWord"))
+
+    def redirectToRegisterPage(self):
+        return redirect(url_for("register"))
 
 class LoginPageController:
     def __init__(self) -> None:
@@ -93,6 +105,22 @@ class LoginPageController:
 
     def getParties(self):
         return self.entity.getAllParties()
+
+    def sendOTPtouser(self, request_form):
+        otp = self.entity.generateOTP()
+        self.entity.OTPPhoneNumber = request_form["phone_number"]
+        account_sid = 'AC4fe73199e1fc12a01e04f1ddb53c18c3' 
+        auth_token = '55efccda2ef34ba35881eb256df476ae' 
+        client = Client(account_sid, auth_token) 
+        
+        message = client.messages.create(  
+                                    messaging_service_sid='MGf788a76f1546ed9cbf819f1ab5ba9f44', 
+                                    body=f'Your OTP IS {otp}',      
+                                    to=f'+65{self.entity.OTPPhoneNumber}' 
+                                ) 
+        otp_dic[self.entity.OTPPhoneNumber] = otp
+        print(message)
+
 
 class UserAccount():
     def getAllProfiles(self) -> list:
@@ -133,6 +161,14 @@ class UserAccount():
                 print(parties)
         return parties
 
+    def generateOTP(self):
+        secret = pyotp.random_base32()
+        #set code expiry to 60 secs
+        totp = pyotp.TOTP(secret, interval=60)
+        otp = totp.now() # => 6 digit number
+        return otp
+
+    
 
 ### party Use case ###
 class PartyPage:

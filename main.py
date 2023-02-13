@@ -37,10 +37,6 @@ app = Flask(__name__)
 app.secret_key = "e_voting"
 app.permanent_session_lifetime = timedelta(minutes=60)
 
-###new login page ####
-@app.route("/newlogin", methods=["GET", "POST"])
-def newlogin():
-    return render_template("voter-login.html")
 
 ##admin page##
 @app.route("/admin", methods=["GET", "POST"])
@@ -68,16 +64,29 @@ def index():
                     session["party"] = request.form["party"]
 
                 # redirect page to candidate, admin, voter
-                return boundary.redirectPage(session["account_type"]) # C-B
+                return boundary.redirectToProfilePage(session["account_type"]) # C-B
 
             else:
                 flash(request.form["username"] + " login failed!")
                 return boundary.loginTemplate() # redirect to login page
         elif request.form["submit"] == "resetpw":
-            pass
+            return boundary.redirectToRegisterPage()
         elif request.form["submit"] == "register":
-            pass
+            return boundary.redirectToRegisterPage()
 
+@app.route("/resetPassWord", methods=["GET", "POST"])
+def resetPassWord():
+    boundary = LoginPage()
+    if request.method == "GET":
+        print("In get")
+        return boundary.loginTemplate() # A-B
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    boundary = LoginPage()
+    if request.method == "GET":
+        print("In get")
+        return boundary.registerTemplate() # A-B
 
 ### PARTY PAGE ###
 @app.route("/party", methods=["GET", "POST"])
