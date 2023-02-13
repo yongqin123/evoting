@@ -33,8 +33,7 @@ db_user = 'evotingsystem'
 db_pw = 'EmXAdCIbKic5IL6TL9e3'
 
 ### SESSION CONFIG (password & period) ###
-app = Flask(__name__)
-app.secret_key = "e_voting"
+
 app.permanent_session_lifetime = timedelta(minutes=60)
 
 
