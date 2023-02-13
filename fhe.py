@@ -1,5 +1,5 @@
 """Example of CKKS addition."""
-from ckks.ckks_decryptor import CKKSDecryptor
+#from ckks.ckks_decryptor import CKKSDecryptor
 from ckks.ckks_encoder import CKKSEncoder
 from ckks.ckks_encryptor import CKKSEncryptor
 from ckks.ckks_evaluator import CKKSEvaluator

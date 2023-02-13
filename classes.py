@@ -1,6 +1,6 @@
 ### IMPORTS ###
 import time
-from fhe import *
+#from fhe import *
 import decimal
 from re import sub
 from decimal import Decimal
@@ -39,7 +39,7 @@ db_name = 'postgres'
 db_user = 'evotingsystem'
 db_pw = 'EmXAdCIbKic5IL6TL9e3'
 
-key_pairs = fhe()
+#key_pairs = fhe()
 global otp_dic
 otp_dic = {}
 
@@ -62,8 +62,10 @@ class LoginPage:
         return render_template("voter-login.html", profiles=profiles, parties=parties)
 
     def registerTemplate(self):
-        return render_template("voter-login-o-t-p.html")
+        return render_template("voter-register-form.html")
 
+    def registerTemplateOTP(self):
+        return render_template("voter-login-o-t-p.html")
 
     def redirectToProfilePage(self,account_type):
         default_profiles = ["party", "super_admin", "voter", 'admin']
@@ -108,7 +110,8 @@ class LoginPageController:
 
     def sendOTPtouser(self, request_form):
         otp = self.entity.generateOTP()
-        self.entity.OTPPhoneNumber = request_form["phone_number"]
+        #self.entity.OTPPhoneNumber = '91251636'
+        self.entity.OTPPhoneNumber = request_form["number"]
         account_sid = 'AC4fe73199e1fc12a01e04f1ddb53c18c3' 
         auth_token = '55efccda2ef34ba35881eb256df476ae' 
         client = Client(account_sid, auth_token) 
