@@ -88,8 +88,19 @@ def register():
         return boundary.registerTemplate() # A-B
 
     if request.method =="POST":
-        boundary.controller.sendOTPtouser(request.form)
-        return boundary.registerTemplateOTP()
+        #boundary.controller.sendOTPtouser(request.form)
+        return redirect(url_for("registerOTP"))
+
+@app.route("/registerOTP", methods=["GET", "POST"])
+def registerOTP():
+    boundary = LoginPage()
+    if request.method == "GET":
+        print("In get")
+        return boundary.registerTemplateOTP() # A-B
+
+    if request.method =="POST":
+        #boundary.controller.sendOTPtouser(request.form)
+        return redirect(url_for("index"))
 
 ### PARTY PAGE ###
 @app.route("/party", methods=["GET", "POST"])

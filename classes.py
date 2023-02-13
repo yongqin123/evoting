@@ -67,6 +67,9 @@ class LoginPage:
     def registerTemplateOTP(self):
         return render_template("voter-login-o-t-p.html")
 
+    #def registerTemplateOTPFinal(self):
+    #    return render_template("voter-login-o-t-p.html")
+
     def redirectToProfilePage(self,account_type):
         default_profiles = ["party", "super_admin", "voter", 'admin']
         if account_type not in default_profiles:
