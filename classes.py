@@ -67,9 +67,6 @@ class LoginPage:
     def registerTemplateOTP(self):
         return render_template("voter-login-o-t-p.html")
 
-    #def registerTemplateOTPFinal(self):
-    #    return render_template("voter-login-o-t-p.html")
-
     def redirectToProfilePage(self,account_type):
         default_profiles = ["party", "super_admin", "voter", 'admin']
         if account_type not in default_profiles:
@@ -127,6 +124,9 @@ class LoginPageController:
         otp_dic[self.entity.OTPPhoneNumber] = otp
         print(message)
 
+    def register(self,username,password,nric,name,postal_code,address,number):
+        return self.entity.registerVoter(username,password,nric,name,postal_code,address,number)
+
 
 class UserAccount():
     def getAllProfiles(self) -> list:
@@ -175,6 +175,12 @@ class UserAccount():
         return otp
 
     
+    def registerVoter(self,username,password,nric,name,postal_code,address,number):
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute('INSERT INTO public."Login" ("username", "password", "name", "profile") VALUES (%s, %s, %s, %s)', (username,password,name,"voter", ))
+                cursor.execute('INSERT INTO public."Voter" ("nric", "name", "address", "postal_code","phone_number","voted") VALUES (%s, %s, %s, %s, %s, %s)', (nric,name,address,postal_code,number,"false", ))
+                db.commit()
 
 ### party Use case ###
 class PartyPage:

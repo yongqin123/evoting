@@ -88,18 +88,51 @@ def register():
         return boundary.registerTemplate() # A-B
 
     if request.method =="POST":
+        print(request.form)
+        print("In post")
+        username = request.form.get('username')
+        password = request.form.get('password')
+        nric = request.form.get('nric')
+        name = request.form.get('name')
+        postal_code = request.form.get('postal_code')
+        address = request.form.get('address')
+        number = request.form.get('number')
         #boundary.controller.sendOTPtouser(request.form)
-        return redirect(url_for("registerOTP"))
+        return redirect(url_for("registerOTP",username=username,password=password,
+        nric=nric,name=name,postal_code=postal_code,address=address
+        ,number=number))
+        #return boundary.registerTemplateOTP(request.form)
 
 @app.route("/registerOTP", methods=["GET", "POST"])
 def registerOTP():
     boundary = LoginPage()
     if request.method == "GET":
-        print("In get")
+        print("In get abc")
+        #username = request.args.get("username")
+        #print(username)
         return boundary.registerTemplateOTP() # A-B
 
     if request.method =="POST":
         #boundary.controller.sendOTPtouser(request.form)
+        username = request.args.get("username")
+        password = request.args.get("password")
+        nric = request.args.get("nric")
+        name = request.args.get("name")
+        postal_code = request.args.get("postal_code")
+        address = request.args.get("address")
+        number = request.args.get("number")
+
+        print(username)
+        print(password)
+        print(nric)
+        print(name)
+        print(postal_code)
+        print(address)
+        print(number)
+
+        boundary.controller.register(username=username,password=password,
+        nric=nric,name=name,postal_code=postal_code,address=address
+        ,number=number)
         return redirect(url_for("index"))
 
 ### PARTY PAGE ###
