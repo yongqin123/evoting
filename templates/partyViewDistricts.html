@@ -89,11 +89,11 @@
               <span class="view-candidate-info-text06">
                 <a href = "{{url_for('PartyViewDistrict')}}">View Candidates</a>
               </span>
-              <span class="view-candidate-info-text08"><span>FAQ</span></span>
+              
               <div class="view-candidate-info-frame28cart-icon"></div>
               <button class="view-candidate-info-frame03filled-button">
                 <span class="view-candidate-info-text10">
-                  <span>Log Out</span>
+                  <a href="{{ url_for('logOut')}}">Logout</a>
                 </span>
               </button>
             </div>
@@ -107,18 +107,7 @@
             />
           </a>
           
-          <div class="view-candidate-info-login-button2">
-            <span class="view-candidate-info-text19">
-              <span>View Results: NOT AVAILABLE</span>
-            </span>
-          </div>
-          <span class="view-candidate-info-text21">
-            <span>
-              <span>Time of last login: 17 Dec 2022, 3:29pm (SGT)</span>
-              <br />
-              <span>IP Address: 192.168.1.2</span>
-            </span>
-          </span>
+      
           <div class="view-candidate-info-text26">
             <span class="view-candidate-info-text27">
               <span>View Candidate Info: Electoral Division - {{ district }}</span>

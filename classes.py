@@ -182,6 +182,41 @@ class UserAccount():
                 cursor.execute('INSERT INTO public."Voter" ("nric", "name", "address", "postal_code","phone_number","voted") VALUES (%s, %s, %s, %s, %s, %s)', (nric,name,address,postal_code,number,"false", ))
                 db.commit()
 
+class Logout:
+    def __init__(self, session) -> None:
+        self.session = session
+        self.username = session["username"]
+        self.controller = LogoutController(self.session, self.username)
+
+    def logUserOut(self):
+        self.session = self.controller.editSession(self.session, self.username)
+        flash(f"{self.username} logged out!")
+        return redirect(url_for("index"))
+
+
+# Logout Controller
+class LogoutController:
+    def __init__(self, session, username) -> None:
+        self.session = session
+        self.username = session["username"]
+        self.entity = UserSession()
+
+    def editSession(self, session, username):
+        return self.entity.checkUserInSession(session, username)
+
+
+# Logout Entity
+class UserSession:
+    def checkUserInSession(self, session, username):
+        self.session = session
+        if "username" in session and session["username"] == username:
+            return self.removeUserSession(username)
+
+    def removeUserSession(self, username):
+        self.session.pop("username")
+        return self.session
+
+
 ### party Use case ###
 class PartyPage:
     def __init__(self) -> None:
@@ -235,8 +270,8 @@ class PartyPage:
     def getDistrictForm(self):
         return redirect(url_for("updateDistrictProfile"))
     
-    def partyDistrictTemplateUpdate(self, data):
-        return render_template("partyDistrictUpdate.html", data=data)
+    def partyDistrictTemplateUpdate(self, data, party):
+        return render_template("partyDistrictUpdate.html", data=data, party=party)
     
     def partyTemplateViewDistricts(self, districts, party):
         return render_template("partyViewDistricts.html", districts=districts, party=party)

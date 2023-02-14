@@ -76,16 +76,12 @@
               <div class="web-voter-homepage-frame28cart-icon"></div>
               <button class="web-voter-homepage-frame03filled-button">
                 <span class="web-voter-homepage-text10">
-                  <span>Log Out</span>
+                  <a href="{{ url_for('logOut')}}">Logout</a>
                 </span>
               </button>
             </div>
           </div>
-          <img
-            src="/static/public/playground_assets/svg25homeicon1623-3g1n.svg"
-            alt="SVG25HomeIcon1623"
-            class="web-voter-homepage-s-v-g25home-icon"
-          />
+         
           <span class="web-voter-homepage-text12">
             <span>Welcome, {{ details[0] }}</span>
           </span>
@@ -186,7 +182,7 @@
             </span>
           </span>
           <img
-            src="/static/public/playground_assets/image25238-wh1n-500h.png"
+            src="/static/public/playground_assets/voterhome.png"
             alt="image25238"
             class="web-voter-homepage-image2"
           />

@@ -72,6 +72,13 @@ def index():
             return boundary.redirectToRegisterPage()
         elif request.form["submit"] == "register":
             return boundary.redirectToRegisterPage()
+#Logout
+@app.route("/logOut")
+def logOut():
+    boundary = Logout(session)
+    session.clear()
+    print(session)
+    return boundary.logUserOut()            
 
 @app.route("/resetPassWord", methods=["GET", "POST"])
 def resetPassWord():
@@ -317,7 +324,7 @@ def Edit():
             print("hereeeeee editing")
             print(f'########candidates : {data}')
             
-            return boundary.partyDistrictTemplateUpdate(data)
+            return boundary.partyDistrictTemplateUpdate(data, session["party"])
             
 
         elif request.method == "POST":
