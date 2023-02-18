@@ -188,9 +188,8 @@
   }
   .voter-login-rectangle10 {
     top: 176px;
-    
     width: 590px;
-    height: 728px;
+    height: 840px;
     position: relative;
     display: block;
     margin-left: auto;
@@ -316,7 +315,7 @@
   }
 
   .voter-login-frame09input-field5 {
-    top: 625px;
+    top: 702px;
     left: 40%;
     color: rgba(137, 137, 137, 1);
     width: 358px;
@@ -336,8 +335,30 @@
     border-radius: 8px;
     background-color: rgba(0, 0, 0, 0.03999999910593033);
   }
+
+  .voter-login-frame09input-field21 {
+    top: 779px;
+    left: 40%;
+    color: rgba(137, 137, 137, 1);
+    width: 100px;
+    height: 44px;
+    display: flex;
+    padding: 8px 16px;
+    position: absolute;
+    font-size: 17px;
+    text-align: left;
+    align-items: center;
+    flex-shrink: 0;
+    font-family: Nunito;
+    font-weight: 500;
+    border-color: rgba(0, 0, 0, 1);
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.03999999910593033);
+  }
   .voter-login-frame09input-field6 {
-    top: 702px;
+    top: 856px;
     left: 40%;
     color: rgba(137, 137, 137, 1);
     width: 358px;
@@ -397,7 +418,7 @@
     text-decoration: none;
   }
   .voter-login-frame03filled-button2 {
-    top: 775px;
+    top: 933px;
     left: 45%;
     width: 76px;
     height: 44px;
@@ -411,6 +432,43 @@
     justify-content: center;
     background-color: rgba(183, 10, 19, 1);
   }
+
+  .getAddressFromPostal {
+    top: 625px;
+    left: 40%;
+    width: 76px;
+    height: 44px;
+    display: flex;
+    padding: 8px 16px;
+    position: absolute;
+    align-items: center;
+    flex-shrink: 0;
+    border-color: transparent;
+    border-radius: 8px;
+    justify-content: center;
+    background-color: rgba(183, 10, 19, 1);
+  }
+
+  .getAddressFromPostalText {
+    top: 635px;
+    left: 40.3%;
+    color: rgba(240, 240, 240, 1);
+    width: 135px;
+    height: auto;
+    position: absolute;
+    font-size: 17px;
+    align-self: auto;
+    font-style: Bold;
+    text-align: left;
+    font-family: Nunito;
+    font-weight: 700;
+    line-height: 129.99999523162842%;
+    font-stretch: normal;
+    margin-right: 0;
+    margin-bottom: 0;
+    text-decoration: none;
+  }
+
   .voter-login-singpasslogowhite21 {
     top: 480px;
     left: 718px;
@@ -420,8 +478,8 @@
     border-color: transparent;
   }
   .voter-login-text14 {
-    top: 786px;
-    left: 45.5%;
+    top: 940px;
+    left: 45.3%;
     color: rgba(240, 240, 240, 1);
     width: 135px;
     height: auto;

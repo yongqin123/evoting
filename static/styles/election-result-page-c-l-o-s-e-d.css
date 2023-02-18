@@ -1,7 +1,7 @@
-.voter-login-o-t-p-container {
+.election-result-page-c-l-o-s-e-d-container {
   min-height: 100vh;
 }
-.voter-login-o-t-p-voter-login-o-t-p {
+.election-result-page-c-l-o-s-e-d-election-result-page-c-l-o-s-e-d {
   width: 100%;
   height: 1024px;
   display: flex;
@@ -9,34 +9,12 @@
   position: relative;
   align-items: flex-start;
   border-color: transparent;
-  background-color: rgba(183, 10, 19, 1);
+  background-color: rgba(240, 240, 240, 1);
 }
-.voter-login-o-t-p-site-header {
+.election-result-page-c-l-o-s-e-d-frame16desktopsiteheading {
   top: 0px;
   left: 0px;
-  width: 100%;
-  height: 84px;
-  display: flex;
-  padding: 0;
-  position: absolute;
-  align-self: auto;
-  box-sizing: border-box;
-  align-items: flex-start;
-  flex-shrink: 1;
-  border-color: transparent;
-  border-style: none;
-  border-width: 0;
-  margin-right: 0;
-  border-radius: 0px 0px 0px 0px;
-  margin-bottom: 0;
-  flex-direction: row;
-  justify-content: flex-start;
-  background-color: transparent;
-}
-.voter-login-o-t-p-frame16desktopsiteheading {
-  top: 0px;
-  left: 0px;
-  width: 100%;
+  width: 1440px;
   height: 84px;
   display: flex;
   overflow: hidden;
@@ -46,7 +24,7 @@
   border-color: transparent;
   background-color: rgba(255, 255, 255, 1);
 }
-.voter-login-o-t-p-text {
+.election-result-page-c-l-o-s-e-d-text {
   top: 26px;
   left: 64px;
   color: rgba(0, 0, 0, 1);
@@ -64,16 +42,16 @@
   margin-bottom: 0;
   text-decoration: none;
 }
-.voter-login-o-t-p-pageitems {
+.election-result-page-c-l-o-s-e-d-pageitems {
   top: 20px;
-  left: 691px;
-  width: 685px;
+  left: 671px;
+  width: 705px;
   display: flex;
   position: absolute;
   align-items: center;
   border-color: transparent;
 }
-.voter-login-o-t-p-text02 {
+.election-result-page-c-l-o-s-e-d-text02 {
   color: rgba(0, 0, 0, 1);
   height: auto;
   font-size: 20px;
@@ -88,7 +66,7 @@
   margin-bottom: 0;
   text-decoration: none;
 }
-.voter-login-o-t-p-text04 {
+.election-result-page-c-l-o-s-e-d-text04 {
   color: rgba(0, 0, 0, 1);
   height: auto;
   font-size: 20px;
@@ -103,7 +81,7 @@
   margin-bottom: 0;
   text-decoration: none;
 }
-.voter-login-o-t-p-text06 {
+.election-result-page-c-l-o-s-e-d-text06 {
   color: rgba(0, 0, 0, 1);
   height: auto;
   font-size: 20px;
@@ -118,7 +96,7 @@
   margin-bottom: 0;
   text-decoration: none;
 }
-.voter-login-o-t-p-text08 {
+.election-result-page-c-l-o-s-e-d-text08 {
   color: rgba(0, 0, 0, 1);
   height: auto;
   font-size: 20px;
@@ -133,7 +111,7 @@
   margin-bottom: 0;
   text-decoration: none;
 }
-.voter-login-o-t-p-frame28cart-icon {
+.election-result-page-c-l-o-s-e-d-frame28cart-icon {
   width: 24px;
   height: 24px;
   display: flex;
@@ -144,7 +122,7 @@
   border-color: transparent;
   margin-right: 48px;
 }
-.voter-login-o-t-p-frame03filled-button {
+.election-result-page-c-l-o-s-e-d-frame03filled-button {
   height: 44px;
   display: flex;
   padding: 8px 16px;
@@ -156,7 +134,7 @@
   justify-content: center;
   background-color: rgba(183, 10, 19, 1);
 }
-.voter-login-o-t-p-text10 {
+.election-result-page-c-l-o-s-e-d-text10 {
   color: rgba(255, 255, 255, 1);
   height: auto;
   font-size: 17px;
@@ -171,159 +149,103 @@
   margin-bottom: 0;
   text-decoration: none;
 }
-.voter-login-o-t-p-s-v-g31lock-icon {
+.election-result-page-c-l-o-s-e-d-s-v-g25home-icon {
   top: 29px;
-  left: 1228px;
+  left: 1208px;
   width: 24px;
   height: 24px;
   position: absolute;
 }
-.voter-login-o-t-p-rectangle10 {
-  top: 176px;
-  left: 425px;
-  width: 590px;
-  height: 728px;
+.election-result-page-c-l-o-s-e-d-rectangle14 {
+  top: 186px;
+  left: 130px;
+  width: 1254px;
+  height: 823px;
   position: absolute;
   border-color: transparent;
-  border-radius: 19px;
+  border-radius: 15px 15px 0 0;
 }
-.voter-login-o-t-p-text12 {
-  top: 467px;
-  left: 631px;
-  color: rgba(0, 0, 0, 1);
-  width: 178px;
+.election-result-page-c-l-o-s-e-d-text12 {
+  top: 206px;
+  left: 169px;
+  color: var(--dl-color-default-dark);
+  width: 1236px;
   height: auto;
   position: absolute;
-  font-size: 14px;
-  align-self: auto;
-  font-style: Medium;
-  text-align: left;
-  font-family: Nunito;
-  font-weight: 500;
-  line-height: 129.99999523162842%;
-  font-stretch: normal;
-  margin-right: 0;
-  margin-bottom: 0;
-  text-decoration: none;
-}
-.voter-login-o-t-p-text13 {
-  color: rgba(0, 0, 0, 1);
-}
-.voter-login-o-t-p-text14 {
-  text-decoration: NONE;
-}
-.voter-login-o-t-p-o-t-p-fields {
-  top: 327px;
-  left: 605.5px;
-  width: 229px;
-  height: 31px;
-  display: flex;
-  padding: 0;
-  position: absolute;
-  align-self: auto;
-  box-sizing: border-box;
-  align-items: flex-start;
-  flex-shrink: 1;
-  border-color: transparent;
-  border-style: none;
-  border-width: 0;
-  margin-right: 0;
-  border-radius: 0px 0px 0px 0px;
-  margin-bottom: 0;
-  flex-direction: row;
-  justify-content: flex-start;
-  background-color: transparent;
-}
-.voter-login-o-t-p-rectangle13 {
-  top: 0px;
-  left: 132.5px;
-  width: 96px;
-  height: 31px;
-  position: absolute;
-  box-sizing: content-box;
-}
-.voter-login-o-t-p-s-v-g01minus-icon {
-  top: 4px;
-  left: 102.5px;
-  width: 24px;
-  height: 24px;
-  position: absolute;
-}
-.voter-login-o-t-p-rectangle12 {
-  top: 0px;
-  left: 0px;
-  width: 96px;
-  height: 31px;
-  position: absolute;
-  box-sizing: content-box;
-}
-.voter-login-o-t-p-text16 {
-  top: 376px;
-  left: 50px;
-  color: rgba(0, 0, 0, 1);
-  width: 127px;
-  height: auto;
-  position: absolute;
-  font-size: 14px;
-  align-self: auto;
-  font-style: Medium;
-  text-align: left;
-  font-family: Nunito;
-  font-weight: 500;
-  line-height: 129.99999523162842%;
-  font-stretch: normal;
-  margin-right: 0;
-  margin-bottom: 0;
-  text-decoration: none;
-}
-.voter-login-o-t-p-submit-button {
-  top: 402px;
-  left: 60px;
-  width: 89px;
-  height: 44px;
-  display: flex;
-  padding: 0;
-  position: absolute;
-  align-self: auto;
-  box-sizing: border-box;
-  align-items: flex-start;
-  flex-shrink: 1;
-  border-color: transparent;
-  border-style: none;
-  border-width: 0;
-  margin-right: 0;
-  border-radius: 0px 0px 0px 0px;
-  margin-bottom: 0;
-  flex-direction: row;
-  justify-content: flex-start;
-  background-color: transparent;
-}
-.voter-login-o-t-p-frame03filled-button1 {
-  top: 0px;
-  left: 20px;
-  height: 44px;
-  display: flex;
-  padding: 8px 16px;
-  position: relative;
-  
-  flex-shrink: 0;
-  border-color: transparent;
-  border-radius: 8px;
-  
-  background-color: rgba(183, 10, 19, 1);
-}
-.voter-login-o-t-p-text18 {
-  color: rgba(255, 255, 255, 1);
-  height: auto;
-  font-size: 17px;
+  font-size: 40px;
   align-self: auto;
   font-style: Bold;
   text-align: left;
-  font-family: Nunito;
+  font-family: Urbanist;
   font-weight: 700;
   line-height: 129.99999523162842%;
   font-stretch: normal;
   margin-right: 0;
   margin-bottom: 0;
   text-decoration: none;
+}
+.election-result-page-c-l-o-s-e-d-text14 {
+  top: 781px;
+  left: 374px;
+  color: var(--dl-color-default-dark);
+  width: 692px;
+  height: auto;
+  position: absolute;
+  font-size: 40px;
+  align-self: auto;
+  font-style: Bold;
+  text-align: center;
+  font-family: Urbanist;
+  font-weight: 700;
+  line-height: 129.99999523162842%;
+  font-stretch: normal;
+  margin-right: 0;
+  margin-bottom: 0;
+  text-decoration: none;
+}
+.election-result-page-c-l-o-s-e-d-login-button {
+  top: 103px;
+  left: 883px;
+  width: 479px;
+  height: 63px;
+  display: flex;
+  padding: 0;
+  position: absolute;
+  align-self: auto;
+  box-sizing: border-box;
+  align-items: flex-start;
+  flex-shrink: 1;
+  border-color: transparent;
+  border-style: none;
+  border-width: 0;
+  margin-right: 0;
+  border-radius: 0px 0px 0px 0px;
+  margin-bottom: 0;
+  flex-direction: row;
+  justify-content: flex-start;
+  background-color: rgba(255, 255, 255, 1);
+}
+.election-result-page-c-l-o-s-e-d-text16 {
+  top: 21.375001907348633px;
+  left: 50.802947998046875px;
+  color: rgba(0, 0, 0, 1);
+  width: 363px;
+  height: auto;
+  position: absolute;
+  font-size: 15px;
+  align-self: auto;
+  font-style: SemiBold;
+  text-align: center;
+  font-family: Urbanist;
+  font-weight: 600;
+  line-height: normal;
+  font-stretch: normal;
+  text-decoration: none;
+}
+.election-result-page-c-l-o-s-e-d-s-v-g17clock-icon {
+  top: 315px;
+  left: 515px;
+  width: 410px;
+  height: 410px;
+  position: absolute;
 }
