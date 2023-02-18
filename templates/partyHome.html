@@ -248,7 +248,13 @@
 
             <span class="party-adminupdateprofile-text34">
               
-              <H1>Welcome back Admin!</H1>
+              {% if partyDetails|length > 1 %}
+                {% if partyDetails[1] != None %}
+                  <H1>{{partyDetails[1]}}</H1> <br>
+                {% else %}
+                  <H1>Welcome back Admin!</H1> <br>
+                {% endif %}
+              {% endif %}
               {% with messages = get_flashed_messages() %} 
                   {% if messages %}
                       {% for msg in messages %}
