@@ -31,23 +31,28 @@
                     {% endwith %}
                     <table class="table table-hover table-dark">
                         <tr>
-                            <th>ID</th>
+                            <!-- <th>ID</th> -->
                             <th>Title</th>
                             <th>Description</th>
                             <th>Action</th>
                         </tr>
                         {% for row in election_areas %}
+
+                        {% set title = row.title.split(' ') %}
+                        {% set new_title = title|join('')%}
+                        
                         <tr>
-                            <td>{{row.id}}</td>
+                             <!--  <td>{{row.id}}</td> -->
                             <td>{{row.title}}</td>
                             <td>{{row.description}}</td>
                             <td>
-                                <a href="/admin/update_election_area/{{row.id}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.id}}">Edit</a>
-                                <a href="/admin/delete_election_area/{{row.id}}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure about deleting?')">Delete</a>
+                                <a href="/admin/update_election_area/{{row.title}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{new_title}}">Edit</a>
+                                <a href="/admin/delete_election_area/{{row.title}}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure about deleting?')">Delete</a>
                             </td>
                         </tr>
-
-                        <div id="modaledit{{row.id}}" class="modal fade" role="dialog">
+                        <!-- I deleted class="modal fade"-->
+                        <div id="modaledit{{new_title}}" class="modal fade" role="dialog">
+                            
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -57,8 +62,8 @@
                                         <form action="{{url_for('admin.update_election_area')}}" method="POST">
                                             <div class="form-group">
                                                 <label>Title:</label>
-                                                <input type="hidden" name="id" value="{{row.id}}">
-                                                <input type="text" class="form-control" name="title" value="{{row.title}}">
+                                                <!-- <input type="hidden" name="id" value="{{row.id}}"> -->
+                                                <input readonly type="text" class="form-control" name="title" value="{{row.title}}">
                                             </div>
                                             <div class="form-group">
                                                 <label>Description:</label>

@@ -6,7 +6,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col md-12">
+        <div class="col lg-12">
             <div class="jumbotron p-3">
                 <h2>Manage <b>Party</b> <button type="button" class="btn btn-success float-right"
                     data-toggle="modal" data-target="#mymodal">Add New Party</button> </h2>
@@ -29,37 +29,40 @@
                     {% endif %}
 
                     {% endwith %}
-                    <table class="table table-hover table-dark">
+                    <table class="table table-hover table-dark ">
                         <tr>
-                            <th>ID</th>
                             <th>Title</th>
-                            <th>Manifesto</th>
-                            <th>Logo</th>
+                            <th>Username</th>
+                            <th>Password</th>
                             <th>Election Areas</th>
                             <th>Action</th>
                         </tr>
                         {% for row in parties %}
+
+                        {% set title = row.title.split(' ') %}
+                        {% set new_title = title|join('')%}
+                        
+                        
                         <tr>
-                            <td>{{row.id}}</td>
                             <td>{{row.title}}</td>
-                            <td>{{row.manifesto}}</td>
-                            <td>{{row.logo}}</td>
+                            <td>{{row.username}}</td>
+                            <td>{{row.password}}</td>
                             <td>
-                                <ul>
+                                <ul style="padding-left: 0; list-style:none">
                                     {% for area in row.participating %}
-                                    <li style="list-style: none;">
+                                    <li  >
                                         {{ area.title }}
                                     </li>
                                     {% endfor %}
                                 </ul>
                             </td>
                             <td>
-                                <a href="/admin/update_party/{{row.id}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.id}}">Edit</a>
-                                <a href="/admin/delete_party/{{row.id}}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure about deleting?')">Delete</a>
+                                <a href="/admin/update_party/{{row.title}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{ new_title }}">Edit</a>
+                                <a href="/admin/delete_party/{{row.title}}" class="btn btn-danger btn-xs" onclick="return confirm('Are you sure about deleting?')">Delete</a>
                             </td>
                         </tr>
-
-                        <div id="modaledit{{row.id}}" class="modal fade" role="dialog">
+                        
+                        <div id="modaledit{{ new_title }}" class="modal fade" role="dialog">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -69,25 +72,26 @@
                                         <form action="{{url_for('admin.update_party')}}" method="POST">
                                             <div class="form-group">
                                                 <label>Title:</label>
-                                                <input type="hidden" name="id" value="{{row.id}}">
-                                                <input type="text" class="form-control" name="title" value="{{row.title}}">
+                                                
+                                                <input readonly type="text" class="form-control" name="title" value="{{row.title}}">
                                             </div>
                                             <div class="form-group">
-                                                <label>Manifesto:</label>
-                                                <input type="text" class="form-control" name="manifesto" value="{{row.manifesto}}">
+                                                <label>Username:</label>
+                                                <input type="text" class="form-control" name="username" value="{{row.username}}">
                                             </div>
                                             <div class="form-group">
-                                                <label>Logo:</label>
-                                                <input type="text" class="form-control" name="logo" value="{{row.logo}}">
+                                                <label>Password:</label>
+                                                <input type="password" class="form-control" name="password" value="{{row.password}}">
                                             </div>
                                             <div class="form-group">
                                                 <label for="ea">Election Areas:</label>
-                                                    <select class="form-control" name="participating" id="ea" multiple>
+                                                    <select class="form-control" name="participating"  id="ea" multiple>
                                                         {% for area in election_areas %}
                                                                 {% for participating_area in row.participating if area.title == participating_area.title %}
-                                                                    <option value="{{area.id}}" selected>{{area.title}}</option>
+                                                                    <option value="{{area.title}}" selected>{{area.title}}</option>
+
                                                                 {% else %}
-                                                                    <option value="{{area.id}}">{{area.title}}</option>
+                                                                    <option value="{{area.title}}">{{area.title}}</option>
                                                                 {% endfor %}
                                                         {% endfor %}
                                                     </select>
@@ -118,21 +122,22 @@
                             <form action="{{url_for('admin.insert_party')}}" method="POST">
                                 <div class="form-group">
                                     <label>Title:</label>
+                                    
                                     <input type="text" class="form-control" name="title" required="1">
                                 </div>
                                 <div class="form-group">
-                                    <label>Manifesto:</label>
-                                    <input type="text" class="form-control" name="manifesto" required="1">
+                                    <label>Username:</label>
+                                    <input type="text" class="form-control" name="username" required="1">
                                 </div>
                                 <div class="form-group">
-                                    <label>Logo:</label>
-                                    <input type="text" class="form-control" name="logo" required="1">
+                                    <label>Password:</label>
+                                    <input type="text" class="form-control" name="password" required="1">
                                 </div>
                                 <div class="form-group">
                                     <label for="ea">Election Areas:</label>
                                         <select class="form-control" name="participating" id="ea" multiple>
                                             {% for area in election_areas %}
-                                                <option value="{{area.id}}">{{area.title}}</option>
+                                                <option value="{{area.title}}">{{area.title}}</option>
                                             {% endfor %}
                                         </select>
                                 </div>
@@ -153,5 +158,4 @@
         </div>
     </div>
 </div>
-
 {% endblock %}
