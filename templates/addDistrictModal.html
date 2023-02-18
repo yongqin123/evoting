@@ -63,7 +63,7 @@
                 g.innerHTML= '';
 
                 const e = document.getElementById("smc");
-                e.innerHTML= '<h4>Candidate 1</h4><label><b>Name</b> &nbsp;</label><input class = "Candidate-NameInput" type ="text" placeholder ="Candidate 1" name = "Name[]"  id="a1" >&nbsp;<label><b>NRIC</b>&nbsp;</label><input type ="text" class = "Candidate-NricInput" placeholder ="S1234567Z" name = "NRIC[]"  id="a2" ><br><br><label><b>Upload Image</b></label><input type="file" name = "img[]" id="a3" /><span>Upload your jpeg/jpg image. Max size 50 MB</span><br><br>'
+                e.innerHTML= '<h4>Candidate 1</h4><label><b>Name</b> &nbsp;</label><input class = "Candidate-NameInput" type ="text" placeholder ="Candidate 1" name = "Name[]"  id="a1" required>&nbsp;<label><b>NRIC</b>&nbsp;</label><input type ="text" class = "Candidate-NricInput" placeholder ="S1234567Z" name = "NRIC[]"  id="a2" required><br><br><label><b>Upload Image</b></label><input type="file" name = "img[]" id="a3" required /><span>Upload your jpeg/jpg image. Max size 50 MB</span><br><br>'
                 //document.getElementById('smc').appendChild(e)
             }
 
@@ -75,7 +75,7 @@
                 const e = document.getElementById("grc");
                 e.innerHTML= '';
                 for (let i =0; i < 5; i++) {
-                    e.innerHTML = e.innerHTML + '<h4>Candidate ' + (i+1) +'</h4><label><b>Name</b>&nbsp;</label><input type ="text" class = "Candidate-NameInput" placeholder ="Candidate ' + (i+1) +'" name = "Name[]"  id="a' + (i+1) +'" >&nbsp;<label><b>NRIC</b>&nbsp;</label><input type ="text" class = "Candidate-NricInput" placeholder ="S1234567Z" name = "NRIC[]"  id="a2" ><br><br><label><b>Upload Image</b></label><input type="file" name = "img[]" id="a3" /><span>Upload your jpeg/jpg image. Max size 50 MB</span><br><br>'
+                    e.innerHTML = e.innerHTML + '<h4>Candidate ' + (i+1) +'</h4><label><b>Name</b>&nbsp;</label><input type ="text" class = "Candidate-NameInput" placeholder ="Candidate ' + (i+1) +'" name = "Name[]"  id="a' + (i+1) +'" required>&nbsp;<label><b>NRIC</b>&nbsp;</label><input type ="text" class = "Candidate-NricInput" placeholder ="S1234567Z" name = "NRIC[]"  id="a2" required ><br><br><label><b>Upload Image</b></label><input type="file" name = "img[]" id="a3" required/><span>Upload your jpeg/jpg image. Max size 50 MB</span><br><br>'
                 }
             }
 

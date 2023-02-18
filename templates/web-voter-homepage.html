@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="english">
   <head>
-    <title>Voter Home Page</title>
+    <title>Vote homepage</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="utf-8" />
     <meta property="twitter:card" content="summary_large_image" />
@@ -59,9 +59,11 @@
       <div class="web-voter-homepage-container">
         <div class="web-voter-homepage-web-voter-homepage">
           <div class="web-voter-homepage-frame16desktopsiteheading">
-            <span class="web-voter-homepage-text">
-              <span>Our Product Name</span>
-            </span>
+            <img
+            src="/static/public/playground_assets/mainicon.png"
+            style="height:90px; width:150px;"
+          />
+            
             <div class="web-voter-homepage-pageitems"> 
               <span class="web-voter-homepage-text02">
                 <span>Elections Info</span>
@@ -90,11 +92,25 @@
             alt="Rectangle141623"
             class="web-voter-homepage-rectangle14"
           />
-          <a href="{{ url_for('voterVote') }}" class="web-voter-homepage-login-button">
-            <span class="web-voter-homepage-text14">
-              <span>Cast Your Vote</span>
-            </span>
-          </a>
+          
+          {% if details[5] %}
+          <Button class="web-voter-homepage-login-button" disabled>
+            
+              <span class="web-voter-homepage-text14">
+                <span>Cast Your Vote</span>
+              </span>
+            
+          </Button>
+          {% else %}
+          <Button class="web-voter-homepage-login-button">
+            <a href="{{ url_for('voterVote') }}" >
+              <span class="web-voter-homepage-text14">
+                <span>Cast Your Vote</span>
+              </span>
+            </a>
+          </Button>
+          {% endif %}
+          
           <span class="web-voter-homepage-text16">
             <span>
               {% if details[5] %}
@@ -251,15 +267,8 @@
           </div>
           <div class="web-voter-homepage-frame1one-line4">
             <div class="web-voter-homepage-x-base1one-line-left-label-icon4">
-              <span class="web-voter-homepage-text59 ParagraphP2-16">
-                <span>Email</span>
-              </span>
-              <div class="web-voter-homepage-chat">
-                <img
-                  src="/static/public/playground_assets/icon5254-b7q.svg"
-                  alt="Icon5254"
-                  class="web-voter-homepage-icon4"
-                />
+              
+              
               </div>
             </div>
           </div>
@@ -273,7 +282,7 @@
               <br />
               <span></span>
               <br />
-              <span>XXXXXXX@gmail.com</span>
+              
               <br />
               <span></span>
               <br />

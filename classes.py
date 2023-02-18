@@ -1,6 +1,7 @@
 ### IMPORTS ###
 import time
-#from fhe import *
+from cryptography.fernet import Fernet
+from fhe import *
 import decimal
 from re import sub
 from decimal import Decimal
@@ -39,11 +40,11 @@ db_name = 'postgres'
 db_user = 'evotingsystem'
 db_pw = 'EmXAdCIbKic5IL6TL9e3'
 
-#key_pairs = fhe()
-global otp_dic
-otp_dic = {}
+key_pairs = fhe()
+otp_fernet_key = open("./keys/otp.key", "rb").read()
+f = Fernet(otp_fernet_key)
 
-ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
+ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'txt'])
 
 def allowed_file(filename): 
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
@@ -59,7 +60,8 @@ class LoginPage:
         # get all profiles
         profiles = self.controller.getProfiles()
         parties = self.controller.getParties()
-        return render_template("voter-login.html", profiles=profiles, parties=parties)
+        status = self.controller.getStatus()
+        return render_template("voter-login.html", profiles=profiles, parties=parties, status=status)
 
     def registerTemplate(self):
         return render_template("voter-register-form.html")
@@ -69,10 +71,13 @@ class LoginPage:
 
     def redirectToProfilePage(self,account_type):
         default_profiles = ["party", "super_admin", "voter", 'admin']
-        if account_type not in default_profiles:
+        if account_type == 'voter':
+            return redirect(url_for("loginOTP"))
+        elif account_type not in default_profiles:
             return redirect(url_for("otherProfiles", type=account_type))
         else:
             return redirect(url_for(account_type))
+
 
     def redirectToResetPasswordPage(self):
         return redirect(url_for("resetPassWord"))
@@ -108,10 +113,33 @@ class LoginPageController:
     def getParties(self):
         return self.entity.getAllParties()
 
-    def sendOTPtouser(self, request_form):
+    def getRegisterationFormDetails(self, request_form):
+        username = request_form["username"]
+        password = request_form["password"]
+        nric = request_form["nric"]
+        name = request_form["name"]
+        postal_code = request_form["postal_code"]
+        address = request_form["address"]
+        unit = request_form["unit"]
+        streetName = str(address).split(" ")
+        #postal_code = streetName[-1]
+        streetName = streetName[:-2]
+        print(streetName)
+        address = " ".join(streetName) + " " + str(unit)
+
+        number = request_form["number"]
+        return [username,password,nric,name,postal_code,address,number]
+        #return self.register(username,password,nric,name,postal_code,address,number)
+
+    def getRegisterationFormDetailsFromGet(self):
+        arr = session["userParticulars"]
+        return self.register(arr[0],arr[1],arr[2],arr[3],arr[4],arr[5],arr[6])
+        
+
+    def sendOTPtouser(self):
         otp = self.entity.generateOTP()
         #self.entity.OTPPhoneNumber = '91251636'
-        self.entity.OTPPhoneNumber = request_form["number"]
+        self.entity.OTPPhoneNumber = request.args.get("number")
         account_sid = 'AC4fe73199e1fc12a01e04f1ddb53c18c3' 
         auth_token = '55efccda2ef34ba35881eb256df476ae' 
         client = Client(account_sid, auth_token) 
@@ -121,14 +149,35 @@ class LoginPageController:
                                     body=f'Your OTP IS {otp}',      
                                     to=f'+65{self.entity.OTPPhoneNumber}' 
                                 ) 
-        otp_dic[self.entity.OTPPhoneNumber] = otp
+        
         print(message)
 
     def register(self,username,password,nric,name,postal_code,address,number):
         return self.entity.registerVoter(username,password,nric,name,postal_code,address,number)
 
+    def setOTP(self, otp):
+        self.entity.otp = otp
+
+    def getOTP(self):
+        return self.entity.otp
+
+    def getOTPInput(self, request_form):
+        return str(request_form['1']) + str(request_form['2']) + str(request_form['3']) + str(request_form['4']) + str(request_form['5'])+ str(request_form['6'])
+
+    def getUserPhone(self):
+        return self.entity.getPhone()
+
+    def getStatus(self):
+        return self.entity.getStatus()
 
 class UserAccount():
+    def getStatus(self):
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute(f'SELECT status FROM public."Election"')
+                result = cursor.fetchone()
+                return result[0]
+
     def getAllProfiles(self) -> list:
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
@@ -143,7 +192,7 @@ class UserAccount():
                 if self.account_type == "party":
                     #check if party's name is correct
                     print("party name:" + self.party)
-                    cursor.execute(f'SELECT * FROM public."Login" WHERE username = %s AND password = %s AND name = %s AND profile = %s', (self.username, self.password, self.party, self.account_type))
+                    cursor.execute(f'SELECT * FROM public."Party" WHERE title = %s AND username = %s AND password = %s', (self.party, self.username, self.password,))
                     result = cursor.fetchone()
                     db.commit()
                 
@@ -162,25 +211,34 @@ class UserAccount():
     def getAllParties(self):
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute(f'SELECT "Party_name" FROM public."Party"')
+                cursor.execute(f'SELECT "title" FROM public."Party"')
                 parties = cursor.fetchall()
                 print(parties)
         return parties
 
-    def generateOTP(self):
-        secret = pyotp.random_base32()
-        #set code expiry to 60 secs
-        totp = pyotp.TOTP(secret, interval=60)
-        otp = totp.now() # => 6 digit number
-        return otp
+    
 
     
     def registerVoter(self,username,password,nric,name,postal_code,address,number):
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                url = f"https://www.parliament.gov.sg/mps/find-mps-in-my-constituency?SearchKeyword={postal_code}"
+                fp = requests.get(url).text
+                soup = BeautifulSoup(fp, 'html.parser')
+                contestingZone = soup.find("div" , {"class" : "row result-grc result-pd"}).find("h4").find("a").text
                 cursor.execute('INSERT INTO public."Login" ("username", "password", "name", "profile") VALUES (%s, %s, %s, %s)', (username,password,name,"voter", ))
-                cursor.execute('INSERT INTO public."Voter" ("nric", "name", "address", "postal_code","phone_number","voted") VALUES (%s, %s, %s, %s, %s, %s)', (nric,name,address,postal_code,number,"false", ))
+                cursor.execute('INSERT INTO public."Voter" ("nric", "name", "address", "postal_code","phone_number","voted","contestingZone") VALUES (%s, %s, %s, %s, %s, %s, %s)', (nric,name,address,postal_code,number,"false", contestingZone))
                 db.commit()
+
+    def getPhone(self):
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute('SELECT phone_number FROM public."Voter" WHERE nric = %s', (session["username"],))
+                result = cursor.fetchone()
+
+                print(result[0])
+                return result[0]
+
 
 class Logout:
     def __init__(self, session) -> None:
@@ -270,8 +328,8 @@ class PartyPage:
     def getDistrictForm(self):
         return redirect(url_for("updateDistrictProfile"))
     
-    def partyDistrictTemplateUpdate(self, data, party):
-        return render_template("partyDistrictUpdate.html", data=data, party=party)
+    def partyDistrictTemplateUpdate(self, data):
+        return render_template("partyDistrictUpdate.html", data=data)
     
     def partyTemplateViewDistricts(self, districts, party):
         return render_template("partyViewDistricts.html", districts=districts, party=party)
@@ -290,8 +348,8 @@ class PartyPageController:
     def getPartyDetails(self):
         return self.entity.partyDetailsAll()
 
-    def getName(self):
-        return self.entity.PartyName()
+    #def getName(self):
+        #return self.entity.PartyName()
 
     def getDistricts(self):
         return self.entity.PartyDistricts()
@@ -355,7 +413,8 @@ class PartyPageController:
         self.entity.districtName = session["districtName"]
         return self.entity.updateNewDistrictProfile()
 
-    def getContestingZones(self):
+    def getContestingZones(self, party):
+        self.entity.party=party
         return self.entity.getDbDistrictName()
 
     def getImages(self, filepath,):
@@ -376,7 +435,7 @@ class PartyDetails:
     def deleteData(self):
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute('DELETE FROM public."PartyElectionArea" WHERE "election_area" = %s and "party" = %s',(self.district, self.party, ))
+                #cursor.execute('DELETE FROM public."PartyElectionArea" WHERE "election_area" = %s and "party" = %s',(self.district, self.party, ))
                 cursor.execute('DELETE FROM public."Candidate" WHERE "DistrictName" = %s and "Party_name" = %s',(self.district, self.party, ))
                 db.commit()
 
@@ -386,9 +445,14 @@ class PartyDetails:
         result = []
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                districts = self.PartyDistricts()
-                for district in districts:
-                    cursor.execute('SELECT * FROM public."Candidate" WHERE "Party_name" = %s and "DistrictName" = %s ' ,(self.party,district, ))
+                cursor.execute('SELECT DISTINCT "DistrictName" FROM public."Candidate" WHERE "Party_name" = %s', (self.party,)) #get the already taken district
+                existing = cursor.fetchall() #get the districts party can run 
+                print(f"contesting in :{existing}")
+                print(f"party: {self.party}")
+                
+                for district in existing:
+                    print(f"district: {district}")
+                    cursor.execute('SELECT * FROM public."Candidate" WHERE "Party_name" = %s and "DistrictName" = %s' ,(self.party, district[0], ))
                     temp = cursor.fetchall()
                     result.append(temp)
         return result
@@ -397,21 +461,23 @@ class PartyDetails:
     def partyDetailsAll(self):
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute('SELECT * FROM public."Party" WHERE "Party_name" = %s',(session["party"],))
+                cursor.execute('SELECT * FROM public."Party" WHERE "title" = %s',(session["party"],))
                 result = cursor.fetchone()
                 print(result)
                 return result
 
-    #get already contested district 
+    #LIST OF available districts the party can run at
     def PartyDistricts(self):
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute('SELECT DISTINCT "DistrictName" FROM public."Candidate" WHERE "Party_name" = %s',(session["party"],))
+                cursor.execute('SELECT "election_title" FROM public."PartyElectionArea" WHERE "party_title" = %s',(session["party"],))
                 result = cursor.fetchall()
                 if result == [[]]:
+                    print("party dont have any contesting district yet (admin didnt insert for this party, check db)")
                     return None
                 else:
-                    result = list(map(lambda x: x[0], result))
+                    #result = list(map(lambda x: x[0], result))
+                    print(f"LIST OF available districts the party can run at: {result}")
                     return result
 
     def uploadImagePartyLogo(self):
@@ -440,10 +506,11 @@ class PartyDetails:
         result = []
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                existing = self.PartyDistricts() # get already contested district
+                districts = self.PartyDistricts() #LIST OF available districts the party can run at (all the district)
 
-                cursor.execute('SELECT * FROM public."ContestingZone" ORDER BY "DistrictName" ASC')
-                districts = cursor.fetchall()
+                cursor.execute('SELECT DISTINCT "DistrictName" FROM public."Candidate" WHERE "Party_name" = %s;', (self.party,)) #get the already taken district
+                existing = cursor.fetchall()
+                #print(districts)
 
                 for district in districts:
                     if district[0] not in existing:
@@ -451,27 +518,29 @@ class PartyDetails:
         return result 
 
     
-    def PartyName(self):
+    """def PartyName(self):
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 cursor.execute(f'SELECT name FROM public."Login" WHERE profile = "Party"; ')
                 result = cursor.fetchall()
                 db.commit()
                
-                return result
+                return result"""
 
-    def CheckPartyExist(self):
+    def CheckPartyExist(self): #checkifprofilesetupalready
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute('SELECT * FROM public."Party" WHERE "Party_name" = %s ;', (self.party,))
+                cursor.execute('SELECT * FROM public."Party" WHERE "title" = %s  AND "manifesto" IS NULL AND "logo" IS NULL;', (self.party,))
                 result = cursor.fetchone()
-                print(result)
+                #print(result)
                 db.commit()
 
-                if result != None: 
+                if result != None:  #means ("val", NULL, NULL, "val" , "val") means havent set up
+                    print ("profile haven't setup")
+                    return False 
+                else:
+                    print ("profile setup already")
                     return True #there is a result, hence party already exists
-                else: 
-                    return False
 
     def CheckDistrictExist(self):
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
@@ -490,7 +559,7 @@ class PartyDetails:
     def createNewPartyProfile(self):
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute('INSERT INTO public."Party" ("Party_name", "Manifesto", "Logo") VALUES (%s, %s, %s)', (self.party, self.manifesto, self.party + ".png", ))
+                cursor.execute('UPDATE public."Party" set "logo" = %s , "manifesto" = %s WHERE "title" = %s', (self.party + ".png", self.manifesto, self.party, ))                  
                 db.commit()
                 self.uploadImagePartyLogo()
         
@@ -501,15 +570,15 @@ class PartyDetails:
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:     
                 if self.manifesto and self.logo.filename != "":
-                    cursor.execute('UPDATE public."Party" set "Logo" = %s , "Manifesto" = %s WHERE "Party_name" = %s', (self.party + ".png", self.manifesto, self.party, ))
+                    cursor.execute('UPDATE public."Party" set "logo" = %s , "manifesto" = %s WHERE "title" = %s', (self.party + ".png", self.manifesto, self.party, ))
                     db.commit()
                     self.uploadImagePartyLogo()
                 elif self.manifesto == "" and self.logo.filename != "": 
-                    cursor.execute('UPDATE public."Party" set "Logo" = %s WHERE "Party_name" = %s', (self.party + ".png", self.party, ))
+                    cursor.execute('UPDATE public."Party" set "logo" = %s WHERE "title" = %s', (self.party + ".png", self.party, ))
                     db.commit()
                     self.uploadImagePartyLogo()
                 elif self.logo.filename == "" and self.manifesto !="": 
-                    cursor.execute('UPDATE public."Party" set "Manifesto" = %s WHERE "Party_name" = %s', (self.manifesto, self.party, ))
+                    cursor.execute('UPDATE public."Party" set "manifesto" = %s WHERE "title" = %s', (self.manifesto, self.party, ))
                     db.commit()
                 else:
                     return
@@ -660,6 +729,9 @@ class PartyDetails:
 class VoterPage:
     def __init__(self) -> None:
         self.controller = VoterPageController()
+
+    def registerTemplateOTP(self):
+        return render_template("voter-login-o-t-p.html")
         
     def buttonClicked(self, request_form):
         self.button_id = request_form["button_type"]
@@ -716,6 +788,12 @@ class VoterPageController:
     def __init__(self) -> None:
         self.entity = VoterDetails()
 
+    def getOTPInput(self, request_form):
+        return str(request_form['1']) + str(request_form['2']) + str(request_form['3']) + str(request_form['4']) + str(request_form['5'])+ str(request_form['6'])
+
+    def setOTP(self, otp):
+        self.entity.otp = otp
+
     def getDetails(self):
         return self.entity.voterDetails()
 
@@ -728,8 +806,8 @@ class VoterPageController:
         self.entity.postal_code = postal_code
         return self.entity.voterNewAddress()
 
-    def setPhoneNumber(self, request):
-        self.entity.phone_number = request["phone_number"]
+    def setPhoneNumber(self, newNum):
+        self.entity.phone_number = newNum
         return self.entity.voterNewPhoneNumber()
 
     def getDistrictName(self):
@@ -753,7 +831,10 @@ class VoterPageController:
     def voterVote(self,request,constituency,parties):
         #self.entity.chosen_party = request.form.get("parties")
         #session["chosen_party"] = self.entity.chosen_party
-        self.entity.addedToBallot(request,parties,constituency)
+        open_count = open('./keys/count.txt','r+')
+        count = int(open_count.read())
+        open_count.close()
+        self.entity.addedToBallot(request,parties,constituency, count)
         return self.entity.voterVote(request,constituency)
 
     def hasVoterVoted(self):
@@ -770,6 +851,8 @@ class VoterDetails:
                 cursor.execute(f'SELECT name, address, postal_code, phone_number, "contestingZone", "voted" FROM public."Voter" WHERE nric = %s; ', (session["username"],))
                 result = cursor.fetchone()
                 db.commit()
+                print("here")
+                print(result)
                 session['districtName'] = result[4]
                 return result
 
@@ -811,7 +894,7 @@ class VoterDetails:
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
                 session['districtName'] =  self.voterDistrictName()
-                cursor.execute(f'SELECT "party" FROM public."PartyElectionArea" WHERE "election_area" = %s;', (session['districtName'],))
+                cursor.execute(f'SELECT "party_title" FROM public."PartyElectionArea" WHERE "election_title" = %s;', (session['districtName'],))
                 
                 result = cursor.fetchall()
                 return result
@@ -819,7 +902,7 @@ class VoterDetails:
     def voterGetSelectedParty(self):
          with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute(f'SELECT "Party_name", "Manifesto", "Logo" FROM public."Party" WHERE "Party_name" = %s;', (session["chosen_party"],))
+                cursor.execute(f'SELECT "title", "manifesto", "logo" FROM public."Party" WHERE "title" = %s;', (session["chosen_party"],))
                 result = cursor.fetchone()
                 
                 return result
@@ -874,30 +957,41 @@ class VoterDetails:
     def voterGetConstituency(self):
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute(f'SELECT "contestingZone" FROM public."Voter"')
+                cursor.execute(f'SELECT "contestingZone" FROM public."Voter" WHERE nric=%s', (session["username"],))
                 result = cursor.fetchone()
                 
                 db.commit()
                 return result
 
-    def addedToBallot(self, election_party_title, parties, constituency):
+    def addedToBallot(self, election_party_title, parties, constituency, count):
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                
+                #print("parties: ")
+                #print(parties)
                 for i in parties:
                     
                     if i[0] == election_party_title:
+                        #print("Over Here")
+                        print(i[0])
                         x = 1
                     else:
                         x = 0
-                    ciph = key_pairs.fhe_encrypt([x,x,x,x], constituency, i[0], "election1")
-                    cursor.execute(f'INSERT INTO public."Ballot"(election_area_title, election_party_title, election_title, encrypted_value_c0, encrypted_value_c1, "time_stamp") VALUES (%s, %s, %s, %s, %s, %s);', (constituency, i[0], "election1", f"{constituency}_{i[0]}_election1_c0.txt", f"{constituency}_{i[0]}_election1_c1.txt",datetime.datetime.now(),))
+                    
+                    ciph = key_pairs.fhe_encrypt([x,x,x,x], constituency, i[0], count)
+                    cursor.execute(f'INSERT INTO public."Ballot"(election_area_title, election_party_title, election_title, encrypted_value_c0, encrypted_value_c1, "time_stamp") VALUES (%s, %s, %s, %s, %s, %s);', (constituency, i[0], "election1", f"{constituency}_{i[0]}_{count}_c0.txt", f"{constituency}_{i[0]}_{count}_c1.txt",datetime.datetime.now(),))
+                    #cursor.execute(f'INSERT INTO public."Ballot"(election_area_title, election_party_title, election_title, encrypted_value_c0, encrypted_value_c1, "time_stamp") VALUES (%s, %s, %s, %s, %s, %s);', (constituency, i[0], "election1", f"{constituency}_{count}_c0.txt", f"{constituency}_{count}_c1.txt",datetime.datetime.now(),))
+                count +=1 
+                open_count = open('./keys/count.txt','w+')
+                open_count.write(str(count))
+                open_count.close()
 
     def liveResult(self,constituency):
         with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
             with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
-                cursor.execute(f'SELECT voted_party,vote_count FROM public."Votes" WHERE "contestingZone"=%s',(constituency,))
+                cursor.execute(f'SELECT "contestingZone",voted_party,vote_count FROM public."Votes" WHERE "contestingZone"=%s',(constituency,))
                 result = cursor.fetchall()
+
+                '''
                 db.commit()
                 print(result)
                 arrFinal=[]
@@ -912,7 +1006,8 @@ class VoterDetails:
                     final_str += final_final_result + "\n" 
                 print("Printing final str")
                 print(final_str)
-                return final_str
+                '''
+                return result
                 
                 #return result
 
@@ -972,3 +1067,140 @@ class superadminDetails:
                 db.commit()
                 result = cursor.fetchall()
                 return result
+
+
+###Admin Decrypt Votes#####
+class AdminPage:
+    def __init__(self) -> None:
+        self.controller = AdminControllerPage()
+
+    def adminUploadSecretKeyTemplate(self):
+        return render_template("adminSecretKey.html")
+
+    def decryptTemplate(self):
+        return render_template("select_decrypt.html")
+    
+class AdminControllerPage:
+    def __init__(self) -> None:
+        self.entity = AdminDetails()
+
+    def getFHESecretKey(self, getform):
+        #file = getform["sk"]
+        #file.save(os.path.join('keys' , secure_filename('s1.txt')))
+        file = getform["sk"]
+        file.save(os.path.join('keys' , secure_filename('fhe_fernet.key')))
+        return True
+
+    def decrypt(self):
+        contestingZones = self.entity.getAllContestingZones()
+        #dic_votes
+
+    def decryptVotesByDistrict(self, key_pairs):
+        contestingZones = self.entity.getAllContestingZones()
+        electionareaparty = self.entity.getAllParties()
+        get_encrypted_votes = self.entity.getAllEncryptedVotes()
+        dic_votes = {}
+        for i in contestingZones:
+            dic_votes[i[0]] = {}
+        for i in electionareaparty:
+            dic_votes[i[1]][i[0]] = []
+            
+        #print(dic_votes)
+        for i in get_encrypted_votes:
+            file_name_c0 = i[3]
+            file_name_c1 = i[4]
+            ct = key_pairs.fhe_cipher(file_name_c0,file_name_c1)
+            dic_votes[i[0]][i[1]].append(ct)
+        for i in dic_votes.copy():
+            if (dic_votes[i] == {}) :
+                del dic_votes[i]
+        tallied_cipher_dic = {}
+        #print(dic_votes)
+        for i in dic_votes:
+            tallied_cipher_dic[i] = {}
+            for j in electionareaparty:
+                
+                if j[1] == i and dic_votes[i][j[0]] != []:
+                    #print(i)
+                    for k in range(len(dic_votes[i][j[0]]) - 1):
+                        dic_votes[i][j[0]][k+1] = key_pairs.fhe_add(dic_votes[i][j[0]][k] , dic_votes[i][j[0]][k+1] )
+                    
+                    tallied_cipher_dic[i][j[0]] = key_pairs.fhe_decrypt(dic_votes[i][j[0]][-1])
+                    #print(key_pairs.fhe_decrypt(dic_votes[i][j[0]][-1])[0])
+                    self.entity.insertTalliedVote(i, j[0], key_pairs.fhe_decrypt(dic_votes[i][j[0]][-1])[0])
+        #print(tallied_cipher_dic)            
+        self.entity.updateStatusToEnded()
+        return dic_votes
+
+class AdminDetails:
+    def getAllContestingZones(self):
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute(f'SELECT * FROM public."ContestingZone";')
+                result = cursor.fetchall()
+                return result
+
+    def getAllEncryptedVotes(self):
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute(f'SELECT * FROM public."Ballot";')
+                result = cursor.fetchall()
+                return result
+    
+    def getAllParties(self):
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute(f'SELECT * FROM public."PartyElectionArea";')
+                result = cursor.fetchall()
+                return result
+
+    def insertTalliedVote(self, election_area, election_party, vote_count):
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute(f'INSERT INTO public."Decrypted" VALUES (%s, %s, %s);', (election_area, election_party, vote_count,))
+                db.commit()
+
+    def updateStatusToEnded(self):
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute(f'Update public."Election" SET "status"= %s',("Ended",))
+                db.commit()
+class ResultsPage:
+    def __init__(self) -> None:
+        self.controller = ResultsControllerPage()
+    
+    def getResultsTemplate(self, districts):
+        return render_template("election-result-page.html",districts=districts)
+
+    def getResultsViewVoteTemplate(self, vote):
+        return render_template("election_view_votes.html",vote=vote)
+
+class ResultsControllerPage:
+    def __init__(self) -> None:
+        self.entity = ResultsEntityPage()
+
+    def getAllResults(self):
+        return self.entity.getAllResults()
+    def getDistrict(self):
+        return self.entity.getDistrict()
+class ResultsEntityPage:
+    def getAllResults(self):
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute(f'SELECT * FROM public."Decrypted" WHERE "electionArea" = %s;',(session["district_clicked"],))
+                results = cursor.fetchall()
+                return results
+    
+    def getStatusOfElection(self):
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute(f'SELECT status FROM public."Election";')
+                result = cursor.fetchone()
+                return result[0]
+
+    def getDistrict(self):
+        with psycopg2.connect(dbname=db_name, user=db_user, password=db_pw, host=db_host, port=5432) as db:
+            with db.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
+                cursor.execute(f'SELECT DISTINCT "electionArea" FROM public."Decrypted";')
+                results = cursor.fetchall()
+                return results

@@ -10,6 +10,13 @@ from app import app
 from app import db
 from admin.blueprint import admin
 #import views
+global OTPPhoneNumber
+global otp
+global totp
+OTPPhoneNumber = ""
+otp = ""
+totp = ""
+
 
 
 app.register_blueprint(admin, url_prefix='/admin')
@@ -35,6 +42,13 @@ db_pw = 'EmXAdCIbKic5IL6TL9e3'
 ### SESSION CONFIG (password & period) ###
 
 app.permanent_session_lifetime = timedelta(minutes=60)
+#Logout
+@app.route("/logOut")
+def logOut():
+    boundary = Logout(session)
+    session.clear()
+    print(session)
+    return boundary.logUserOut() 
 
 
 ##admin page##
@@ -72,13 +86,55 @@ def index():
             return boundary.redirectToRegisterPage()
         elif request.form["submit"] == "register":
             return boundary.redirectToRegisterPage()
-#Logout
-@app.route("/logOut")
-def logOut():
-    boundary = Logout(session)
-    session.clear()
-    print(session)
-    return boundary.logUserOut()            
+        elif request.form["submit"] == 'yes':
+            return redirect(url_for("resultsViewDistrict"))
+        elif request.form["submit"] == 'no':
+            return redirect(url_for("index"))
+        
+        
+        
+
+
+@app.route("/loginOTP", methods=["GET", "POST"])
+def loginOTP():
+    boundary = LoginPage()
+    if request.method == "GET":
+        secret = pyotp.random_base32()
+        #set code expiry to 60 secs
+        totp = pyotp.TOTP(secret, interval=60)
+        otp = totp.now() # => 6 digit number
+        OTPPhoneNumber = boundary.controller.getUserPhone()
+        account_sid = 'AC4fe73199e1fc12a01e04f1ddb53c18c3' 
+        auth_token = '55efccda2ef34ba35881eb256df476ae' 
+        client = Client(account_sid, auth_token) 
+        print("Phone Number: ")
+        print(OTPPhoneNumber)
+        message = client.messages.create(messaging_service_sid='MGf788a76f1546ed9cbf819f1ab5ba9f44', body=f'Your OTP IS {otp}', to=f'+65{OTPPhoneNumber}')
+        print(OTPPhoneNumber)
+        print(otp)
+        otp_arr = []
+        for i in otp:
+            otp_arr.append(f.encrypt(str(i).encode()))
+        
+        session["otp"] = otp_arr
+        
+        boundary.controller.setOTP(otp)
+        return boundary.registerTemplateOTP()
+    
+    elif request.method =="POST":
+        OTPkeyed = boundary.controller.getOTPInput(request.form)
+        verify_otp = ""
+        for i in session["otp"]:
+            verify_otp += str(int(f.decrypt(i)))
+        print(str(OTPkeyed))
+        print(verify_otp)
+        if (str(OTPkeyed) == verify_otp):
+            print("ttue")
+            return redirect(url_for('voter'))
+        else:
+            return redirect(url_for('loginOTP'))
+            print("Wrong password")
+            flash("Wrong password")
 
 @app.route("/resetPassWord", methods=["GET", "POST"])
 def resetPassWord():
@@ -97,50 +153,58 @@ def register():
     if request.method =="POST":
         print(request.form)
         print("In post")
-        username = request.form.get('username')
-        password = request.form.get('password')
-        nric = request.form.get('nric')
-        name = request.form.get('name')
-        postal_code = request.form.get('postal_code')
-        address = request.form.get('address')
-        number = request.form.get('number')
+        session["userParticulars"] = boundary.controller.getRegisterationFormDetails(request.form)
         #boundary.controller.sendOTPtouser(request.form)
-        return redirect(url_for("registerOTP",username=username,password=password,
-        nric=nric,name=name,postal_code=postal_code,address=address
-        ,number=number))
+        return redirect(url_for("registerOTP"))
         #return boundary.registerTemplateOTP(request.form)
 
 @app.route("/registerOTP", methods=["GET", "POST"])
 def registerOTP():
+    
     boundary = LoginPage()
     if request.method == "GET":
-        print("In get abc")
         #username = request.args.get("username")
         #print(username)
-        return boundary.registerTemplateOTP() # A-B
-
-    if request.method =="POST":
         #boundary.controller.sendOTPtouser(request.form)
-        username = request.args.get("username")
-        password = request.args.get("password")
-        nric = request.args.get("nric")
-        name = request.args.get("name")
-        postal_code = request.args.get("postal_code")
-        address = request.args.get("address")
-        number = request.args.get("number")
+        
+        secret = pyotp.random_base32()
+        #set code expiry to 60 secs
+        totp = pyotp.TOTP(secret, interval=60)
+        otp = totp.now() # => 6 digit number
+        OTPPhoneNumber = session["userParticulars"][6]
+        account_sid = 'AC4fe73199e1fc12a01e04f1ddb53c18c3' 
+        auth_token = '55efccda2ef34ba35881eb256df476ae' 
+        client = Client(account_sid, auth_token) 
+        
+        message = client.messages.create(messaging_service_sid='MGf788a76f1546ed9cbf819f1ab5ba9f44', body=f'Your OTP IS {otp}', to=f'+65{OTPPhoneNumber}')
+        #print(session["OTPPhoneNumber"])
+        print(otp)
+        otp_arr = []
+        for i in otp:
+            otp_arr.append(f.encrypt(str(i).encode()))
+        
+        session["otp"] = otp_arr
+        boundary.controller.setOTP(otp)
+        #boundary.controller.setPhoneNumber(request.form)
+        return boundary.registerTemplateOTP()
 
-        print(username)
-        print(password)
-        print(nric)
-        print(name)
-        print(postal_code)
-        print(address)
-        print(number)
+    elif request.method == "POST":
+        OTPkeyed = boundary.controller.getOTPInput(request.form)
+        verify_otp = ""
+        for i in session["otp"]:
+            verify_otp += str(int(f.decrypt(i)))
+        print(str(OTPkeyed))
+        print(verify_otp)
+        if (str(OTPkeyed) == verify_otp):
+            boundary.controller.getRegisterationFormDetailsFromGet()
+            return redirect(url_for("index"))
 
-        boundary.controller.register(username=username,password=password,
-        nric=nric,name=name,postal_code=postal_code,address=address
-        ,number=number)
-        return redirect(url_for("index"))
+        else:
+            flash("Wrong Otp!")
+            return redirect(url_for("registerOTP"))
+        
+
+        
 
 ### PARTY PAGE ###
 @app.route("/party", methods=["GET", "POST"])
@@ -212,9 +276,10 @@ def CreateDistrictProfile():
         if request.method == "GET":
             partyProfile_exists = boundary.controller.ProfileExists(session["party"])
             if partyProfile_exists == True:
-                contestingZones = boundary.controller.getContestingZones()
+                contestingZones = boundary.controller.getContestingZones(session["party"])
+                print(f"contesting zones: {contestingZones}")
                 data = boundary.controller.getAll(session["party"])
-                print(data)
+                print(f"contesting zones: {data}")
                 return boundary.partyDistrictTemplateCreate(session["party"], data , contestingZones)
             else:
                 flash("Create a party profile first!")
@@ -249,11 +314,11 @@ def Test():
     if "username" in session:
         if request.method == "GET":
            
-            contestingZones = boundary.controller.getContestingZones()
+            contestingZones = boundary.controller.getContestingZones(session["party"])
             data = boundary.controller.getAll(session["party"])
             print("hereeeeee")
             print(f'zones : {contestingZones}')
-            
+    
             return boundary.partyDistrictTemplateModal(session["party"], data, contestingZones)
             
 
@@ -265,7 +330,7 @@ def Test():
             error, result =  boundary.controller.createDistrictProfile(request.form, request.form.getlist, request.files.getlist)
             if result:
                 flash("Profile successfully created!")
-                contestingZones = boundary.controller.getContestingZones()
+                contestingZones = boundary.controller.getContestingZones(session["party"])
                 data = boundary.controller.getAll(session["party"]) #get all candidate's data
                 return redirect(url_for("CreateDistrictProfile"))
 
@@ -324,7 +389,7 @@ def Edit():
             print("hereeeeee editing")
             print(f'########candidates : {data}')
             
-            return boundary.partyDistrictTemplateUpdate(data, session["party"])
+            return boundary.partyDistrictTemplateUpdate(data)
             
 
         elif request.method == "POST":
@@ -500,8 +565,53 @@ def voterUpdatePhoneNumber():
         return boundary.voterTemplateUpdatePhoneNumber(session["username"], details)
 
     elif request.method == "POST":
-        boundary.controller.setPhoneNumber(request.form)
-        return redirect(url_for("voter"))
+        session["OTPPhoneNumber"] = request.form["phone_number"]
+        print(session["OTPPhoneNumber"])
+        return redirect(url_for("OtpValidation"))
+        
+
+@app.route("/voter/OtpValidation", methods=["GET", "POST"])
+def OtpValidation():
+    boundary = VoterPage()
+    if request.method == "GET":
+        secret = pyotp.random_base32()
+        #set code expiry to 60 secs
+        totp = pyotp.TOTP(secret, interval=60)
+        otp = totp.now() # => 6 digit number
+        
+        account_sid = 'AC4fe73199e1fc12a01e04f1ddb53c18c3' 
+        auth_token = '55efccda2ef34ba35881eb256df476ae' 
+        client = Client(account_sid, auth_token) 
+        
+        message = client.messages.create(messaging_service_sid='MGf788a76f1546ed9cbf819f1ab5ba9f44', body=f'Your OTP IS {otp}', to=f'+65{session["OTPPhoneNumber"]}')
+        print(session["OTPPhoneNumber"])
+        print(otp)
+        otp_arr = []
+        for i in otp:
+            otp_arr.append(f.encrypt(str(i).encode()))
+        
+        session["otp"] = otp_arr
+        boundary.controller.setOTP(otp)
+        #boundary.controller.setPhoneNumber(request.form)
+        return boundary.registerTemplateOTP()
+
+    elif request.method == "POST":
+        OTPkeyed = boundary.controller.getOTPInput(request.form)
+        verify_otp = ""
+        for i in session["otp"]:
+            verify_otp += str(int(f.decrypt(i)))
+        print(str(OTPkeyed))
+        print(verify_otp)
+        if (str(OTPkeyed) == verify_otp):
+            boundary.controller.setPhoneNumber(session["OTPPhoneNumber"])
+            return redirect(url_for("voter"))
+
+        else:
+            flash("Wrong Otp!")
+            return redirect(url_for("OtpValidation"))
+    
+
+       
 
 @app.route("/voterViewParties", methods=["GET", "POST"])
 def voterViewParties():
@@ -568,6 +678,49 @@ def voterLiveVotes():
         print("12345")
         return boundary.buttonClicked(request.form)
 
+@app.route("/adminDecrypt", methods=["GET", "POST"])
+def adminDecrypt():
+    boundary = AdminPage()
+    if request.method == "GET":
+        return boundary.adminUploadSecretKeyTemplate()
+    elif request.method == "POST":
+        if boundary.controller.getFHESecretKey(request.files):
+            fhe_fernet_key = open("./keys/fhe_fernet.key", "rb").read()
+            f = Fernet(fhe_fernet_key)
+            s3 = open('./keys/fernet_fhe.txt', 'r')
+            contents = s3.read().splitlines()
+            #print(contents)
+            s3.close()
+            write_decrypted_sk = open('./keys/s1.txt','w+')
+            for i in contents:
+                write_decrypted_sk.write(str(int(f.decrypt(i))) +'\n')
+            write_decrypted_sk.close()
+            key_pairs.uploadSecretKey()
+            print("pass")
+            boundary.controller.decryptVotesByDistrict(key_pairs)
+            return redirect(url_for("resultsViewDistrict"))
+        else:
+            print("Wrong SK")
+
+@app.route("/resultsViewDistrict", methods=["GET","POST"])
+def resultsViewDistrict():
+    boundary = ResultsPage()
+    if request.method == "GET":
+        districts = boundary.controller.getDistrict()
+        return boundary.getResultsTemplate(districts=districts)
+    
+    if request.method == "POST":
+        session["district_clicked"] = request.form["districts"]
+        return redirect(url_for('resultsViewVote'))
+        
+@app.route("/resultsViewVote", methods=["GET","POST"])
+def resultsViewVote():
+    boundary = ResultsPage()
+    if request.method == "GET":
+        vote = boundary.controller.getAllResults()
+        return boundary.getResultsViewVoteTemplate(vote=vote)
+    
+    
 '''
 ### LOGOUT (TO APPLY BCE) ###
 @app.route("/logOut")

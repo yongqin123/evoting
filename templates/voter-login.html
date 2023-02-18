@@ -66,7 +66,10 @@
       <div class="voter-login-container">
         <div class="voter-login-voter-login">
           <div class="voter-login-frame16desktopsiteheading">
-            <span class="voter-login-text"><span>E-voting System</span></span>
+            <img
+            src="/static/public/playground_assets/mainicon.png"
+            style="height:90px; width:150px;"
+          />
             
           </div>
           <div class="main_content">
@@ -103,32 +106,41 @@
           </select>
           
           <div class="partySelect">
-          <select name="party" id="party">
-            <option>Thunder Party</option>
-            <option>Mallet Party</option>
-            <option>Sun Party</option>
-            <option>Palm Tree Party</option>
-            <option>Campass Party</option>
-            <option>Audi Party</option>
-            <option>Nokia Party</option>
-            <option>Olympics Torch Party</option>
-          </select>
-          </div>
+            <select name="party" id="party">
+              {% for party in parties %}
+                <option value="{{party[0]}}" id = "partyname" >{{party[0]}}</option>
+              {% endfor %}
+            </select>
+            </div>
+          
           <button class="voter-login-frame03filled-button1" name="submit" value="login">
             <span class="voter-login-text12"><span>Login</span></span>
           </button>
           <button class="voter-login-frame03filled-button2" name="submit" value="register"></button>
           
           <span class="voter-login-text14"><span>Register</span></span>
-          <Button name="submit" value="resetpw">
-            <span class="voter-login-text18">
-              <span>Forgot Password</span>
-            </span>
-        </Button>
+
+
+          {% if status == 'Ended' %}
+          <button   class="view-Votes1" type='submit' name="submit" value="yes">
+            
+            <span class="view-votes2"><span>View Votes</span></span>
+           
+          </button>
+          {% else %}
+          <button   type="submit" class="view-Votes1" name="submit" value="no">
+            
+              <span class="view-votes2"><span>View Votes</span></span>
+              
+          </button>
+          {% endif %}
+
+
         </div>
         </div>
       </div>
     </div>
+    </form>
   </body>
   <script>
 	//Set Party Selector list as non visible as default

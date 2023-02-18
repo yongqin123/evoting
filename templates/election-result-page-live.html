@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="english">
+  <head>
+    <title>Live</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta property="twitter:card" content="summary_large_image" />
+
+    <style data-tag="reset-style-sheet">
+      html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6,figure,blockquote,figcaption {  margin: 0;  padding: 0;}button {  background-color: transparent;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}html { scroll-behavior: smooth  }
+    </style>
+    <style data-tag="default-style-sheet">
+      html {
+        font-family: Inter;
+        font-size: 16px;
+      }
+
+      body {
+        font-weight: 400;
+        font-style:normal;
+        text-decoration: none;
+        text-transform: none;
+        letter-spacing: normal;
+        line-height: 1.15;
+        color: var(--dl-color-gray-black);
+        background-color: var(--dl-color-gray-white);
+
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+      data-tag="font"
+    />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div>
+      <link href="./election-result-page.css" rel="stylesheet" />
+
+      <div class="election-result-page-container">
+        <div class="election-result-page-election-result-page">
+          <div class="election-result-page-frame16desktopsiteheading">
+            <img
+            src="/static/public/playground_assets/mainicon.png"
+            style="height:90px; width:150px;"
+          />
+            <div class="election-result-page-pageitems">
+              <span class="election-result-page-text02">
+                <span>Elections Info</span>
+              </span>
+              <span class="election-result-page-text04">
+                <span>Security</span>
+              </span>
+              <span class="election-result-page-text06">
+                <span>Contact Us</span>
+              </span>
+              <span class="election-result-page-text08"><span>FAQ</span></span>
+              <div class="election-result-page-frame28cart-icon"></div>
+              <button class="election-result-page-frame03filled-button">
+                <span class="election-result-page-text10">
+                  <a href="{{ url_for('logOut')}}">
+                    Logout
+                </a>
+                </span>
+              </button>
+            </div>
+          </div>
+          <img
+            src="public/playground_assets/svg25homeicon2627-30hl.svg"
+            alt="SVG25HomeIcon2627"
+            class="election-result-page-s-v-g25home-icon"
+          />
+          <img
+            src="public/playground_assets/rectangle142627-v5oj-900h.png"
+            alt="Rectangle142627"
+            class="election-result-page-rectangle14"
+          />
+          <span class="election-result-page-text12">
+            <span>PARLIAMENTARY ELECTIONS RESULTS</span>
+          </span>
+          <div class="election-result-page-frame123">
+            <div class="election-result-page-frame75">
+              <span class="election-result-page-text14">
+                <span>Electoral District</span>
+              </span>
+              <span class="election-result-page-text16">
+                <span>Electoral District</span>
+              </span>
+            </div>
+          </div>
+          <div class="election-result-page-frame124">
+            <span class="election-result-page-text18"><span>Status</span></span>
+          </div>
+          <span class="election-result-page-text20">
+            <span>Ang Mo Kio</span>
+          </span>
+          <span class="election-result-page-text22">
+            <span>Completed</span>
+          </span>
+          <span class="election-result-page-text24">
+            <span>Completed</span>
+          </span>
+          <span class="election-result-page-text26">
+            <span>In Progress</span>
+          </span>
+          <span class="election-result-page-text28">
+            <span>Not Started</span>
+          </span>
+          <span class="election-result-page-text30">
+            <span>Completed</span>
+          </span>
+          <span class="election-result-page-text32">
+            <span>Completed</span>
+          </span>
+          <span class="election-result-page-text34">
+            <span>Completed</span>
+          </span>
+          <span class="election-result-page-text36">
+            <span>Completed</span>
+          </span>
+          <span class="election-result-page-text38">
+            <span>Bukit Batok</span>
+          </span>
+          <span class="election-result-page-text40">
+            <span>Bukit Panjang</span>
+          </span>
+          <span class="election-result-page-text42">
+            <span>Bishan - Toa Payoh</span>
+          </span>
+          <div class="election-result-page-basic-gray">
+            <span class="election-result-page-text44 textXsleading-4fontMedium">
+              <span>74.6%</span>
+            </span>
+          </div>
+          <div class="election-result-page-basic-gray01">
+            <span class="election-result-page-text46 textXsleading-4fontMedium">
+              <span>26.4%</span>
+            </span>
+          </div>
+          <div class="election-result-page-basic-gray02">
+            <span class="election-result-page-text48 textXsleading-4fontMedium">
+              <span>33.5%</span>
+            </span>
+          </div>
+          <div class="election-result-page-basic-gray03">
+            <span class="election-result-page-text50 textXsleading-4fontMedium">
+              <span>66.5%</span>
+            </span>
+          </div>
+          <img
+            src="public/playground_assets/pngitem20111112627-iqc-200w.png"
+            alt="PngItem20111112627"
+            class="election-result-page-png-item2011111"
+          />
+          <img
+            src="public/playground_assets/pngitem20111122627-7g79-200w.png"
+            alt="PngItem20111122627"
+            class="election-result-page-png-item2011112"
+          />
+          <img
+            src="public/playground_assets/image62627-28yb-200w.png"
+            alt="image62627"
+            class="election-result-page-image6"
+          />
+          <img
+            src="public/playground_assets/image92627-cgp7-200w.png"
+            alt="image92627"
+            class="election-result-page-image9"
+          />
+          <div class="election-result-page-frame13horizontal-divider">
+            <img
+              src="public/playground_assets/rectangle5i262-hwzn-200h.png"
+              alt="Rectangle5I262"
+              class="election-result-page-rectangle5"
+            />
+          </div>
+          <div class="election-result-page-basic-gray04">
+            <span class="election-result-page-text52 textXsleading-4fontMedium">
+              <span>33.5%</span>
+            </span>
+          </div>
+          <div class="election-result-page-basic-gray05">
+            <span class="election-result-page-text54 textXsleading-4fontMedium">
+              <span>66.5%</span>
+            </span>
+          </div>
+          <img
+            src="public/playground_assets/pngitem20111132627-ly97-200w.png"
+            alt="PngItem20111132627"
+            class="election-result-page-png-item2011113"
+          />
+          <img
+            src="public/playground_assets/image102627-xq4k-200w.png"
+            alt="image102627"
+            class="election-result-page-image10"
+          />
+          <div class="election-result-page-frame13horizontal-divider1">
+            <img
+              src="public/playground_assets/rectangle5i262-g1hp-200h.png"
+              alt="Rectangle5I262"
+              class="election-result-page-rectangle51"
+            />
+          </div>
+          <div class="election-result-page-basic-gray06">
+            <span class="election-result-page-text56 textXsleading-4fontMedium">
+              <span>33.5%</span>
+            </span>
+          </div>
+          <div class="election-result-page-basic-gray07">
+            <span class="election-result-page-text58 textXsleading-4fontMedium">
+              <span>66.5%</span>
+            </span>
+          </div>
+          <img
+            src="public/playground_assets/pngitem20111142627-g5y-200w.png"
+            alt="PngItem20111142627"
+            class="election-result-page-png-item2011114"
+          />
+          <img
+            src="public/playground_assets/image112627-jevp-200w.png"
+            alt="image112627"
+            class="election-result-page-image11"
+          />
+          <div class="election-result-page-frame13horizontal-divider2">
+            <img
+              src="public/playground_assets/rectangle5i262-hlya-200h.png"
+              alt="Rectangle5I262"
+              class="election-result-page-rectangle52"
+            />
+          </div>
+          <span class="election-result-page-text60">
+            <span>Hong Kah North</span>
+          </span>
+          <span class="election-result-page-text62"><span>Hougang</span></span>
+          <div class="election-result-page-basic-gray08">
+            <span class="election-result-page-text64 textXsleading-4fontMedium">
+              <span>33.5%</span>
+            </span>
+          </div>
+          <div class="election-result-page-basic-gray09">
+            <span class="election-result-page-text66 textXsleading-4fontMedium">
+              <span>66.5%</span>
+            </span>
+          </div>
+          <img
+            src="public/playground_assets/pngitem20111172638-dxic-200w.png"
+            alt="PngItem20111172638"
+            class="election-result-page-png-item2011117"
+          />
+          <img
+            src="public/playground_assets/image142638-t1c6-200w.png"
+            alt="image142638"
+            class="election-result-page-image14"
+          />
+          <div class="election-result-page-frame13horizontal-divider3">
+            <img
+              src="public/playground_assets/rectangle5i263-5le-200h.png"
+              alt="Rectangle5I263"
+              class="election-result-page-rectangle53"
+            />
+          </div>
+          <div class="election-result-page-basic-gray10">
+            <span class="election-result-page-text68 textXsleading-4fontMedium">
+              <span>33.5%</span>
+            </span>
+          </div>
+          <div class="election-result-page-basic-gray11">
+            <span class="election-result-page-text70 textXsleading-4fontMedium">
+              <span>66.5%</span>
+            </span>
+          </div>
+          <img
+            src="public/playground_assets/pngitem20111182638-5bli-200w.png"
+            alt="PngItem20111182638"
+            class="election-result-page-png-item2011118"
+          />
+          <img
+            src="public/playground_assets/image152638-bkdk-200w.png"
+            alt="image152638"
+            class="election-result-page-image15"
+          />
+          <div class="election-result-page-frame13horizontal-divider4">
+            <img
+              src="public/playground_assets/rectangle5i263-9jin-200h.png"
+              alt="Rectangle5I263"
+              class="election-result-page-rectangle54"
+            />
+          </div>
+          <span class="election-result-page-text72">
+            <span>Choa Chu Kang</span>
+          </span>
+          <span class="election-result-page-text74">
+            <span>East Coast</span>
+          </span>
+          <div class="election-result-page-basic-gray12">
+            <span class="election-result-page-text76 textXsleading-4fontMedium">
+              <span>33.5%</span>
+            </span>
+          </div>
+          <div class="election-result-page-basic-gray13">
+            <span class="election-result-page-text78 textXsleading-4fontMedium">
+              <span>66.5%</span>
+            </span>
+          </div>
+          <img
+            src="public/playground_assets/pngitem20111152638-p3an-200w.png"
+            alt="PngItem20111152638"
+            class="election-result-page-png-item2011115"
+          />
+          <img
+            src="public/playground_assets/image122638-74rk-200w.png"
+            alt="image122638"
+            class="election-result-page-image12"
+          />
+          <div class="election-result-page-frame13horizontal-divider5">
+            <img
+              src="public/playground_assets/rectangle5i263-v9e-200h.png"
+              alt="Rectangle5I263"
+              class="election-result-page-rectangle55"
+            />
+          </div>
+          <div class="election-result-page-basic-gray14">
+            <span class="election-result-page-text80 textXsleading-4fontMedium">
+              <span>33.5%</span>
+            </span>
+          </div>
+          <div class="election-result-page-basic-gray15">
+            <span class="election-result-page-text82 textXsleading-4fontMedium">
+              <span>66.5%</span>
+            </span>
+          </div>
+          <img
+            src="public/playground_assets/pngitem20111162638-zgxw-200w.png"
+            alt="PngItem20111162638"
+            class="election-result-page-png-item2011116"
+          />
+          <img
+            src="public/playground_assets/image132638-b7c9-200w.png"
+            alt="image132638"
+            class="election-result-page-image13"
+          />
+          <div class="election-result-page-frame13horizontal-divider6">
+            <img
+              src="public/playground_assets/rectangle5i263-3e8d-200h.png"
+              alt="Rectangle5I263"
+              class="election-result-page-rectangle56"
+            />
+          </div>
+          <div class="election-result-page-login-button">
+            <span class="election-result-page-text84">
+              <span>
+                <span>Back to Home</span>
+                <br />
+                <span></span>
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

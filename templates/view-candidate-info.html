@@ -99,9 +99,10 @@
 
         </div>
           <div class="view-candidate-info-frame16desktopsiteheading">
-            <span class="view-candidate-info-text">
-              <span>Our Product Name</span>
-            </span>
+            <img
+            src="/static/public/playground_assets/mainicon.png"
+            style="height:90px; width:150px;"
+          />
             <div class="view-candidate-info-pageitems">
               <span class="view-candidate-info-text02">
                 <span>Elections Info</span>
@@ -116,7 +117,7 @@
               <div class="view-candidate-info-frame28cart-icon"></div>
               <button class="view-candidate-info-frame03filled-button">
                 <span class="view-candidate-info-text10">
-                  <span>Log Out</span>
+                  <a href="{{ url_for('logOut')}}">Logout</a>
                 </span>
               </button>
             </div>
@@ -132,7 +133,7 @@
           <div class="view-candidate-info-login-button1">
             <span class="view-candidate-info-text14">
               <span>
-                <span>Back to Home</span>
+                <a href="{{ url_for('voter')}}">Home</a>
                 <br />
                 <span></span>
               </span>

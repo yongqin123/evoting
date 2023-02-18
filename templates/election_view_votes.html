@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="english">
   <head>
-    <title>Live Votes</title>
+    <title>View Election Votes</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="utf-8" />
     <meta property="twitter:card" content="summary_large_image" />
@@ -48,7 +48,6 @@
     <link rel="stylesheet" href="/static/styles/style.css" />
   </head>
   <body>
-    <div  id="para">
     <div>
       <link href="/static/styles/election_view_votes.css" rel="stylesheet" />
 
@@ -78,24 +77,23 @@
               </button>
             </div>
           </div>
-          <a href="{{ url_for('voter')}}">
           <img
             src="/static/public/playground_assets/svg25homeicon2627-30hl.svg"
             alt="SVG25HomeIcon2627"
             class="election-result-page-s-v-g25home-icon"
-          /></a>
+          />
           <img
             src="/static/public/playground_assets/rectangle142627-v5oj-900h.png"
             alt="Rectangle142627"
             class="election-result-page-rectangle14"
           />
           <span class="election-result-page-text12">
-            <span>LIVE PARLIAMENTARY ELECTIONS RESULTS</span>
+            <span>PARLIAMENTARY ELECTIONS RESULTS</span>
           </span>
           <div  class="web-voter-homepage-image2 container">
             <table class="table">
                 <tr><th>Election area</th><th>Party</th><th>No. Of Votes</th></tr>
-                {% for n in liveResult %}
+                {% for n in vote %}
                 <tr><td>{{n[0]}}</td><td>{{n[1]}}</td><td>{{n[2]}}</td></tr>
                 {% endfor %}
             </table>
@@ -104,31 +102,5 @@
         </div>
       </div>
     </div>
-</div>
-<script>
-    setInterval(function(){
-   $('#para').load("/voterLiveVotes");
-}, 3000) /* time in milliseconds (ie 10 seconds)*/
-    
-</script>
   </body>
 </html>
-
-        
-
-        
-
-       
-            
-            
-            
-            
-            
-            
-            
-     
-        
-    
-
-
-

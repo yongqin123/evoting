@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="english">
   <head>
-    <title>Login</title>
+    <title>Register</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="utf-8" />
     <meta property="twitter:card" content="summary_large_image" />
@@ -121,13 +121,21 @@
             type="text"
             class="voter-login-frame09input-field4" required
           />
+          <button class="getAddressFromPostal" name="getadd" onclick="findAddress()"></button>
+          
+          <span class="getAddressFromPostalText"><span>Get Add</span></span>
+          
 
           <input
             id = "address" placeholder = "Address"  name="address"
             type="text"
             class="voter-login-frame09input-field5" required
           />
-          
+          <input
+            id = "unitNo" placeholder = "Unit no."  name="unit"
+            type="text"
+            class="voter-login-frame09input-field21" required
+          />
 
           <input
             id = "number" placeholder = "Phone number"  name="number"
@@ -145,5 +153,28 @@
         </div>
       </div>
     </div>
+    <script>
+      $(document).ready(function() {
+            console.log("window is loaded");
+            $("#getadd").click(function(event) {
+                event.preventDefault();
+                
+            });
+        })
+        
+        function findAddress() {
+            var postalCode = document.getElementById("postal_code").value
+            var streetName = document.getElementById("address")
+            fetch(
+                'https://developers.onemap.sg/commonapi/search?searchVal=' +
+                postalCode +
+                '&returnGeom=Y&getAddrDetails=Y'
+            )
+            .then((response) => response.json())
+            .then((json) => 
+                streetName.value = json.results[0].ADDRESS
+            );
+        }
+    </script>
   </body>
 </html>

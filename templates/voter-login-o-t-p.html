@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="english">
   <head>
-    <title>exported project</title>
+    <title>Login OTP</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="utf-8" />
     <meta property="twitter:card" content="summary_large_image" />
@@ -27,6 +27,7 @@
 
       }
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap"
@@ -52,14 +53,16 @@
   <body>
     <div>
       <link href="/static/styles/voter-login-o-t-p.css" rel="stylesheet" />
+      <link href="/static/styles/otp.css" rel="stylesheet" />
 
       <div class="voter-login-o-t-p-container">
         <div class="voter-login-o-t-p-voter-login-o-t-p">
           <div class="voter-login-o-t-p-site-header">
             <div class="voter-login-o-t-p-frame16desktopsiteheading">
-              <span class="voter-login-o-t-p-text">
-                <span>Our Product Name</span>
-              </span>
+              <img
+            src="/static/public/playground_assets/mainicon.png"
+            style="height:90px; width:150px;"
+          />
               <div class="voter-login-o-t-p-pageitems">
                 <span class="voter-login-o-t-p-text02">
                   <span>Elections Info</span>
@@ -95,35 +98,84 @@
             <span class="voter-login-o-t-p-text14"></span>
             <span>Resend</span>
           </span>
-          <div class="voter-login-o-t-p-o-t-p-fields">
-            <img
-              src="/static/public/playground_assets/rectangle131622-08va.svg"
-              alt="Rectangle131622"
-              class="voter-login-o-t-p-rectangle13"
-            />
-            <img
-              src="/static/public/playground_assets/svg01minusicon1621-2fgj.svg"
-              alt="SVG01MinusIcon1621"
-              class="voter-login-o-t-p-s-v-g01minus-icon"
-            />
-            <img
-              src="/static/public/playground_assets/rectangle121622-rxkq.svg"
-              alt="Rectangle121622"
-              class="voter-login-o-t-p-rectangle12"
-            />
-          </div>
-          <span class="voter-login-o-t-p-text16">
-            <span>OTP expires in 1:00</span>
-          </span>
-          <div class="voter-login-o-t-p-submit-button">
-            <form action="" method="POST">
-            <button class="voter-login-o-t-p-frame03filled-button1" type="submit">
-              <span class="voter-login-o-t-p-text18"><span>Submit</span></span>
-            </button>
-          </form>
-          </div>
+          
+          <div class="div-input">
+            <form method="POST" class="digit-group" data-group-name="digits" data-autosubmit="false" autocomplete="off">
+              <input type="text" id="digit-1" name="1" data-next="2" />
+              <input type="text" id="digit-2" name="2" data-next="3" data-previous="1" />
+              <input type="text" id="digit-3" name="3" data-next="4" data-previous="2" />
+              <span class="splitter">&ndash;</span>
+              <input type="text" id="digit-4" name="4" data-next="5" data-previous="3" />
+              <input type="text" id="digit-5" name="5" data-next="6" data-previous="4" />
+              <input type="text" id="digit-6" name="6" data-previous="5" />
+              <span class="voter-login-o-t-p-text16">
+                <span>OTP expires in <span id="timer">1:00</span></span>
+              </span>
+              <div class="voter-login-o-t-p-submit-button">
+                
+                <button class="voter-login-o-t-p-frame03filled-button1" type="submit">
+                  <span class="voter-login-o-t-p-text18"><span>Submit</span></span>
+                </button>
+              
+              </div>
+            </form>
+        </div>
+          
         </div>
       </div>
     </div>
+    <script>
+      var seconds=60;
+      var timer;
+      function myFunction() {
+        if(seconds < 60) {
+          document.getElementById("timer").innerHTML = seconds + 's';
+        }
+           if (seconds >0 ) {
+               seconds--;
+           } else {
+               clearInterval(timer);
+               //alert("OTP expired, please request new otp");
+               location.reload();
+           }
+      }
+      
+        if(!timer) {
+          timer = window.setInterval(function() {
+            myFunction();
+          }, 1000);
+        }
+       
+      //When a key is pressed in the text area, update the timer using myFunction
+      
+       //If seconds are equal or greater than 0, countdown until 1 minute has passed
+      //Else, clear the timer and alert user of how many words they type per minute
+      
+      document.getElementById("timer").innerHTML="1:00"; 
+      $('.digit-group').find('input').each(function() {
+        $(this).attr('maxlength', 1);
+        $(this).on('keyup', function(e) {
+          var parent = $($(this).parent());
+          
+          if(e.keyCode === 8 || e.keyCode === 37) {
+            var prev = parent.find('input#' + $(this).data('previous'));
+            
+            if(prev.length) {
+              $(prev).select();
+            }
+          } else if((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 65 && e.keyCode <= 90) || (e.keyCode >= 96 && e.keyCode <= 105) || e.keyCode === 39) {
+            var next = parent.find('input#' + $(this).data('next'));
+            
+            if(next.length) {
+              $(next).select();
+            } else {
+              if(parent.data('autosubmit')) {
+                parent.submit();
+              }
+            }
+          }
+        });
+      });
+    </script>
   </body>
 </html>

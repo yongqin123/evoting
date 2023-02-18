@@ -66,7 +66,7 @@
               <select name="districtName" id="districtName" required>
                 <option disabled selected value> -- select an option -- </option>
                 {% for n in districts %}
-                <option value="{{ n }}">{{ n }}</option>
+                <option value="{{ n[0] }}">{{ n[0] }}</option>
                 {% endfor %}
               </select>
               <button class="button" type = "submit">Search</button>
