@@ -109,7 +109,7 @@ def loginOTP():
         client = Client(account_sid, auth_token) 
         print("Phone Number: ")
         print(OTPPhoneNumber)
-        message = client.messages.create(messaging_service_sid='MGf788a76f1546ed9cbf819f1ab5ba9f44', body=f'Your OTP IS {otp}', to=f'+65{OTPPhoneNumber}')
+        #message = client.messages.create(messaging_service_sid='MGf788a76f1546ed9cbf819f1ab5ba9f44', body=f'Your OTP IS {otp}', to=f'+65{OTPPhoneNumber}')
         print(OTPPhoneNumber)
         print(otp)
         otp_arr = []
@@ -176,7 +176,7 @@ def registerOTP():
         auth_token = '55efccda2ef34ba35881eb256df476ae' 
         client = Client(account_sid, auth_token) 
         
-        message = client.messages.create(messaging_service_sid='MGf788a76f1546ed9cbf819f1ab5ba9f44', body=f'Your OTP IS {otp}', to=f'+65{OTPPhoneNumber}')
+        #message = client.messages.create(messaging_service_sid='MGf788a76f1546ed9cbf819f1ab5ba9f44', body=f'Your OTP IS {otp}', to=f'+65{OTPPhoneNumber}')
         #print(session["OTPPhoneNumber"])
         print(otp)
         otp_arr = []
@@ -583,7 +583,7 @@ def OtpValidation():
         auth_token = '55efccda2ef34ba35881eb256df476ae' 
         client = Client(account_sid, auth_token) 
         
-        message = client.messages.create(messaging_service_sid='MGf788a76f1546ed9cbf819f1ab5ba9f44', body=f'Your OTP IS {otp}', to=f'+65{session["OTPPhoneNumber"]}')
+        #message = client.messages.create(messaging_service_sid='MGf788a76f1546ed9cbf819f1ab5ba9f44', body=f'Your OTP IS {otp}', to=f'+65{session["OTPPhoneNumber"]}')
         print(session["OTPPhoneNumber"])
         print(otp)
         otp_arr = []
